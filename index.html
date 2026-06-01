@@ -842,20 +842,53 @@ const CFG = {
 const IS_CFG = CFG.cloudName !== 'YOUR_CLOUD_NAME' && CFG.supabaseUrl !== 'YOUR_SUPABASE_URL';
 
 /* ════════════ SUPABASE HELPER ════════════ */
-const SB_H = () => ({'apikey': CFG.supabaseKey, 'Authorization': 'Bearer '+CFG.supabaseKey, 'Content-Type':'application/json'});
+const SB_H = () => ({
+  'apikey': CFG.supabaseKey,
+  'Authorization': 'Bearer '+CFG.supabaseKey,
+  'Content-Type': 'application/json'
+});
 async function sbSelect(table, filter=''){
-  const r = await fetch(`${CFG.supabaseUrl}/rest/v1/${table}?order=created_at.desc${filter}`, {headers:SB_H()});
-  return r.ok ? r.json() : [];
+  try{
+    const r = await fetch(`${CFG.supabaseUrl}/rest/v1/${table}?order=created_at.desc${filter}`, {headers:SB_H()});
+    if(!r.ok){const e=await r.text();console.error('sbSelect error',table,r.status,e);return [];}
+    return r.json();
+  }catch(e){console.error('sbSelect fetch error',e);return [];}
 }
 async function sbInsert(table, row){
-  const r = await fetch(`${CFG.supabaseUrl}/rest/v1/${table}`, {method:'POST', headers:{...SB_H(),'Prefer':'return=representation'}, body:JSON.stringify(row)});
-  return r.ok ? r.json() : null;
+  try{
+    const r = await fetch(`${CFG.supabaseUrl}/rest/v1/${table}`, {
+      method:'POST',
+      headers:{...SB_H(),'Prefer':'return=representation'},
+      body:JSON.stringify(row)
+    });
+    const body = await r.text();
+    if(!r.ok){
+      console.error(`sbInsert [${table}] HTTP ${r.status}:`, body);
+      throw new Error(`DB insert failed (${r.status}): ${body}`);
+    }
+    try{return JSON.parse(body);}catch{return body;}
+  }catch(e){
+    console.error('sbInsert exception',table,e);
+    throw e; // re-throw so caller can catch
+  }
 }
 async function sbUpdate(table, id, data){
-  return fetch(`${CFG.supabaseUrl}/rest/v1/${table}?id=eq.${id}`, {method:'PATCH', headers:SB_H(), body:JSON.stringify(data)});
+  try{
+    const r = await fetch(`${CFG.supabaseUrl}/rest/v1/${table}?id=eq.${id}`, {
+      method:'PATCH', headers:SB_H(), body:JSON.stringify(data)
+    });
+    if(!r.ok){const e=await r.text();console.error('sbUpdate error',r.status,e);}
+    return r;
+  }catch(e){console.error('sbUpdate exception',e);throw e;}
 }
 async function sbDelete(table, id){
-  return fetch(`${CFG.supabaseUrl}/rest/v1/${table}?id=eq.${id}`, {method:'DELETE', headers:SB_H()});
+  try{
+    const r = await fetch(`${CFG.supabaseUrl}/rest/v1/${table}?id=eq.${id}`, {
+      method:'DELETE', headers:SB_H()
+    });
+    if(!r.ok){const e=await r.text();console.error('sbDelete error',r.status,e);}
+    return r;
+  }catch(e){console.error('sbDelete exception',e);throw e;}
 }
 
 /* ════════════ CLOUDINARY UPLOAD ════════════ */
@@ -966,11 +999,20 @@ let rIdx=0,rTimer=null,rSlides=[];
 async function buildReel(){
   let slides=[];
   if(IS_CFG){
-    slides=await sbSelect('slides','&order=sort_order.asc,created_at.asc');
+    try{
+      slides=await sbSelect('slides','&order=sort_order.asc,created_at.asc');
+    }catch(e){console.error('buildReel sbSelect:',e);}
+    // Merge local fallback slides (saved when DB was unavailable)
+    const ld=lLoad();
+    const localSlides=(ld.slides||[]).filter(x=>x.url&&x.url.startsWith('http'));
+    localSlides.forEach(loc=>{
+      if(!slides.find(s=>s.url===loc.url)) slides.push({...loc});
+    });
   } else {
-    // local fallback: rebuild URLs from IDB
+    // local: use IDB blobs
     const ld=lLoad();
     for(const sl of (ld.slides||[])){
+      if(sl.url&&sl.url.startsWith('http')){slides.push(sl);continue;}
       const blob=await idbGet('sl_'+sl.id);
       if(blob) slides.push({...sl,url:URL.createObjectURL(blob)});
     }
@@ -1181,31 +1223,50 @@ async function handleGalUp(inp){
   for(const file of files){
     const isVid=fileIsVideo(file);
     const isImg=fileIsImage(file);
-    if(!isVid && !isImg){toast(`⚠️ Skipping unsupported file: ${file.name}`);continue;}
+    if(!isVid && !isImg){toast(`⚠️ Skipping unsupported: ${file.name}`);continue;}
     const maxMB=isVid?CFG.maxVideoMB:CFG.maxPhotoMB;
-    if(file.size>maxMB*1024*1024){toast(`⚠️ "${file.name}" exceeds ${maxMB}MB limit. Skipped.`);continue;}
-    toast(`📤 Uploading ${file.name}...`);
+    if(file.size>maxMB*1024*1024){toast(`⚠️ "${file.name}" exceeds ${maxMB}MB. Skipped.`);continue;}
+    toast(`📤 Uploading ${file.name} to cloud...`);
+    let cloudUrl = null;
+    // Step 1: upload to Cloudinary
     try{
-      const r=await cloudUpload(file,p=>toast(`📤 ${file.name}: ${p}%`));
-      const row={name:file.name,type:isVid?'video':'image',url:r.url,size:file.size,approved:false};
-      if(IS_CFG){
-        const saved=await sbInsert('gallery',row);
-        if(!saved){toast(`❌ Could not save ${file.name} to database.`);continue;}
-      } else {
+      const r=await cloudUpload(file, p=>toast(`📤 ${file.name}: ${p}%`));
+      cloudUrl = r.url;
+      toast(`☁️ Cloud upload done. Saving to database...`);
+    }catch(ce){
+      console.error('Cloudinary upload failed:',ce);
+      toast(`❌ Cloud upload failed for ${file.name}. Check internet.`);
+      continue;
+    }
+    // Step 2: save metadata to Supabase
+    const row={name:file.name,type:isVid?'video':'image',url:cloudUrl,size:file.size,approved:false};
+    if(IS_CFG){
+      try{
+        await sbInsert('gallery',row);
+        uploadedCount++;
+        toast(`✅ ${file.name} uploaded! Awaiting host approval.`);
+        pending.style.display='block';
+      }catch(dbe){
+        console.error('Database save failed:',dbe);
+        // Still show image publicly even if DB failed — save URL locally as fallback
         const ld=lLoad();
-        ld.gallery.unshift({id:uid(),...row,created_at:new Date().toISOString()});
+        ld.gallery.unshift({id:uid(),...row,approved:false,created_at:new Date().toISOString()});
         lSave(ld);
+        uploadedCount++;
+        toast(`⚠️ Saved locally (DB error). Admin: run SQL fix in Supabase.`);
+        pending.style.display='block';
       }
+    } else {
+      const ld=lLoad();
+      ld.gallery.unshift({id:uid(),...row,created_at:new Date().toISOString()});
+      lSave(ld);
       uploadedCount++;
-      toast(`✅ ${file.name} uploaded! Pending host approval.`);
+      toast(`✅ ${file.name} saved! Pending approval.`);
       pending.style.display='block';
-    } catch(e){
-      console.error('Upload error:',e);
-      toast(`❌ Failed to upload ${file.name}. Check connection.`);
     }
   }
   inp.value='';
-  if(uploadedCount>0) renderGallery();
+  if(uploadedCount>0){ renderGallery(); rAStats(); }
 }
 
 async function renderGallery(){
@@ -1232,27 +1293,69 @@ async function renderGallery(){
 async function uploadSlides(inp){
   if(!inp.files.length)return;
   const files=Array.from(inp.files);
+  let added=0;
   for(const file of files){
     const isVid=fileIsVideo(file);
     const isImg=fileIsImage(file);
     if(!isVid && !isImg){toast(`⚠️ Skipping: ${file.name}`);continue;}
     toast(`📤 Uploading ${file.name}...`);
+    // Step 1: upload file to Cloudinary
+    let cloudUrl=null;
     try{
-      const r=await cloudUpload(file);
-      const row={name:file.name,type:isVid?'video':'image',url:r.url,sort_order:Date.now()};
-      if(IS_CFG) await sbInsert('slides',row);
-      else {const ld=lLoad();if(!ld.slides)ld.slides=[];const id=uid();await idbPut('sl_'+id,file);ld.slides.push({id,...row,created_at:new Date().toISOString()});lSave(ld);}
-      toast(`✅ ${file.name} added to slideshow!`);
-    }catch(e){console.error('Slide upload error:',e);toast(`❌ Failed: ${file.name}`);}
+      const r=await cloudUpload(file, p=>toast(`📤 ${file.name}: ${p}%`));
+      cloudUrl=r.url;
+    }catch(ce){
+      console.error('Cloudinary slide upload failed:',ce);
+      toast(`❌ Cloud upload failed: ${file.name}`);
+      continue;
+    }
+    // Step 2: save to Supabase or local
+    const row={name:file.name,type:isVid?'video':'image',url:cloudUrl,sort_order:Date.now()};
+    if(IS_CFG){
+      try{
+        await sbInsert('slides',row);
+        added++;
+        toast(`✅ ${file.name} added to slideshow!`);
+      }catch(dbe){
+        console.error('Slides DB insert failed:',dbe);
+        // Save locally as fallback so slide still shows
+        const ld=lLoad();
+        if(!ld.slides)ld.slides=[];
+        ld.slides.push({id:uid(),...row,created_at:new Date().toISOString()});
+        lSave(ld);
+        added++;
+        toast(`⚠️ ${file.name} saved locally (DB error). Run SQL fix in Supabase.`);
+      }
+    } else {
+      const ld=lLoad();
+      if(!ld.slides)ld.slides=[];
+      const id=uid();
+      await idbPut('sl_'+id,file);
+      ld.slides.push({id,...row,created_at:new Date().toISOString()});
+      lSave(ld);
+      added++;
+      toast(`✅ ${file.name} added!`);
+    }
   }
   inp.value='';
-  rSSGrid(); buildReel(); rAStats();
+  if(added>0){ rSSGrid(); buildReel(); rAStats(); }
 }
 
 async function rSSGrid(){
   let slides=[];
-  if(IS_CFG) slides=await sbSelect('slides','&order=sort_order.asc,created_at.asc');
-  else {const ld=lLoad();slides=ld.slides||[];}
+  if(IS_CFG){
+    try{
+      slides=await sbSelect('slides','&order=sort_order.asc,created_at.asc');
+    }catch(e){console.error('rSSGrid sbSelect error:',e);}
+    // Also merge any locally saved slides (DB-fail fallback)
+    const ld=lLoad();
+    const localSlides=(ld.slides||[]).filter(x=>x.url&&x.url.startsWith('http'));
+    localSlides.forEach(loc=>{
+      if(!slides.find(s=>s.url===loc.url)) slides.push({...loc,_local:true});
+    });
+  } else {
+    const ld=lLoad();slides=ld.slides||[];
+  }
   const g=document.getElementById('ss-grid');
   document.getElementById('ss-cnt').textContent=slides.length?`${slides.length} slide${slides.length>1?'s':''}`:' — no slides yet';
   if(!slides.length){g.innerHTML='<p style="color:var(--muted);font-size:.82rem;">No slides yet. Upload above.</p>';return;}
@@ -1279,16 +1382,28 @@ async function rSSGrid(){
   }
 }
 
-/* Admin gallery — show ALL (pending + approved) with correct filter */
+/* Admin gallery — show ALL (pending + approved), merge Supabase + local fallback */
 let galFilter='all';
 async function rAGal(filter){
   galFilter=filter||galFilter;
   let items=[];
   if(IS_CFG){
-    // fetch ALL gallery items for admin (no approved filter)
+    // fetch ALL gallery items for admin — no RLS approved filter
     const f=galFilter==='pending'?'&approved=eq.false':galFilter==='approved'?'&approved=eq.true':'';
-    const res=await fetch(`${CFG.supabaseUrl}/rest/v1/gallery?order=created_at.desc${f}`,{headers:SB_H()});
-    items=res.ok?await res.json():[];
+    try{
+      const res=await fetch(`${CFG.supabaseUrl}/rest/v1/gallery?order=created_at.desc${f}`,{headers:SB_H()});
+      if(res.ok) items=await res.json();
+      else{
+        const err=await res.text();
+        console.error('rAGal fetch error:',res.status,err);
+      }
+    }catch(e){console.error('rAGal exception:',e);}
+    // ALSO merge any local fallback items (saved when DB failed)
+    const ld=lLoad();
+    const localItems=(ld.gallery||[]).filter(x=>x.url&&x.url.startsWith('http'));
+    localItems.forEach(loc=>{
+      if(!items.find(i=>i.url===loc.url)) items.unshift({...loc,_local:true});
+    });
   } else {
     const ld=lLoad();
     items=ld.gallery||[];
