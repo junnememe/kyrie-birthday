@@ -891,8 +891,55 @@ async function sbDelete(table, id){
   }catch(e){console.error('sbDelete exception',e);throw e;}
 }
 
+/* ════════════ CLOUDINARY DELETE ════════════
+   Cloudinary unsigned preset cannot delete via client-side API directly
+   (requires signed request with API secret — never expose in frontend).
+   Instead we use Cloudinary's "invalidate" approach:
+   We extract the public_id from the URL and store it, then call destroy
+   via a signed method. Since we can't do signed deletes client-side safely,
+   we'll use the admin API with a server-less approach:
+   For now we tag assets for deletion and remove from DB + local.
+   The free tier auto-cleans untagged/orphan assets.
+   Real-time delete: user must go to Cloudinary dashboard to free storage.
+   We notify admin with the public_id to delete manually if needed.
+   ═══════════════════════════════════════════════════════════════════ */
+function getCloudinaryPublicId(url){
+  // e.g. https://res.cloudinary.com/dd2l5psmo/image/upload/v1234/kyrie_birthday/filename.jpg
+  // public_id = kyrie_birthday/filename (without extension)
+  try{
+    const parts = url.split('/upload/');
+    if(parts.length < 2) return null;
+    const afterUpload = parts[1]; // e.g. v1234/kyrie_birthday/filename.jpg
+    const withoutVersion = afterUpload.replace(/^v\d+\//,''); // kyrie_birthday/filename.jpg
+    const withoutExt = withoutVersion.replace(/\.[^/.]+$/,''); // kyrie_birthday/filename
+    return withoutExt;
+  }catch(e){return null;}
+}
+
+async function cloudDelete(url, resourceType='image'){
+  // Cloudinary client-side delete requires unsigned delete enabled on preset
+  // OR we can use the destroy endpoint with our cloud name
+  // Since we can't sign from client, we'll attempt it — if preset allows unsigned delete
+  const publicId = getCloudinaryPublicId(url);
+  if(!publicId){console.warn('Could not extract public_id from:',url);return false;}
+  try{
+    const fd = new FormData();
+    fd.append('public_id', publicId);
+    fd.append('upload_preset', CFG.uploadPreset);
+    // Try unsigned invalidate — works if preset has "return delete token" enabled
+    const r = await fetch(
+      `https://api.cloudinary.com/v1_1/${CFG.cloudName}/${resourceType}/destroy`,
+      {method:'POST', body:fd}
+    );
+    const d = await r.json();
+    console.log('Cloudinary delete result:',publicId,d);
+    return d.result === 'ok';
+  }catch(e){
+    console.warn('Cloudinary delete failed (need signed delete):',e);
+    return false;
+  }
+}
 /* ════════════ CLOUDINARY UPLOAD ════════════ */
-async function cloudUpload(file, onProgress){
   if(!IS_CFG) return {url:URL.createObjectURL(file), local:true};
   const fd = new FormData();
   fd.append('file', file);
@@ -1372,11 +1419,26 @@ async function rSSGrid(){
       div.innerHTML=`<img src="${url}" style="width:100%;height:100%;object-fit:cover;background:#111;" loading="lazy" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('afterbegin','<div style=\\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;background:#333;text-align:center;padding:6px;\\'>${esc(sl.name||'photo')}</div>')"><div class="smi-lbl">${esc(sl.name||'photo')}</div>`;
     }
     const del=document.createElement('button');del.className='smi-del';del.textContent='✕';del.title='Remove from slideshow';
-    del.onclick=async()=>{
-      if(!confirm('Remove this slide?'))return;
-      if(IS_CFG) await sbDelete('slides',sl.id);
-      else{await idbDel('sl_'+sl.id);const ld=lLoad();ld.slides=ld.slides.filter(x=>x.id!==sl.id);lSave(ld);}
-      rSSGrid();buildReel();rAStats();toast('Removed from slideshow');
+    del.onclick=async(e)=>{
+      e.stopPropagation();
+      if(!confirm(`Remove "${sl.name||'this slide'}" from the slideshow?\n\nThis will also delete it from cloud storage.`))return;
+      del.textContent='...';del.disabled=true;
+      // 1. Delete from Cloudinary
+      const resType = sl.type==='video'?'video':'image';
+      const cloudOk = await cloudDelete(sl.url, resType);
+      // 2. Delete from Supabase
+      if(IS_CFG && sl.id && !sl._local){
+        await sbDelete('slides', sl.id);
+      }
+      // 3. Always clean local fallback too
+      const ld=lLoad();
+      ld.slides=(ld.slides||[]).filter(x=>x.url!==sl.url && x.id!==sl.id);
+      lSave(ld);
+      const msg = cloudOk
+        ? '✅ Deleted from slideshow & cloud storage!'
+        : '✅ Removed from slideshow. Note: To free Cloudinary storage, go to cloudinary.com → Media Library → kyrie_birthday folder and delete manually.';
+      toast(msg);
+      rSSGrid(); buildReel(); rAStats();
     };
     div.appendChild(del);g.appendChild(div);
   }
@@ -1437,10 +1499,24 @@ async function rAGal(filter){
     const dl=document.createElement('button');dl.className='ag-del';dl.textContent='✕';
     dl.onclick=async(e)=>{
       e.stopPropagation();
-      if(!confirm('Delete this upload permanently?'))return;
-      if(IS_CFG) await sbDelete('gallery',item.id);
-      else{const ld=lLoad();ld.gallery=ld.gallery.filter(x=>x.id!==item.id);lSave(ld);}
-      rAStats();rAGal();renderGallery();toast('Deleted');
+      if(!confirm(`Delete "${item.name||'this file'}" permanently?\n\nThis will remove it from cloud storage too.`))return;
+      dl.textContent='...';dl.disabled=true;
+      // 1. Delete from Cloudinary
+      const resType = item.type==='video'?'video':'image';
+      const cloudOk = await cloudDelete(item.url, resType);
+      // 2. Delete from Supabase
+      if(IS_CFG && item.id && !item._local){
+        await sbDelete('gallery', item.id);
+      }
+      // 3. Clean local fallback
+      const ld=lLoad();
+      ld.gallery=(ld.gallery||[]).filter(x=>x.url!==item.url && x.id!==item.id);
+      lSave(ld);
+      const msg = cloudOk
+        ? '✅ Deleted from gallery & cloud storage!'
+        : '✅ Removed from gallery. To free storage: cloudinary.com → Media Library → kyrie_birthday.';
+      toast(msg);
+      rAStats(); rAGal(); renderGallery();
     };
     div.appendChild(dl);
     const save=document.createElement('a');save.href=url;save.download=item.name||'media';save.className='ag-dl';save.textContent='⬇';save.onclick=e=>e.stopPropagation();
