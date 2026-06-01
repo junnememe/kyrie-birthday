@@ -940,6 +940,7 @@ async function cloudDelete(url, resourceType='image'){
   }
 }
 /* ════════════ CLOUDINARY UPLOAD ════════════ */
+async function cloudUpload(file, onProgress){
   if(!IS_CFG) return {url:URL.createObjectURL(file), local:true};
   const fd = new FormData();
   fd.append('file', file);
