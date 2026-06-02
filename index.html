@@ -1282,7 +1282,7 @@ async function submitWish(){
 function resetWish(){document.getElementById('w-name').value='';document.getElementById('w-msg').value='';document.getElementById('w-pp').innerHTML='';document.getElementById('w-vp').innerHTML='';document.getElementById('w-photo').value='';document.getElementById('w-video').value='';['wpc-photo','wpc-video'].forEach(i=>{const el=document.getElementById(i);if(el)el.classList.remove('on');});wPhoto=null;wVideo=null;document.getElementById('wish-fw').style.display='';document.getElementById('wish-ok').classList.remove('on');}
 
 /* ════════════ RENDER WISHES (carousel) ════════════ */
-let wishShowAll = false;
+let wishShowAll=false;
 function showMoreWishes(){ wishShowAll=true; renderWishes(); }
 
 async function renderWishes(){
@@ -1299,17 +1299,28 @@ async function renderWishes(){
   const limit=wishShowAll?wishes.length:Math.min(8,wishes.length);
   const visible=wishes.slice(0,limit);
   if(moreBtn) moreBtn.style.display=(!wishShowAll&&wishes.length>8)?'inline-block':'none';
-  g.innerHTML=visible.map(w=>`
-    <div class="wcard" onclick='openWPop(${JSON.stringify({id:w.id,name:w.name,message:w.message,photo_url:w.photo_url||w.photo||null,video_url:w.video_url||w.video||null,created_at:w.created_at||w.ts}).replace(/'/g,"&#39;")})'>
+  // Use data-wid to avoid JSON-in-HTML attribute issues
+  window._wishMap={};
+  wishes.forEach(w=>{ window._wishMap[w.id||w.created_at]=w; });
+  g.innerHTML=visible.map(w=>{
+    const key=esc(w.id||w.created_at||'');
+    const hasPhoto=!!(w.photo_url||w.photo);
+    return `<div class="wcard" data-wid="${key}" role="button" tabindex="0">
       <div class="wcard-h">
-        <div class="wav">${esc(w.name[0].toUpperCase())}</div>
-        <div><div class="wn">${esc(w.name)}</div><div class="wd">${fmtDt(w.created_at||w.ts)}</div></div>
+        <div class="wav">${esc((w.name||'?')[0].toUpperCase())}</div>
+        <div><div class="wn">${esc(w.name||'')}</div><div class="wd">${fmtDt(w.created_at||w.ts)}</div></div>
       </div>
-      <div class="wm">"${esc(w.message)}"</div>
-      ${(w.photo_url||w.photo)?`<div class="wm-img"><img src="${esc(w.photo_url||w.photo)}" loading="lazy"></div>`:''}
+      <div class="wm">"${esc(w.message||'')}"</div>
+      ${hasPhoto?`<div class="wm-img"><img src="${esc(w.photo_url||w.photo)}" loading="lazy"></div>`:''}
       <div class="wread">Tap to read full wish →</div>
-    </div>`).join('');
-  // Auto-scroll carousel slowly
+    </div>`;
+  }).join('');
+  // Attach click handlers
+  g.querySelectorAll('.wcard[data-wid]').forEach(card=>{
+    const fn=()=>{ const w=window._wishMap[card.dataset.wid]; if(w) openWPop(w); };
+    card.addEventListener('click',fn);
+    card.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') fn(); });
+  });
   startCarouselScroll();
 }
 
@@ -1320,7 +1331,7 @@ function startCarouselScroll(){
   if(!wrap) return;
   let dir=1;
   carouselScrollTimer=setInterval(()=>{
-    if(wrap.matches(':hover')){return;} // pause on hover
+    if(wrap.matches(':hover')) return;
     wrap.scrollLeft+=dir*1.2;
     if(wrap.scrollLeft+wrap.clientWidth>=wrap.scrollWidth-2) dir=-1;
     if(wrap.scrollLeft<=0) dir=1;
@@ -1328,19 +1339,25 @@ function startCarouselScroll(){
 }
 
 function openWPop(w){
-  try{ if(typeof w==='string') w=JSON.parse(w.replace(/&#39;/g,"'")); }catch(e){console.error('openWPop parse error',e);return;}
-  const pop=document.getElementById('wish-pop');
+  if(!w||typeof w!=='object'){console.error('openWPop: invalid wish object',w);return;}
+  const name = w.name||'Guest';
+  const message = w.message||'';
+  const photoUrl = w.photo_url||w.photo||null;
+  const videoUrl = w.video_url||w.video||null;
+  const ts = w.created_at||w.ts||'';
   document.getElementById('wish-pop-body').innerHTML=`
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-      <div style="width:52px;height:52px;border-radius:50%;background:var(--red);color:#fff;font-size:1.4rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${esc(w.name[0].toUpperCase())}</div>
-      <div><div style="font-family:var(--fh);font-size:1.15rem;font-style:italic;">${esc(w.name)}</div><div style="font-size:.72rem;color:var(--muted);">${fmtDt(w.created_at||w.ts)}</div></div>
+      <div style="width:52px;height:52px;border-radius:50%;background:var(--red);color:#fff;font-size:1.4rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${esc(name[0].toUpperCase())}</div>
+      <div>
+        <div style="font-family:var(--fh);font-size:1.15rem;font-style:italic;">${esc(name)}</div>
+        <div style="font-size:.72rem;color:var(--muted);">${ts?fmtDt(ts):''}</div>
+      </div>
     </div>
-    <div class="pw-msg">"${esc(w.message)}"</div>
-    ${(w.photo_url||w.photo)?`<div class="pw-media" style="margin-top:12px;"><img src="${esc(w.photo_url||w.photo)}" style="width:100%;border-radius:10px;max-height:50vh;object-fit:contain;"></div>`:''}
-    ${(w.video_url||w.video)?`<div class="pw-media" style="margin-top:12px;"><video src="${esc(w.video_url||w.video)}" controls playsinline style="width:100%;border-radius:10px;max-height:50vh;"></video></div>`:''}
+    <div class="pw-msg">"${esc(message)}"</div>
+    ${photoUrl?`<div class="pw-media" style="margin-top:12px;"><img src="${esc(photoUrl)}" style="width:100%;border-radius:10px;max-height:50vh;object-fit:contain;"></div>`:''}
+    ${videoUrl?`<div class="pw-media" style="margin-top:12px;"><video src="${esc(videoUrl)}" controls playsinline style="width:100%;border-radius:10px;max-height:50vh;"></video></div>`:''}
   `;
-  pop.classList.add('on');
-  // Prevent body scroll on mobile when popup open
+  document.getElementById('wish-pop').classList.add('on');
   document.body.style.overflow='hidden';
 }
 function closeWPop(){
@@ -1389,19 +1406,24 @@ async function handleGalUp(inp){
     const row={name:file.name,type:isVid?'video':'image',url:cloudUrl,size:file.size,approved:false};
     if(IS_CFG){
       try{
-        await sbInsert('gallery',row);
+        const res=await fetch(`${CFG.supabaseUrl}/rest/v1/gallery`,{
+          method:'POST',
+          headers:{
+            'apikey': CFG.supabaseKey,
+            'Authorization': 'Bearer '+CFG.supabaseKey,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+          body:JSON.stringify(row)
+        });
+        const body=await res.text();
+        if(!res.ok){console.error('Gallery insert HTTP',res.status,body);throw new Error(body);}
         uploadedCount++;
         toast(`✅ ${file.name} uploaded! Awaiting host approval.`);
         pending.style.display='block';
       }catch(dbe){
-        console.error('Database save failed:',dbe);
-        // Still show image publicly even if DB failed — save URL locally as fallback
-        const ld=lLoad();
-        ld.gallery.unshift({id:uid(),...row,approved:false,created_at:new Date().toISOString()});
-        lSave(ld);
-        uploadedCount++;
-        toast(`⚠️ Saved locally (DB error). Admin: run SQL fix in Supabase.`);
-        pending.style.display='block';
+        console.error('Gallery DB save failed:',dbe);
+        toast(`❌ DB save failed for ${file.name}. File is in Cloudinary. Check Supabase policies.`);
       }
     } else {
       const ld=lLoad();
