@@ -72,7 +72,7 @@ button{cursor:pointer;font-family:var(--fb);}
   position:fixed;inset:0;z-index:9999;
   background:radial-gradient(ellipse at 50% 35%,#2a0018 0%,#130008 55%,#080003 100%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:20px;
+  padding:80px 20px 20px;
   transition:opacity 1s ease,transform 1s ease;
 }
 #intro.out{opacity:0;pointer-events:none;transform:scale(1.04);}
@@ -605,7 +605,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
         <div class="ev-row"><div class="ev-ic">⏰</div><div><div class="ev-info-l">Program Starts</div><div class="ev-info-v red">6:30 PM SHARP</div></div></div>
         <div class="ev-row"><div class="ev-ic">📍</div><div><div class="ev-info-l">Venue</div><div class="ev-info-v">Jollibee Doha Souq Mall</div></div></div>
         <div class="ev-row"><div class="ev-ic">🗺️</div><div><div class="ev-info-l">Address</div><div class="ev-info-v">Al Mirqab Al Jadeed St, Doha, Qatar</div></div></div>
-        <div class="notice"><strong>⚠️ Important Notice</strong>Please arrive at <strong>6:30 PM</strong>. Program starts exactly at <strong>6:30 PM</strong>. Your punctuality is greatly appreciated!</div>
       </div>
       <div class="ev-btns">
         <a class="btn-primary" href="https://maps.app.goo.gl/KY11nzyfGpWEoGuJA" target="_blank" rel="noopener">🗺️ Open in Google Maps</a>
@@ -1457,22 +1456,33 @@ async function uploadSlides(inp){
       toast(`❌ Cloud upload failed: ${file.name}`);
       continue;
     }
-    // Step 2: save to Supabase or local
+    // Step 2: save to Supabase
     const row={name:file.name,type:isVid?'video':'image',url:cloudUrl,sort_order:Date.now()};
     if(IS_CFG){
       try{
-        await sbInsert('slides',row);
+        // Use raw fetch with full explicit headers (same pattern as buildReel which works)
+        const res=await fetch(`${CFG.supabaseUrl}/rest/v1/slides`,{
+          method:'POST',
+          headers:{
+            'apikey': CFG.supabaseKey,
+            'Authorization': 'Bearer '+CFG.supabaseKey,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+          body:JSON.stringify(row)
+        });
+        const body=await res.text();
+        if(!res.ok){
+          console.error('Slides insert HTTP',res.status,body);
+          throw new Error(body);
+        }
         added++;
         toast(`✅ ${file.name} added to slideshow!`);
       }catch(dbe){
         console.error('Slides DB insert failed:',dbe);
-        // Save locally as fallback so slide still shows
-        const ld=lLoad();
-        if(!ld.slides)ld.slides=[];
-        ld.slides.push({id:uid(),...row,created_at:new Date().toISOString()});
-        lSave(ld);
-        added++;
-        toast(`⚠️ ${file.name} saved locally (DB error). Run SQL fix in Supabase.`);
+        toast(`❌ Could not save to DB: ${dbe.message||dbe}. Check Supabase policies.`);
+        // Do NOT save locally — Cloudinary URL already exists so it's not lost
+        // User can retry after fixing Supabase
       }
     } else {
       const ld=lLoad();
