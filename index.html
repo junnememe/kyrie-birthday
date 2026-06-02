@@ -1479,7 +1479,9 @@ async function uploadSlides(inp){
       continue;
     }
     // Step 2: save to Supabase
-    const row={name:file.name,type:isVid?'video':'image',url:cloudUrl,sort_order:Date.now()};
+    // sort_order: seconds since 2024-01-01 — stays well within int range for decades
+    const sortBase = 1704067200; // 2024-01-01 Unix timestamp
+    const row={name:file.name,type:isVid?'video':'image',url:cloudUrl,sort_order:Math.floor(Date.now()/1000)-sortBase};
     if(IS_CFG){
       try{
         // Use raw fetch with full explicit headers (same pattern as buildReel which works)
