@@ -200,16 +200,32 @@ button{cursor:pointer;font-family:var(--fb);}
 .red-band img{height:26px;} 
 .red-band-t{font-family:var(--fh);color:#fff;font-size:clamp(.82rem,2vw,1.05rem);font-style:italic;}
 
-/* ─── COUNTDOWN ─── */
-.cd-sec{background:linear-gradient(160deg,#160004 0%,#280010 50%,#160004 100%);padding:64px 20px;text-align:center;position:relative;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.cd-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(214,43,43,.13) 0%,transparent 65%);}
-.cd-ey{font-size:.68rem;font-weight:700;letter-spacing:6px;color:rgba(240,200,90,.7);text-transform:uppercase;position:relative;z-index:1;}
-.cd-ttl{font-family:var(--fh);color:#fff;font-size:clamp(1.4rem,4vw,2.1rem);font-style:italic;margin:8px 0 30px;position:relative;z-index:1;}
+/* ─── MERGED REEL + COUNTDOWN ─── */
+/* countdown section hidden — merged into reel */
+.cd-sec{display:none;}
+/* countdown overlay inside reel */
+.reel-cd-overlay{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  z-index:6;
+  padding:20px 20px 32px;
+  background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.5) 60%,transparent 100%);
+  text-align:center;
+}
+.cd-ey{font-size:.6rem;font-weight:700;letter-spacing:5px;color:rgba(240,200,90,.75);text-transform:uppercase;margin-bottom:4px;display:block;}
+.cd-ttl{font-family:var(--fh);color:#fff;font-size:clamp(1rem,3.5vw,1.5rem);font-style:italic;margin-bottom:14px;display:block;}
 .cd-ttl span{color:var(--yellow-light);}
-.cd-grid{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
-.cd-box{background:rgba(255,255,255,.06);border:1px solid rgba(240,200,90,.22);border-radius:var(--radius-lg);padding:18px 26px;min-width:82px;backdrop-filter:blur(6px);}
-.cd-n{font-family:var(--fh);font-size:clamp(2rem,6vw,3.4rem);font-weight:900;color:var(--yellow-light);line-height:1;}
-.cd-u{font-size:.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(240,200,90,.5);margin-top:4px;}
+.cd-grid{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.cd-box{
+  background:rgba(0,0,0,.45);
+  border:1px solid rgba(240,200,90,.35);
+  border-radius:12px;
+  padding:10px 16px;
+  min-width:64px;
+  backdrop-filter:blur(12px);
+}
+.cd-n{font-family:var(--fh);font-size:clamp(1.6rem,6vw,2.8rem);font-weight:900;color:var(--yellow-light);line-height:1;}
+.cd-u{font-size:.55rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(240,200,90,.55);margin-top:3px;}
 
 /* ─── SECTIONS ─── */
 .sec{padding:68px 20px;scroll-snap-align:start;scroll-snap-stop:always;min-height:100vh;display:flex;flex-direction:column;justify-content:center;}
@@ -434,13 +450,11 @@ button{cursor:pointer;font-family:var(--fb);}
 
 /* ─── SNAP SCROLL ─── */
 html{scroll-snap-type:y mandatory;}
-.hero,#cd,#kyrie-reel,.ev-wrap,#form-sec,.gal-sec{
+.hero,#reel-sec,.ev-wrap,#form-sec,.gal-sec{
   scroll-snap-align:start;
   scroll-snap-stop:always;
   min-height:100vh;
 }
-/* Sections that are shorter don't force full height */
-#cd{min-height:auto;}
 
 /* ─── NAV ─── */
 footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padding:48px 20px 60px;position:relative;scroll-snap-align:start;scroll-snap-stop:always;min-height:auto;}
@@ -633,35 +647,42 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
   <span class="red-band-t">Celebrating at Jollibee Doha Souq Mall — The Home of Happiness!</span>
 </div>
 
-<!-- COUNTDOWN -->
-<section class="cd-sec" id="cd">
-  <p class="cd-ey">The Big Day Is Coming</p>
-  <h2 class="cd-ttl">Counting Down to <span>Kyrie's Day</span></h2>
-  <div class="cd-grid">
-    <div class="cd-box"><div class="cd-n" id="cd-d">--</div><div class="cd-u">Days</div></div>
-    <div class="cd-box"><div class="cd-n" id="cd-h">--</div><div class="cd-u">Hours</div></div>
-    <div class="cd-box"><div class="cd-n" id="cd-m">--</div><div class="cd-u">Minutes</div></div>
-    <div class="cd-box"><div class="cd-n" id="cd-s">--</div><div class="cd-u">Seconds</div></div>
-  </div>
-</section>
-
-<!-- KYRIE REEL -->
+<!-- MERGED REEL + COUNTDOWN (one full-screen section) -->
 <section class="sec" id="reel-sec" style="background:#000;">
   <div class="si">
     <div class="reel-wrap" id="reel-wrap">
+
+      <!-- Top label overlay -->
       <div class="reel-top-label">
         <span class="reel-ey">Our Princess</span>
         <span class="reel-title">Meet Kyrie 👑</span>
       </div>
+
+      <!-- Empty state -->
       <div class="reel-empty" id="reel-empty">
         <div class="reel-e-icon">👑</div>
         <div class="reel-e-text">Kyrie's photos &amp; videos</div>
         <div class="reel-e-hint">Upload in Admin → Slideshow</div>
       </div>
+
+      <!-- Bottom: dots + countdown overlaid on photo -->
       <div class="reel-bottom">
         <div class="reel-dots" id="reel-dots"></div>
         <div class="reel-ctr" id="reel-ctr"></div>
       </div>
+
+      <!-- Countdown overlay (bottom of photo) -->
+      <div class="reel-cd-overlay" id="cd">
+        <span class="cd-ey">The Big Day Is Coming</span>
+        <span class="cd-ttl">Counting Down to <span>Kyrie's Day</span></span>
+        <div class="cd-grid">
+          <div class="cd-box"><div class="cd-n" id="cd-d">--</div><div class="cd-u">Days</div></div>
+          <div class="cd-box"><div class="cd-n" id="cd-h">--</div><div class="cd-u">Hours</div></div>
+          <div class="cd-box"><div class="cd-n" id="cd-m">--</div><div class="cd-u">Minutes</div></div>
+          <div class="cd-box"><div class="cd-n" id="cd-s">--</div><div class="cd-u">Seconds</div></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
