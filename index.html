@@ -571,10 +571,26 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
 .apc.on{display:block;}
 
 /* Stats */
-.ap-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:22px;}
-.aps{background:#fff;border-radius:var(--radius);padding:14px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.05);}
-.aps-n{font-family:var(--fh);font-size:1.9rem;font-weight:900;color:var(--red);}
-.aps-l{font-size:.67rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+.ap-stats{display:flex;flex-direction:column;gap:16px;margin-bottom:22px;}
+.aps-section{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.05);}
+.aps-heading{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.aps-heading .aps-note{font-weight:400;text-transform:none;letter-spacing:0;color:#bbb;font-size:.68rem;}
+.aps-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px;}
+.aps{background:#fafafa;border-radius:var(--radius);padding:12px 8px;text-align:center;border:1px solid #f0f0f0;}
+.aps-big{background:linear-gradient(135deg,#fff5f5,#fff);border:1.5px solid rgba(214,43,43,.2);}
+.aps-yes{border-color:rgba(34,197,94,.3);background:#f0fdf4;}
+.aps-no{border-color:rgba(239,68,68,.2);background:#fff5f5;}
+.aps-maybe{border-color:rgba(234,179,8,.3);background:#fefce8;}
+.aps-maybe-soft{border-color:rgba(234,179,8,.2);background:#fffdf0;}
+.aps-warn{border-color:rgba(234,179,8,.4);background:#fefce8;}
+.aps-n{font-family:var(--fh);font-size:1.7rem;font-weight:900;color:var(--red);line-height:1;}
+.aps-n-big{font-size:2.4rem;color:var(--red);}
+.aps-l{font-size:.62rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-top:3px;}
+.aps-tip{margin-top:10px;background:rgba(214,43,43,.06);border-radius:8px;padding:8px 12px;font-size:.78rem;color:var(--mid);border-left:3px solid var(--red);}
+/* drag handle for slides */
+.smi{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:1;background:#ddd;box-shadow:0 2px 10px rgba(0,0,0,.07);cursor:grab;transition:box-shadow .2s,transform .2s;}
+.smi.dragging{opacity:.5;box-shadow:0 8px 24px rgba(0,0,0,.2);cursor:grabbing;transform:scale(.97);}
+.smi.drag-over{box-shadow:0 0 0 3px var(--red);}
 
 /* Search + table */
 .ap-srch{padding:9px 13px;border:1.5px solid #ddd;border-radius:var(--radius);font-family:var(--fb);font-size:.84rem;outline:none;max-width:320px;width:100%;margin-bottom:12px;-webkit-appearance:none;}
@@ -600,6 +616,14 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
 .smi-del{position:absolute;top:5px;right:5px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);border:none;color:#fff;font-size:.72rem;display:flex;align-items:center;justify-content:center;}
 .smi-del:hover{background:rgba(200,0,0,.7);}
 .smi-lbl{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.55));padding:8px 6px 4px;color:#fff;font-size:.64rem;}
+.smi-order{position:absolute;top:5px;left:5px;background:rgba(0,0,0,.6);color:#fff;font-size:.65rem;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3;}
+.smi-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(255,255,255,.7);font-size:1.2rem;letter-spacing:-2px;pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,.5);opacity:0;transition:opacity .2s;}
+.smi:hover .smi-handle{opacity:1;}
+.smi-mv{position:absolute;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.55);border:none;color:#fff;font-size:.6rem;display:flex;align-items:center;justify-content:center;z-index:3;cursor:pointer;opacity:0;transition:opacity .2s,background .2s;}
+.smi:hover .smi-mv{opacity:1;}
+.smi-mv:hover{background:rgba(214,43,43,.85);}
+.smi-up{bottom:34px;right:5px;}
+.smi-dn{bottom:8px;right:5px;}
 
 /* Gallery approval */
 .ap-gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
@@ -1739,40 +1763,71 @@ async function rSSGrid(){
   document.getElementById('ss-cnt').textContent=slides.length?`${slides.length} slide${slides.length>1?'s':''}`:' — no slides yet';
   if(!slides.length){g.innerHTML='<p style="color:var(--muted);font-size:.82rem;">No slides yet. Upload above.</p>';return;}
   g.innerHTML='';
-  for(const sl of slides){
-    const div=document.createElement('div');div.className='smi';
+  let dragSrc=null;
+
+  async function saveOrder(){
+    const items=[...g.querySelectorAll('.smi')];
+    await Promise.all(items.map((el,i)=>{
+      const id=el.dataset.id;
+      if(IS_CFG){
+        return fetch(`${CFG.supabaseUrl}/rest/v1/slides?id=eq.${id}`,{
+          method:'PATCH',headers:{...SB_H(),'Content-Type':'application/json'},
+          body:JSON.stringify({sort_order:i+1})
+        });
+      } else {
+        const ld=lLoad();const s=ld.slides.find(x=>String(x.id)===String(id)||x.url===id);
+        if(s)s.sort_order=i+1;lSave(ld);
+      }
+    }));
+    items.forEach((el,i)=>{const b=el.querySelector('.smi-order');if(b)b.textContent=i+1;});
+    buildReel();
+    toast('✅ Order saved!');
+  }
+
+  for(let i=0;i<slides.length;i++){
+    const sl=slides[i];
+    const div=document.createElement('div');div.className='smi';div.draggable=true;div.dataset.id=sl.id||sl.url;
     let url=sl.url;
     if(!url&&!IS_CFG){const blob=await idbGet('sl_'+sl.id);if(blob)url=URL.createObjectURL(blob);}
     if(!url)continue;
     if(sl.type==='video'){
-      div.innerHTML=`<video src="${url}" muted playsinline style="width:100%;height:100%;object-fit:cover;"></video><div class="smi-lbl">📹 ${esc(sl.name||'video')}</div>`;
+      div.innerHTML=`<video src="${url}" muted playsinline style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video><div class="smi-lbl">📹 ${esc(sl.name||'video')}</div>`;
     } else {
-      // Image — always cover-fit inside the frame, original untouched on Cloudinary
-      div.innerHTML=`<img src="${url}" style="width:100%;height:100%;object-fit:cover;background:#111;" loading="lazy" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('afterbegin','<div style=\\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;background:#333;text-align:center;padding:6px;\\'>${esc(sl.name||'photo')}</div>')"><div class="smi-lbl">${esc(sl.name||'photo')}</div>`;
+      div.innerHTML=`<img src="${url}" style="width:100%;height:100%;object-fit:cover;background:#111;pointer-events:none;" loading="lazy"><div class="smi-lbl">${esc(sl.name||'photo')}</div>`;
     }
+    const badge=document.createElement('div');badge.className='smi-order';badge.textContent=i+1;div.appendChild(badge);
+    const handle=document.createElement('div');handle.className='smi-handle';handle.innerHTML='&#8942;&#8942;';handle.title='Drag to reorder';div.appendChild(handle);
+    const up=document.createElement('button');up.className='smi-mv smi-up';up.innerHTML='&#9650;';up.title='Move up';
+    up.onclick=async(e)=>{e.stopPropagation();const prev=div.previousElementSibling;if(prev&&prev.classList.contains('smi')){g.insertBefore(div,prev);await saveOrder();}};
+    const dn=document.createElement('button');dn.className='smi-mv smi-dn';dn.innerHTML='&#9660;';dn.title='Move down';
+    dn.onclick=async(e)=>{e.stopPropagation();const next=div.nextElementSibling;if(next&&next.classList.contains('smi')){g.insertBefore(next,div);await saveOrder();}};
+    div.appendChild(up);div.appendChild(dn);
     const del=document.createElement('button');del.className='smi-del';del.textContent='✕';del.title='Remove from slideshow';
     del.onclick=async(e)=>{
       e.stopPropagation();
-      if(!confirm(`Remove "${sl.name||'this slide'}" from the slideshow?\n\nThis will also delete it from cloud storage.`))return;
+      if(!confirm(`Remove "${sl.name||'this slide'}" from the slideshow?`))return;
       del.textContent='...';del.disabled=true;
-      // 1. Delete from Cloudinary
-      const resType = sl.type==='video'?'video':'image';
-      const cloudOk = await cloudDelete(sl.url, resType);
-      // 2. Delete from Supabase
-      if(IS_CFG && sl.id && !sl._local){
-        await sbDelete('slides', sl.id);
-      }
-      // 3. Always clean local fallback too
-      const ld=lLoad();
-      ld.slides=(ld.slides||[]).filter(x=>x.url!==sl.url && x.id!==sl.id);
-      lSave(ld);
-      const msg = cloudOk
-        ? '✅ Deleted from slideshow & cloud storage!'
-        : '✅ Removed from slideshow. Note: To free Cloudinary storage, go to cloudinary.com → Media Library → kyrie_birthday folder and delete manually.';
-      toast(msg);
-      rSSGrid(); buildReel(); rAStats();
+      const resType=sl.type==='video'?'video':'image';
+      const cloudOk=await cloudDelete(sl.url,resType);
+      if(IS_CFG&&sl.id&&!sl._local)await sbDelete('slides',sl.id);
+      const ld=lLoad();ld.slides=(ld.slides||[]).filter(x=>x.url!==sl.url&&x.id!==sl.id);lSave(ld);
+      toast(cloudOk?'✅ Deleted from slideshow & cloud storage!':'✅ Removed. Delete manually at cloudinary.com → kyrie_birthday folder');
+      rSSGrid();buildReel();rAStats();
     };
-    div.appendChild(del);g.appendChild(div);
+    div.appendChild(del);
+    div.addEventListener('dragstart',e=>{dragSrc=div;div.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
+    div.addEventListener('dragend',()=>{div.classList.remove('dragging');[...g.querySelectorAll('.smi')].forEach(s=>s.classList.remove('drag-over'));});
+    div.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='move';if(div!==dragSrc){[...g.querySelectorAll('.smi')].forEach(s=>s.classList.remove('drag-over'));div.classList.add('drag-over');}});
+    div.addEventListener('dragleave',()=>div.classList.remove('drag-over'));
+    div.addEventListener('drop',async e=>{
+      e.preventDefault();div.classList.remove('drag-over');
+      if(!dragSrc||dragSrc===div)return;
+      const all=[...g.querySelectorAll('.smi')];
+      const si=all.indexOf(dragSrc),ti=all.indexOf(div);
+      if(si<ti)g.insertBefore(dragSrc,div.nextSibling);else g.insertBefore(dragSrc,div);
+      await saveOrder();
+    });
+    g.appendChild(div);
   }
 }
 
@@ -1908,15 +1963,54 @@ async function rAStats(){
   } else {
     const ld=lLoad();rsvps=ld.rsvps||[];wishes=ld.wishes||[];gallery=ld.gallery||[];slides=ld.slides||[];
   }
-  const att=rsvps.filter(r=>r.attendance==='Yes');
-  const pending=gallery.filter(g=>!g.approved).length;
-  const st=[
-    {n:rsvps.length,l:'RSVPs'},{n:att.length,l:'Attending'},
-    {n:att.reduce((s,r)=>s+(r.adults||0),0),l:'Adults'},{n:att.reduce((s,r)=>s+(r.kids||0),0),l:'Kids'},
-    {n:wishes.length,l:'Wishes'},{n:gallery.filter(g=>g.approved).length,l:'Gallery'},{n:pending,l:'Pending'},
-    {n:slides.length,l:'Slides'},
-  ];
-  document.getElementById('ap-stats').innerHTML=st.map(s=>`<div class="aps"><div class="aps-n">${s.n}</div><div class="aps-l">${s.l}</div></div>`).join('');
+  const yes    = rsvps.filter(r=>r.attendance==='Yes');
+  const maybe  = rsvps.filter(r=>r.attendance==='Maybe');
+  const no     = rsvps.filter(r=>r.attendance==='No');
+  const confirmed_adults = yes.reduce((s,r)=>s+(r.adults||0),0);
+  const confirmed_kids   = yes.reduce((s,r)=>s+(r.kids||0),0);
+  const confirmed_total  = confirmed_adults + confirmed_kids;
+  const maybe_adults     = maybe.reduce((s,r)=>s+(r.adults||0),0);
+  const maybe_kids       = maybe.reduce((s,r)=>s+(r.kids||0),0);
+  const maybe_total      = maybe_adults + maybe_kids;
+  const pending_gal      = gallery.filter(g=>!g.approved).length;
+
+  document.getElementById('ap-stats').innerHTML=`
+    <div class="aps-section">
+      <div class="aps-heading">📋 RSVPs Overview</div>
+      <div class="aps-row">
+        <div class="aps aps-total"><div class="aps-n">${rsvps.length}</div><div class="aps-l">Total RSVPs</div></div>
+        <div class="aps aps-yes"><div class="aps-n">${yes.length}</div><div class="aps-l">✅ Coming</div></div>
+        <div class="aps aps-maybe"><div class="aps-n">${maybe.length}</div><div class="aps-l">🤔 Maybe</div></div>
+        <div class="aps aps-no"><div class="aps-n">${no.length}</div><div class="aps-l">❌ Can't Come</div></div>
+      </div>
+    </div>
+    <div class="aps-section">
+      <div class="aps-heading">👥 Confirmed Guest Count <span class="aps-note">(Yes only)</span></div>
+      <div class="aps-row">
+        <div class="aps aps-big"><div class="aps-n aps-n-big">${confirmed_total}</div><div class="aps-l">Total Heads</div></div>
+        <div class="aps"><div class="aps-n">${confirmed_adults}</div><div class="aps-l">🧑 Adults</div></div>
+        <div class="aps"><div class="aps-n">${confirmed_kids}</div><div class="aps-l">👶 Kids</div></div>
+      </div>
+    </div>
+    <div class="aps-section">
+      <div class="aps-heading">🤔 Potential Guests <span class="aps-note">(Maybe — plan for these)</span></div>
+      <div class="aps-row">
+        <div class="aps aps-maybe-soft"><div class="aps-n">${maybe_total}</div><div class="aps-l">Possible Total</div></div>
+        <div class="aps aps-maybe-soft"><div class="aps-n">${maybe_adults}</div><div class="aps-l">🧑 Adults</div></div>
+        <div class="aps aps-maybe-soft"><div class="aps-n">${maybe_kids}</div><div class="aps-l">👶 Kids</div></div>
+      </div>
+      <div class="aps-tip">💡 Plan for <strong>${confirmed_total + maybe_total}</strong> total (confirmed + maybe)</div>
+    </div>
+    <div class="aps-section">
+      <div class="aps-heading">💝 Content</div>
+      <div class="aps-row">
+        <div class="aps"><div class="aps-n">${wishes.length}</div><div class="aps-l">Wishes</div></div>
+        <div class="aps"><div class="aps-n">${gallery.filter(g=>g.approved).length}</div><div class="aps-l">📸 Gallery</div></div>
+        <div class="aps ${pending_gal>0?'aps-warn':''}"><div class="aps-n">${pending_gal}</div><div class="aps-l">⏳ Pending</div></div>
+        <div class="aps"><div class="aps-n">${slides.length}</div><div class="aps-l">🎞 Slides</div></div>
+      </div>
+    </div>
+  `;
 }
 
 async function rARSVPs(){
