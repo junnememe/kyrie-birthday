@@ -26,9 +26,9 @@ footer{scroll-snap-align:start;}
 img{max-width:100%;display:block;}
 
 /* ─── WISH CAROUSEL ─── */
-.wish-carousel-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:8px 0 16px;}
+.wish-carousel-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:8px 0 16px;width:100%;max-width:100%;}
 .wish-carousel-wrap::-webkit-scrollbar{display:none;}
-.wish-carousel{display:flex;gap:14px;padding:4px 4px;width:max-content;}
+.wish-carousel{display:flex;gap:14px;padding:4px 4px;width:max-content;min-width:100%;}
 .wish-carousel .wcard{width:min(280px,75vw);flex-shrink:0;animation:none;}
 /* ─── MOBILE GLOBAL IMPROVEMENTS ─── */
 @media(max-width:600px){
@@ -39,13 +39,16 @@ img{max-width:100%;display:block;}
   .cd-n{font-size:clamp(1.8rem,10vw,3rem);}
   .reel-wrap{border-radius:16px;}
   .ev-card{border-radius:16px;}
-  .fc{border-radius:16px;}
+  .fc{border-radius:16px;width:100%;max-width:100%;}
   .gup-card{border-radius:16px;padding:18px 14px;}
   .ap-hd{flex-wrap:wrap;height:auto;padding:10px 14px;gap:6px;}
   .ap-hd-btns{gap:4px;}
   .apb{padding:5px 9px;font-size:.7rem;}
   .pop-box{max-width:100%;border-radius:16px 16px 0 0;margin-top:auto;}
   .pop-ov{align-items:flex-end;padding:0;}
+  .sec{padding:60px 16px;}
+  .si{padding:0;}
+  .wish-carousel-wrap{margin:0 -16px;padding:8px 16px 16px;width:calc(100% + 32px);}
 }
 /* iOS Safari momentum scroll fix */
 .wish-carousel-wrap, .ap-ct, #lb-wrap{-webkit-overflow-scrolling:touch;}
@@ -228,8 +231,8 @@ button{cursor:pointer;font-family:var(--fb);}
 .cd-u{font-size:.55rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(240,200,90,.55);margin-top:3px;}
 
 /* ─── SECTIONS ─── */
-.sec{padding:68px 20px;scroll-snap-align:start;scroll-snap-stop:always;min-height:100vh;display:flex;flex-direction:column;justify-content:center;}
-.si{max-width:1080px;margin:0 auto;}
+.sec{padding:68px 20px;scroll-snap-align:start;scroll-snap-stop:always;min-height:100vh;display:flex;flex-direction:column;justify-content:center;width:100%;overflow-x:hidden;}
+.si{max-width:1080px;margin:0 auto;width:100%;}
 .ey{font-size:.68rem;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:var(--red);text-align:center;margin-bottom:6px;}
 .st{font-family:var(--fh);font-size:clamp(1.7rem,5vw,2.7rem);text-align:center;font-style:italic;color:var(--dark);margin-bottom:6px;}
 .st span{color:var(--red);}
@@ -356,7 +359,7 @@ button{cursor:pointer;font-family:var(--fb);}
 .btn-sec:hover{border-color:var(--red);background:#fff5f5;}
 
 /* ─── FORM CARD (RSVP + WISHES combined) ─── */
-.form-sec{background:var(--cream);}
+.form-sec{background:var(--cream);overflow-x:hidden;}
 .fc{max-width:660px;margin:0 auto;background:#fff;border-radius:var(--radius-xl);overflow:hidden;box-shadow:0 14px 48px rgba(0,0,0,.07);}
 .fc-head{background:var(--red);padding:22px;display:flex;align-items:center;gap:12px;}
 .fc-head img{height:34px;}
@@ -403,7 +406,7 @@ button{cursor:pointer;font-family:var(--fb);}
 .uprev img,.uprev video{max-width:100%;max-height:90px;border-radius:8px;object-fit:cover;}
 
 /* ─── WISHES GRID ─── */
-.wo{max-width:1080px;margin:0 auto;margin-top:44px;}
+.wo{max-width:1080px;margin:0 auto;margin-top:44px;overflow:hidden;width:100%;}
 .wg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
 .wcard{background:#fff;border-radius:var(--radius-lg);padding:18px;border:1px solid rgba(0,0,0,.07);box-shadow:0 3px 16px rgba(0,0,0,.06);transition:var(--tr);position:relative;overflow:hidden;cursor:pointer;}
 .wcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--yellow));}
