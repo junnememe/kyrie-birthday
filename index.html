@@ -25,14 +25,31 @@ body{font-family:var(--fb);background:#fff;color:var(--dark);overflow-x:hidden;}
 footer{scroll-snap-align:start;}
 img{max-width:100%;display:block;}
 
-/* ─── WISH CAROUSEL ─── */
+/* ─── WISH CAROUSEL ARROWS ─── */
+.wc-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:36px;height:36px;border-radius:50%;
+  background:#fff;border:1.5px solid rgba(214,43,43,.25);
+  color:var(--red);font-size:1.1rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.1);
+  z-index:5;cursor:pointer;transition:var(--tr);
+  flex-shrink:0;
+}
+.wc-arrow:hover{background:var(--red);color:#fff;border-color:var(--red);transform:translateY(-50%) scale(1.1);}
+.wc-prev{left:-18px;}
+.wc-next{right:-18px;}
+@media(max-width:600px){
+  .wc-prev{left:-14px;}
+  .wc-next{right:-14px;}
+}
 .wish-carousel-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:8px 0 16px;width:100%;max-width:100%;}
 .wish-carousel-wrap::-webkit-scrollbar{display:none;}
 .wish-carousel{display:flex;gap:14px;padding:4px 4px;width:max-content;min-width:100%;}
 .wish-carousel .wcard{width:min(280px,75vw);flex-shrink:0;animation:none;}
 /* ─── MOBILE GLOBAL IMPROVEMENTS ─── */
 @media(max-width:600px){
-  .env-scene{width:min(310px,90vw);}
+  .env-scene{width:min(340px,92vw);margin-top:10px;}
   .fc-body{padding:16px 12px;}
   .row2{grid-template-columns:1fr;}
   .cd-box{padding:14px 18px;min-width:70px;}
@@ -75,7 +92,7 @@ button{cursor:pointer;font-family:var(--fb);}
   position:fixed;inset:0;z-index:9999;
   background:radial-gradient(ellipse at 50% 35%,#2a0018 0%,#130008 55%,#080003 100%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:80px 20px 20px;
+  padding:20px 20px 40px;
   transition:opacity 1s ease,transform 1s ease;
 }
 #intro.out{opacity:0;pointer-events:none;transform:scale(1.04);}
@@ -90,10 +107,11 @@ button{cursor:pointer;font-family:var(--fb);}
 /* The envelope */
 .env-scene{
   position:relative;
-  width:min(340px,82vw);
+  width:min(360px,88vw);
   cursor:pointer;
   perspective:800px;
-  margin-bottom:12px;
+  margin-bottom:16px;
+  margin-top:20px;
   overflow:visible; /* allows card to rise above envelope boundary */
 }
 .env-back{
@@ -592,11 +610,10 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
       <!-- The card lives INSIDE — hidden until open -->
       <div class="env-card" id="env-card">
         <span class="env-card-crown">👑🎂👑</span>
-        <span class="env-card-line1">You're invited!</span>
-        <span style="font-family:var(--fb);color:var(--mid);font-size:clamp(.8rem,2.4vw,.95rem);line-height:1.7;margin-top:8px;margin-bottom:6px;display:block;">
+        <span style="font-family:var(--fb);color:var(--mid);font-size:clamp(.82rem,2.5vw,.97rem);line-height:1.75;margin-top:4px;margin-bottom:6px;display:block;">
           Join us as we celebrate<br>
           <strong style="font-family:var(--fs);color:var(--red);font-size:clamp(1.1rem,3.2vw,1.4rem);">Kyrie's 1st Birthday</strong><br>
-          <span style="font-size:.82em;color:var(--muted);">One year of pure magic 🌟</span>
+          <span style="font-size:.85em;color:var(--muted);">One year of pure magic 🌟</span>
         </span>
         <span class="env-card-line2">03 JULY 2026 · 7:00 PM</span>
         <span class="env-card-venue">Jollibee Doha Souq Mall</span>
@@ -662,8 +679,8 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
 
       <!-- Top label overlay -->
       <div class="reel-top-label">
-        <span class="reel-ey">Our Princess</span>
-        <span class="reel-title">Meet Kyrie 👑</span>
+        <span class="reel-ey">Meet Our Princess</span>
+        <span class="reel-title">Kyrie 👑</span>
       </div>
 
       <!-- Empty state -->
@@ -811,10 +828,15 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
 
     <!-- Wishes display — horizontal carousel -->
     <div class="wo">
-      <h3 style="font-family:var(--fh);font-size:1.45rem;color:var(--dark);text-align:center;font-style:italic;margin-bottom:20px;">Wishes from <span style="color:var(--red);">Loved Ones</span></h3>
-      <div class="wish-carousel-wrap">
-        <div class="wish-carousel" id="wg"></div>
+      <h3 style="font-family:var(--fh);font-size:1.45rem;color:var(--dark);text-align:center;font-style:italic;margin-bottom:14px;">Wishes from <span style="color:var(--red);">Loved Ones</span></h3>
+      <div style="position:relative;">
+        <button class="wc-arrow wc-prev" onclick="scrollWishCarousel(-1)" aria-label="Previous wishes">&#8592;</button>
+        <div class="wish-carousel-wrap" id="wish-carousel-wrap">
+          <div class="wish-carousel" id="wg"></div>
+        </div>
+        <button class="wc-arrow wc-next" onclick="scrollWishCarousel(1)" aria-label="Next wishes">&#8594;</button>
       </div>
+      <p style="text-align:center;font-size:.72rem;color:var(--muted);margin-top:10px;letter-spacing:1px;">← swipe or use arrows to browse →</p>
       <div style="text-align:center;margin-top:16px;"></div>
     </div>
   </div>
@@ -1178,7 +1200,7 @@ function openEnv(){
   setTimeout(() => {
     back.style.overflow = 'visible'; // now let card emerge above the top edge
     card.style.transition = 'transform .75s cubic-bezier(.175,.885,.32,1.275), box-shadow .75s';
-    card.style.transform  = 'translateX(-50%) translateY(-55%)'; // rise just above envelope top
+    card.style.transform  = 'translateX(-50%) translateY(-18%)'; // rise just above envelope top
     card.style.boxShadow  = '0 20px 60px rgba(0,0,0,.4)';
     card.style.zIndex     = '10';
   }, 850);
@@ -1430,17 +1452,37 @@ async function renderWishes(){
 }
 
 let carouselScrollTimer=null;
+let carouselPauseTimer=null;
+let carouselDir=1;
+
+function scrollWishCarousel(dir){
+  const wrap=document.getElementById('wish-carousel-wrap');
+  if(!wrap) return;
+  // pause auto-scroll while user navigates
+  clearTimeout(carouselPauseTimer);
+  clearInterval(carouselScrollTimer);
+  const cardW = wrap.querySelector('.wcard')?.offsetWidth||280;
+  wrap.scrollBy({left: dir*(cardW+14), behavior:'smooth'});
+  // resume auto-scroll after 3s of inactivity
+  carouselPauseTimer=setTimeout(()=>startCarouselScroll(),3000);
+}
+
 function startCarouselScroll(){
   clearInterval(carouselScrollTimer);
-  const wrap=document.querySelector('.wish-carousel-wrap');
+  const wrap=document.getElementById('wish-carousel-wrap');
   if(!wrap) return;
-  let dir=1;
   carouselScrollTimer=setInterval(()=>{
     if(wrap.matches(':hover')) return;
-    wrap.scrollLeft+=dir*1.2;
-    if(wrap.scrollLeft+wrap.clientWidth>=wrap.scrollWidth-2) dir=-1;
-    if(wrap.scrollLeft<=0) dir=1;
+    wrap.scrollLeft+=carouselDir*1.2;
+    if(wrap.scrollLeft+wrap.clientWidth>=wrap.scrollWidth-2) carouselDir=-1;
+    if(wrap.scrollLeft<=0) carouselDir=1;
   },20);
+  // pause on touch/drag
+  wrap.ontouchstart=()=>{
+    clearInterval(carouselScrollTimer);
+    clearTimeout(carouselPauseTimer);
+    carouselPauseTimer=setTimeout(()=>startCarouselScroll(),3000);
+  };
 }
 
 function openWPop(w){
