@@ -1437,13 +1437,27 @@ async function submitWish(){
     }
     document.getElementById('wish-fw').style.display='none';
     document.getElementById('wish-ok').classList.add('on');
+    btn.disabled=false; btn.textContent='💝 Send My Wish';
     renderWishes(); confetti(40);
   } catch(e){
     toast('❌ Upload failed. Check connection.');
     btn.disabled=false; btn.textContent='💝 Send My Wish';
   }
 }
-function resetWish(){document.getElementById('w-name').value='';document.getElementById('w-msg').value='';document.getElementById('w-pp').innerHTML='';document.getElementById('w-vp').innerHTML='';document.getElementById('w-photo').value='';document.getElementById('w-video').value='';['wpc-photo','wpc-video'].forEach(i=>{const el=document.getElementById(i);if(el)el.classList.remove('on');});wPhoto=null;wVideo=null;document.getElementById('wish-fw').style.display='';document.getElementById('wish-ok').classList.remove('on');}
+function resetWish(){
+  document.getElementById('w-name').value='';
+  document.getElementById('w-msg').value='';
+  document.getElementById('w-pp').innerHTML='';
+  document.getElementById('w-vp').innerHTML='';
+  document.getElementById('w-photo').value='';
+  document.getElementById('w-video').value='';
+  ['wpc-photo','wpc-video'].forEach(i=>{const el=document.getElementById(i);if(el)el.classList.remove('on');});
+  wPhoto=null; wVideo=null;
+  const btn=document.querySelector('#wish-fw .sbtn');
+  if(btn){btn.disabled=false;btn.textContent='💝 Send My Wish';}
+  document.getElementById('wish-fw').style.display='';
+  document.getElementById('wish-ok').classList.remove('on');
+}
 
 /* ════════════ RENDER WISHES (carousel) ════════════ */
 let wishShowAll=true;
