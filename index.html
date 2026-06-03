@@ -591,9 +591,14 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
       <div class="env-fold-r"></div>
       <!-- The card lives INSIDE — hidden until open -->
       <div class="env-card" id="env-card">
-        <span class="env-card-crown">👑</span>
-        <span class="env-card-line1">Princess Kyrie's<br>1st Birthday</span>
-        <span class="env-card-line2">03 JULY 2026 · 6:30 PM</span>
+        <span class="env-card-crown">👑🎂👑</span>
+        <span class="env-card-line1">You're invited!</span>
+        <span style="font-family:var(--fb);color:var(--mid);font-size:clamp(.8rem,2.4vw,.95rem);line-height:1.7;margin-top:8px;margin-bottom:6px;display:block;">
+          Join us as we celebrate<br>
+          <strong style="font-family:var(--fs);color:var(--red);font-size:clamp(1.1rem,3.2vw,1.4rem);">Kyrie's 1st Birthday</strong><br>
+          <span style="font-size:.82em;color:var(--muted);">One year of pure magic 🌟</span>
+        </span>
+        <span class="env-card-line2">03 JULY 2026 · 7:00 PM</span>
         <span class="env-card-venue">Jollibee Doha Souq Mall</span>
       </div>
     </div>
@@ -810,9 +815,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
       <div class="wish-carousel-wrap">
         <div class="wish-carousel" id="wg"></div>
       </div>
-      <div style="text-align:center;margin-top:16px;">
-        <button class="ob" id="show-more-wishes" style="display:none;" onclick="showMoreWishes()">See All Wishes ›</button>
-      </div>
+      <div style="text-align:center;margin-top:16px;"></div>
     </div>
   </div>
 </section>
@@ -1197,7 +1200,7 @@ document.getElementById('env-scene').addEventListener('click', openEnv);
 document.getElementById('env-scene').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')openEnv();});
 
 /* ════════════ COUNTDOWN ════════════ */
-const PARTY=new Date('2026-07-03T18:30:00+03:00');
+const PARTY=new Date('2026-07-03T19:00:00+03:00');
 function tick(){
   const d=PARTY-Date.now();
   if(d<=0){['cd-d','cd-h','cd-m','cd-s'].forEach(i=>document.getElementById(i).textContent='🎉');return;}
@@ -1384,7 +1387,7 @@ async function submitWish(){
 function resetWish(){document.getElementById('w-name').value='';document.getElementById('w-msg').value='';document.getElementById('w-pp').innerHTML='';document.getElementById('w-vp').innerHTML='';document.getElementById('w-photo').value='';document.getElementById('w-video').value='';['wpc-photo','wpc-video'].forEach(i=>{const el=document.getElementById(i);if(el)el.classList.remove('on');});wPhoto=null;wVideo=null;document.getElementById('wish-fw').style.display='';document.getElementById('wish-ok').classList.remove('on');}
 
 /* ════════════ RENDER WISHES (carousel) ════════════ */
-let wishShowAll=false;
+let wishShowAll=true;
 function showMoreWishes(){ wishShowAll=true; renderWishes(); }
 
 async function renderWishes(){
