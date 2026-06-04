@@ -847,7 +847,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
               <div class="fg"><label class="fl">Adults</label><input class="fi" id="r-adults" type="number" min="0" max="20" value="1"></div>
               <div class="fg"><label class="fl">Kids</label><input class="fi" id="r-kids" type="number" min="0" max="20" value="0"></div>
             </div>
-            <div class="fg"><label class="fl">Message to the Birthday Princess 👑</label><textarea class="ft" id="r-msg" placeholder="Write a sweet message for Princess Kyrie..."></textarea></div>
             <button type="button" class="sbtn" onclick="submitRSVP()">💌 Submit RSVP</button>
           </div>
           <div class="succ" id="rsvp-ok">
@@ -1408,7 +1407,7 @@ async function submitRSVP(){
   if(!name){document.getElementById('r-name').classList.add('err');toast('⚠️ Name is required');return;}
   if(!mob){document.getElementById('r-mob').classList.add('err');toast('⚠️ Mobile is required');return;}
   if(!pickedA){toast('⚠️ Please select attendance');return;}
-  const row={name,mobile:mob,attendance:pickedA,adults:+document.getElementById('r-adults').value||0,kids:+document.getElementById('r-kids').value||0,message:document.getElementById('r-msg').value.trim()};
+  const row={name,mobile:mob,attendance:pickedA,adults:+document.getElementById('r-adults').value||0,kids:+document.getElementById('r-kids').value||0};
   if(IS_CFG){
     const res=await sbInsert('rsvps',row);
     if(!res){toast('❌ Error saving RSVP. Try again.');return;}
@@ -1419,7 +1418,7 @@ async function submitRSVP(){
   document.getElementById('rsvp-ok').classList.add('on');
   confetti(60);
 }
-function resetRSVP(){pickedA='';['r-name','r-mob','r-msg'].forEach(i=>document.getElementById(i).value='');document.getElementById('r-adults').value='1';document.getElementById('r-kids').value='0';document.querySelectorAll('.att').forEach(b=>b.classList.remove('sel'));document.getElementById('rsvp-fw').style.display='';document.getElementById('rsvp-ok').classList.remove('on');}
+function resetRSVP(){pickedA='';['r-name','r-mob'].forEach(i=>document.getElementById(i).value='');document.getElementById('r-adults').value='1';document.getElementById('r-kids').value='0';document.querySelectorAll('.att').forEach(b=>b.classList.remove('sel'));document.getElementById('rsvp-fw').style.display='';document.getElementById('rsvp-ok').classList.remove('on');}
 
 /* ════════════ WISH FILE HANDLING ════════════ */
 let wPhoto=null, wVideo=null;
