@@ -102,7 +102,7 @@ img{max-width:100%;display:block;}
   .reel-title{font-size:clamp(1.1rem,5vw,1.6rem) !important;}
   /* countdown: compact single row, small padding */
   .cd-grid{gap:6px;padding:0 6px;}
-  .reel-cd-overlay{padding:12px 10px 24px;}
+  .hero-cd{max-width:100%;} .cd-box{max-width:72px;}
   .cd-ttl{font-size:.85rem;margin-bottom:8px;}
   .cd-ey{display:none;}
   /* event card full width */
@@ -268,34 +268,30 @@ button{cursor:pointer;font-family:var(--fb);}
 .red-band img{height:26px;} 
 .red-band-t{font-family:var(--fh);color:#fff;font-size:clamp(.82rem,2vw,1.05rem);font-style:italic;}
 
-/* ─── MERGED REEL + COUNTDOWN ─── */
-/* countdown section hidden — merged into reel */
-.cd-sec{display:none;}
-/* countdown overlay inside reel */
-.reel-cd-overlay{
-  position:absolute;
-  bottom:0;left:0;right:0;
-  z-index:6;
-  padding:16px 16px 28px;
-  background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.6) 55%,transparent 100%);
+/* ─── COUNTDOWN — in hero section ─── */
+.hero-cd{
+  margin-top:28px;
   text-align:center;
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:420px;
 }
-.cd-ey{font-size:.55rem;font-weight:700;letter-spacing:5px;color:rgba(240,200,90,.75);text-transform:uppercase;margin-bottom:2px;display:block;}
-.cd-ttl{font-family:var(--fh);color:#fff;font-size:clamp(.85rem,2.8vw,1.2rem);font-style:italic;margin-bottom:10px;display:block;}
-.cd-ttl span{color:var(--yellow-light);}
-.cd-grid{display:flex;gap:8px;justify-content:center;flex-wrap:nowrap;}
+.cd-ey{font-size:.55rem;font-weight:700;letter-spacing:5px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;display:block;}
+.cd-ttl{font-family:var(--fh);color:var(--dark);font-size:clamp(.85rem,2.8vw,1.1rem);font-style:italic;margin-bottom:12px;display:block;}
+.cd-ttl span{color:var(--red);}
+.cd-grid{display:flex;gap:10px;justify-content:center;}
 .cd-box{
-  background:rgba(0,0,0,.5);
-  border:1px solid rgba(240,200,90,.35);
-  border-radius:10px;
-  padding:8px 0;
-  min-width:0;
+  background:#fff;
+  border:1.5px solid rgba(214,43,43,.15);
+  border-radius:12px;
+  padding:10px 0 8px;
   flex:1;
-  max-width:80px;
-  backdrop-filter:blur(12px);
+  max-width:90px;
+  box-shadow:0 4px 16px rgba(214,43,43,.07);
 }
-.cd-n{font-family:var(--fh);font-size:clamp(1.3rem,5vw,2.2rem);font-weight:900;color:var(--yellow-light);line-height:1;}
-.cd-u{font-size:.48rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(240,200,90,.55);margin-top:2px;}
+.cd-n{font-family:var(--fh);font-size:clamp(1.4rem,5vw,2rem);font-weight:900;color:var(--red);line-height:1;}
+.cd-u{font-size:.5rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:3px;}
 
 /* ─── SECTIONS ─── */
 .sec{padding:68px 20px;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;width:100%;overflow-x:hidden;}
@@ -775,6 +771,18 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
     <div class="hero-div-line" style="background:linear-gradient(90deg,rgba(201,150,58,.45),transparent);"></div>
   </div>
   <button type="button" class="hero-rsvp" onclick="document.getElementById('form-sec').scrollIntoView({behavior:'smooth'})">Reserve My Spot</button>
+
+  <!-- Countdown moved here from reel -->
+  <div id="cd" class="hero-cd">
+    <span class="cd-ey">The Big Day Is Coming</span>
+    <span class="cd-ttl">Counting Down to <span>Kyrie's Day</span></span>
+    <div class="cd-grid">
+      <div class="cd-box"><div class="cd-n" id="cd-d">--</div><div class="cd-u">Days</div></div>
+      <div class="cd-box"><div class="cd-n" id="cd-h">--</div><div class="cd-u">Hours</div></div>
+      <div class="cd-box"><div class="cd-n" id="cd-m">--</div><div class="cd-u">Minutes</div></div>
+      <div class="cd-box"><div class="cd-n" id="cd-s">--</div><div class="cd-u">Seconds</div></div>
+    </div>
+  </div>
 </section>
 
 <!-- RED BAND -->
@@ -807,17 +815,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
         <div class="reel-ctr" id="reel-ctr"></div>
       </div>
 
-      <!-- Countdown overlay (bottom of photo) -->
-      <div class="reel-cd-overlay" id="cd">
-        <span class="cd-ey">The Big Day Is Coming</span>
-        <span class="cd-ttl">Counting Down to <span>Kyrie's Day</span></span>
-        <div class="cd-grid">
-          <div class="cd-box"><div class="cd-n" id="cd-d">--</div><div class="cd-u">Days</div></div>
-          <div class="cd-box"><div class="cd-n" id="cd-h">--</div><div class="cd-u">Hours</div></div>
-          <div class="cd-box"><div class="cd-n" id="cd-m">--</div><div class="cd-u">Minutes</div></div>
-          <div class="cd-box"><div class="cd-n" id="cd-s">--</div><div class="cd-u">Seconds</div></div>
-        </div>
-      </div>
+
 
     </div>
   </div>
