@@ -337,49 +337,46 @@ button{cursor:pointer;font-family:var(--fb);}
   aspect-ratio:unset;
   box-shadow:none;
 }
-/* ─── REEL SLIDES: adaptive object-fit based on image orientation + device ─── */
-.reel-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;}
-.reel-slide.active{opacity:1;}
-.reel-slide img,.reel-slide video{
+
+/* ─── BLURRED BACKDROP (portrait/contained photos) ─── */
+.reel-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;background:#000;}
+.reel-blur-bg{
+  position:absolute;inset:0;
   width:100%;height:100%;
-  object-fit:cover;          /* default — overridden by JS per slide */
-  object-position:center center;
-  transition:object-fit 0s;
+  background-size:cover;
+  background-position:center;
+  filter:blur(28px) brightness(.55) saturate(1.4);
+  transform:scale(1.08); /* prevents blur edge fringing */
+  z-index:0;
+  opacity:0;
+  transition:opacity .6s ease;
 }
-/* Portrait image on wide screen — use contain so nothing gets cropped */
-.reel-slide.is-portrait img{
-  object-fit:contain;
-  background:#000;
-}
-/* Landscape image always fills — cover */
-.reel-slide.is-landscape img{
+.reel-slide.has-blur .reel-blur-bg{opacity:1;}
+.reel-slide img,.reel-slide video{
+  position:relative;
+  z-index:1;
+  width:100%;height:100%;
   object-fit:cover;
+  object-position:center center;
 }
-/* Mobile: always cover regardless — portrait crops nicely on narrow screen */
+.reel-slide.is-portrait img{object-fit:contain;}
+.reel-slide.is-landscape img{object-fit:cover;}
 @media(max-width:600px){
   .reel-slide.is-portrait img,
-  .reel-slide.is-landscape img{
-    object-fit:cover;
-    object-position:center top; /* show face/top on portrait mobile */
-  }
+  .reel-slide.is-landscape img{object-fit:cover;object-position:center top;}
+  .reel-blur-bg{filter:blur(20px) brightness(.5) saturate(1.3);} 
 }
-/* Tablet: contain portrait, cover landscape */
 @media(min-width:601px) and (max-width:1024px){
   .reel-slide.is-portrait img{object-fit:contain;}
   .reel-slide.is-landscape img{object-fit:cover;}
 }
-/* Desktop & TV (1025px+): always contain so full photo shows */
 @media(min-width:1025px){
   .reel-slide.is-portrait img,
-  .reel-slide.is-landscape img{
-    object-fit:contain;
-  }
+  .reel-slide.is-landscape img{object-fit:contain;}
 }
-.reel-slide video{background:#000;object-fit:contain;}
-/* On mobile, video covers */
-@media(max-width:600px){
-  .reel-slide video{object-fit:cover;}
-}
+.reel-slide video{object-fit:contain;background:transparent;}
+@media(max-width:600px){.reel-slide video{object-fit:cover;}}
+
 /* Dark overlay gradient at top & bottom for text readability */
 .reel-wrap::after{
   content:'';
@@ -415,10 +412,10 @@ button{cursor:pointer;font-family:var(--fb);}
   z-index:5;
   display:flex;flex-direction:column;align-items:center;gap:8px;
 }
-.reel-dots{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;}
-.rdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:var(--tr);}
-.rdot.active{background:#fff;transform:scale(1.4);}
-.reel-ctr{font-size:.72rem;color:rgba(255,255,255,.5);font-weight:600;letter-spacing:2px;}
+.reel-dots{display:none;}
+.rdot{display:none;}
+.rdot.active{display:none;}
+.reel-ctr{display:none;}
 /* Nav arrows — bigger, on sides */
 .reel-prev,.reel-next{
   position:absolute;top:50%;transform:translateY(-50%);
@@ -1370,7 +1367,7 @@ async function buildReel(){
     return 'mobile';
   }
 
-  /* ── Apply orientation class to slide div after image loads ── */
+  /* ── Apply orientation class + blurred backdrop ── */
   function applyOrientationClass(div, img){
     const device=getDeviceType();
     const w=img.naturalWidth, h=img.naturalHeight;
@@ -1379,21 +1376,35 @@ async function buildReel(){
     const wrapRatio=wrapW/wrapH;
     const imgRatio=w/h;
 
-    // Remove old classes
     div.classList.remove('is-portrait','is-landscape');
 
+    let useContain = false;
     if(device==='mobile'){
-      // Mobile: always cover — CSS handles object-position:top for portrait
       div.classList.add(isPortrait ? 'is-portrait' : 'is-landscape');
+      useContain = false; // mobile always cover
     } else if(device==='tablet'){
       div.classList.add(isPortrait ? 'is-portrait' : 'is-landscape');
+      useContain = isPortrait;
     } else {
-      // Desktop & TV: contain if portrait or if image ratio is much narrower than viewport
-      // Also contain if landscape image is significantly narrower than screen
+      // desktop / tv
       if(isPortrait || imgRatio < wrapRatio * 0.75){
         div.classList.add('is-portrait');
+        useContain = true;
       } else {
         div.classList.add('is-landscape');
+        useContain = false;
+      }
+    }
+
+    // Show blur backdrop only when image won't fill the frame
+    const blurEl = div.querySelector('.reel-blur-bg');
+    if(blurEl){
+      if(useContain){
+        blurEl.style.backgroundImage = `url('${img.src}')`;
+        div.classList.add('has-blur');
+      } else {
+        blurEl.style.backgroundImage = '';
+        div.classList.remove('has-blur');
       }
     }
   }
@@ -1408,10 +1419,14 @@ async function buildReel(){
       v.addEventListener('ended',nextReel);
       div.appendChild(v);
     } else {
+      // Blurred backdrop layer (hidden until orientation detected)
+      const blurBg=document.createElement('div');
+      blurBg.className='reel-blur-bg';
+      div.appendChild(blurBg);
+
       const img=document.createElement('img');
       img.alt="Kyrie's photo"; img.loading='lazy';
       img.crossOrigin='anonymous';
-      // Apply orientation class once dimensions are known
       img.addEventListener('load',()=>applyOrientationClass(div,img),{once:true});
       img.src=sl.url;
       div.appendChild(img);
