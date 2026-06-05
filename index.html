@@ -337,10 +337,49 @@ button{cursor:pointer;font-family:var(--fb);}
   aspect-ratio:unset;
   box-shadow:none;
 }
+/* ─── REEL SLIDES: adaptive object-fit based on image orientation + device ─── */
 .reel-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;}
 .reel-slide.active{opacity:1;}
-.reel-slide img,.reel-slide video{width:100%;height:100%;object-fit:cover;}
-.reel-slide video{background:#000;}
+.reel-slide img,.reel-slide video{
+  width:100%;height:100%;
+  object-fit:cover;          /* default — overridden by JS per slide */
+  object-position:center center;
+  transition:object-fit 0s;
+}
+/* Portrait image on wide screen — use contain so nothing gets cropped */
+.reel-slide.is-portrait img{
+  object-fit:contain;
+  background:#000;
+}
+/* Landscape image always fills — cover */
+.reel-slide.is-landscape img{
+  object-fit:cover;
+}
+/* Mobile: always cover regardless — portrait crops nicely on narrow screen */
+@media(max-width:600px){
+  .reel-slide.is-portrait img,
+  .reel-slide.is-landscape img{
+    object-fit:cover;
+    object-position:center top; /* show face/top on portrait mobile */
+  }
+}
+/* Tablet: contain portrait, cover landscape */
+@media(min-width:601px) and (max-width:1024px){
+  .reel-slide.is-portrait img{object-fit:contain;}
+  .reel-slide.is-landscape img{object-fit:cover;}
+}
+/* Desktop & TV (1025px+): always contain so full photo shows */
+@media(min-width:1025px){
+  .reel-slide.is-portrait img,
+  .reel-slide.is-landscape img{
+    object-fit:contain;
+  }
+}
+.reel-slide video{background:#000;object-fit:contain;}
+/* On mobile, video covers */
+@media(max-width:600px){
+  .reel-slide video{object-fit:cover;}
+}
 /* Dark overlay gradient at top & bottom for text readability */
 .reel-wrap::after{
   content:'';
@@ -1319,6 +1358,46 @@ async function buildReel(){
   if(!slides.length){empty.style.display='flex';return;}
   empty.style.display='none';
   rIdx=0;
+
+  /* ── Device detection for adaptive fit ── */
+  function getDeviceType(){
+    const w=window.innerWidth;
+    const ua=navigator.userAgent||'';
+    // TV: large screen or SmartTV UA
+    if(w>=1800 || /SmartTV|Tizen|WebOS|SMART-TV|HbbTV|TV Safari/i.test(ua)) return 'tv';
+    if(w>=1025) return 'desktop';
+    if(w>=601) return 'tablet';
+    return 'mobile';
+  }
+
+  /* ── Apply orientation class to slide div after image loads ── */
+  function applyOrientationClass(div, img){
+    const device=getDeviceType();
+    const w=img.naturalWidth, h=img.naturalHeight;
+    const isPortrait = h > w;
+    const wrapW=wrap.offsetWidth, wrapH=wrap.offsetHeight;
+    const wrapRatio=wrapW/wrapH;
+    const imgRatio=w/h;
+
+    // Remove old classes
+    div.classList.remove('is-portrait','is-landscape');
+
+    if(device==='mobile'){
+      // Mobile: always cover — CSS handles object-position:top for portrait
+      div.classList.add(isPortrait ? 'is-portrait' : 'is-landscape');
+    } else if(device==='tablet'){
+      div.classList.add(isPortrait ? 'is-portrait' : 'is-landscape');
+    } else {
+      // Desktop & TV: contain if portrait or if image ratio is much narrower than viewport
+      // Also contain if landscape image is significantly narrower than screen
+      if(isPortrait || imgRatio < wrapRatio * 0.75){
+        div.classList.add('is-portrait');
+      } else {
+        div.classList.add('is-landscape');
+      }
+    }
+  }
+
   slides.forEach((sl,i)=>{
     const div=document.createElement('div');
     div.className='reel-slide'+(i===0?' active':'');
@@ -1330,9 +1409,11 @@ async function buildReel(){
       div.appendChild(v);
     } else {
       const img=document.createElement('img');
-      img.src=sl.url; img.alt='Kyrie'; img.loading='lazy';
-      // crossOrigin needed for Cloudinary images on some browsers
+      img.alt="Kyrie's photo"; img.loading='lazy';
       img.crossOrigin='anonymous';
+      // Apply orientation class once dimensions are known
+      img.addEventListener('load',()=>applyOrientationClass(div,img),{once:true});
+      img.src=sl.url;
       div.appendChild(img);
     }
     wrap.insertBefore(div,empty);
@@ -1341,6 +1422,16 @@ async function buildReel(){
     dot.onclick=()=>goReel(i);
     dotsEl.appendChild(dot);
   });
+
+  // Re-apply orientation on resize (e.g. phone rotation, window resize on desktop)
+  if(window._reelResizeObs) window._reelResizeObs.disconnect();
+  window._reelResizeObs = new ResizeObserver(()=>{
+    wrap.querySelectorAll('.reel-slide').forEach(div=>{
+      const img=div.querySelector('img');
+      if(img && img.naturalWidth) applyOrientationClass(div,img);
+    });
+  });
+  window._reelResizeObs.observe(wrap);
   const prev=Object.assign(document.createElement('button'),{className:'reel-prev',innerHTML:'&#8249;'});
   prev.onclick=()=>{clearTimeout(rTimer);prevReel();};
   const next=Object.assign(document.createElement('button'),{className:'reel-next',innerHTML:'&#8250;'});
