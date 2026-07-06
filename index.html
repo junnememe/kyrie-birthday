@@ -5,19 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Princess Kyrie's 1st Birthday 👑</title>
 <meta name="description" content="You're invited! Join us as we celebrate Kyrie's 1st Birthday — 03 July 2026, 7:00 PM at Jollibee Doha Souq Mall 🎂👑">
-<!-- Open Graph — Facebook, WhatsApp, Messenger -->
 <meta property="og:title" content="👑 You're Invited — Kyrie Turns ONE! 🎂">
 <meta property="og:description" content="Join us for a Jollibee royal celebration! 03 July 2026 · 7:00 PM · Jollibee Doha Souq Mall">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://kyrie-1birthday.vercel.app/og-preview.jpg">
 <meta property="og:url" content="https://kyrie-1birthday.vercel.app">
-<!-- Personal invite page: prevent search engine indexing -->
 <meta name="robots" content="noindex, nofollow">
-<!-- Twitter/X card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="👑 Kyrie Turns ONE! — You're Invited 🎂">
 <meta name="twitter:description" content="03 July 2026 · 7:00 PM · Jollibee Doha Souq Mall">
-<!-- iOS Safari -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#d62b2b">
@@ -38,15 +34,11 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;overflow-y:scroll;}
-/* iOS safe area support */
 :root{ --sat: env(safe-area-inset-top,0px); --sab: env(safe-area-inset-bottom,0px); }
 body{font-family:var(--fb);background:#fff;color:var(--dark);overflow-x:hidden;}
-/* ─── SNAP SCROLL: removed mandatory snap for smooth mobile scrolling ─── */
 .snap-sec{}
 footer{}
 img{max-width:100%;display:block;}
-
-/* ─── WISH CAROUSEL ARROWS ─── */
 .wc-arrow{
   position:absolute;top:50%;transform:translateY(-50%);
   width:36px;height:36px;border-radius:50%;
@@ -69,7 +61,6 @@ img{max-width:100%;display:block;}
 .wish-carousel-wrap::-webkit-scrollbar{display:none;}
 .wish-carousel{display:flex;gap:14px;padding:4px 4px;width:max-content;min-width:100%;}
 .wish-carousel .wcard{width:min(280px,75vw);flex-shrink:0;animation:none;}
-/* ─── MOBILE GLOBAL IMPROVEMENTS ─── */
 @media(max-width:600px){
   .env-scene{width:min(340px,92vw);margin-top:10px;}
   .fc-body{padding:16px 12px;}
@@ -87,52 +78,33 @@ img{max-width:100%;display:block;}
   .pop-ov{align-items:flex-end;padding:0;}
   .sec{padding:52px 16px 48px;}
   .si{padding:0;}
-  /* carousel: full-bleed on mobile */
   .wish-carousel-wrap{margin:0 -16px;padding:8px 16px 16px;width:calc(100% + 32px);}
-  /* safe area bottom */
   .hero, footer{padding-bottom:calc(48px + var(--sab));}
   .sec{padding-bottom:calc(48px + var(--sab));}
-  /* nav text smaller */
   .nav-name{font-size:.85rem;}
-  /* hero tighter on small phones */
   .hero-name{font-size:clamp(3rem,15vw,5rem);}
   .hero-one{font-size:clamp(4rem,18vw,7rem);}
-  /* reel label readable on mobile */
   .reel-top-label{padding:20px 16px 0;}
   .reel-title{font-size:clamp(1.1rem,5vw,1.6rem) !important;}
-  /* countdown: compact single row, small padding */
   .cd-grid{gap:6px;padding:0 6px;}
   .hero-cd{max-width:100%;} .cd-box{max-width:72px;}
   .cd-ttl{font-size:.85rem;margin-bottom:8px;}
   .cd-ey{display:none;}
-  /* event card full width */
   .ev-card{max-width:100%;}
-  /* RSVP/wish form card full width */
   .fc{width:100% !important;max-width:100% !important;}
-  /* gallery upload card */
   .gup-card{max-width:100%;}
 }
-/* iOS Safari momentum scroll fix */
 .wish-carousel-wrap, .ap-ct, #lb-wrap{-webkit-overflow-scrolling:touch;}
-/* Prevent double-tap zoom on buttons mobile */
 button,a{touch-action:manipulation;}
-/* Better tap targets mobile */
 @media(max-width:600px){
   .att{min-height:44px;}
   .sbtn{min-height:48px;font-size:1rem;}
   .ctab{min-height:44px;}
   .reel-prev,.reel-next{width:36px;height:36px;}
 }
-
 button{cursor:pointer;font-family:var(--fb);}
-
-/* ─── TOAST ─── */
 #toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(16px);background:#111;color:#fff;padding:10px 22px;border-radius:50px;font-size:.83rem;z-index:9200;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center;}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
-
-/* ═══════════════════════════════════════════════
-   INTRO / ENVELOPE SCREEN
-   ═══════════════════════════════════════════════ */
 #intro{
   position:fixed;inset:0;z-index:9999;
   background:radial-gradient(ellipse at 50% 35%,#2a0018 0%,#130008 55%,#080003 100%);
@@ -144,12 +116,8 @@ button{cursor:pointer;font-family:var(--fb);}
 #intro-stars{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
 .istar{position:absolute;background:#fff;border-radius:50%;animation:itwink var(--d,3s) ease-in-out infinite var(--dl,0s);}
 @keyframes itwink{0%,100%{opacity:.07;transform:scale(1);}50%{opacity:1;transform:scale(1.7);}}
-
-/* floating accent pieces */
 .int-float{position:absolute;font-size:clamp(1.2rem,3vw,1.8rem);animation:ifloat var(--d,5s) ease-in-out infinite var(--dl,0s);opacity:.45;pointer-events:none;}
 @keyframes ifloat{0%,100%{transform:translateY(0) rotate(var(--r,-4deg));}50%{transform:translateY(-16px) rotate(var(--r2,4deg));}}
-
-/* The envelope */
 .env-scene{
   position:relative;
   width:min(360px,88vw);
@@ -157,7 +125,7 @@ button{cursor:pointer;font-family:var(--fb);}
   perspective:800px;
   margin-bottom:16px;
   margin-top:20px;
-  overflow:visible; /* allows card to rise above envelope boundary */
+  overflow:visible;
 }
 .env-back{
   position:relative;
@@ -166,18 +134,15 @@ button{cursor:pointer;font-family:var(--fb);}
   padding-top:62%;
   box-shadow:0 24px 60px rgba(0,0,0,.65),0 0 40px rgba(196,0,74,.18);
   border:1.5px solid rgba(210,160,60,.35);
-  overflow:hidden; /* card hidden inside until flap opens */
+  overflow:hidden;
 }
-/* left/right diagonal shading */
 .env-fold-l{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.1),transparent 40%);border-radius:4px 4px 14px 14px;pointer-events:none;}
 .env-fold-r{position:absolute;inset:0;background:linear-gradient(to left,rgba(0,0,0,.1),transparent 40%);border-radius:4px 4px 14px 14px;pointer-events:none;}
-
-/* the letter/card — starts tucked inside the envelope bottom */
 .env-card{
   position:absolute;
   bottom:0;left:50%;
   transform:translateX(-50%) translateY(100%);
-  width:90%; /* nearly full envelope width */
+  width:90%;
   box-sizing:border-box;
   background:linear-gradient(140deg,#fffcf5,#fff8fa);
   border-radius:8px 8px 4px 4px;
@@ -191,8 +156,6 @@ button{cursor:pointer;font-family:var(--fb);}
 .env-card-line1{font-family:var(--fs);color:var(--red);font-size:clamp(1.1rem,3.5vw,1.5rem);line-height:1.5;display:block;font-weight:700;}
 .env-card-line2{font-family:var(--fb);color:var(--gold);font-size:clamp(.78rem,2.2vw,.95rem);letter-spacing:2px;margin-top:6px;display:block;font-weight:600;}
 .env-card-venue{font-family:var(--fb);color:var(--muted);font-size:clamp(.72rem,2vw,.85rem);margin-top:4px;display:block;}
-
-/* flap */
 .env-flap{
   position:absolute;top:0;left:-1px;right:-1px;
   height:54%;z-index:4;
@@ -204,8 +167,6 @@ button{cursor:pointer;font-family:var(--fb);}
   border-bottom:1px solid rgba(200,160,50,.2);
 }
 .env-scene.opening .env-flap{transform:rotateX(-182deg);}
-
-/* seal */
 .env-seal{
   position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);
   width:min(58px,15vw);height:min(58px,15vw);
@@ -218,17 +179,11 @@ button{cursor:pointer;font-family:var(--fb);}
 }
 @keyframes sealglow{0%,100%{box-shadow:0 0 16px rgba(200,150,50,.5);}50%{box-shadow:0 0 30px rgba(255,200,60,.85),0 0 55px rgba(200,150,50,.4);}}
 .env-seal img{width:100%;height:100%;object-fit:contain;}
-
-/* tagline & button */
 .env-tagline{font-family:var(--fh);color:var(--gold-light);font-size:clamp(1rem,3.2vw,1.45rem);font-style:italic;text-align:center;margin:6px 16px 2px;text-shadow:0 0 18px rgba(240,200,90,.35);}
 .env-hint{font-size:.74rem;color:rgba(255,200,160,.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;text-align:center;}
 #open-btn{padding:14px 40px;border:none;border-radius:50px;background:linear-gradient(135deg,#b8882e,#f0c85a,#b8882e);color:#3a1800;font-size:.9rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;box-shadow:0 8px 28px rgba(200,150,50,.5);transition:var(--tr);}
 #open-btn:hover{transform:translateY(-3px);}
 #open-btn:disabled{opacity:.6;}
-
-/* ═══════════════════════════════════════════════
-   NAV
-   ═══════════════════════════════════════════════ */
 #snav{position:fixed;top:0;left:0;right:0;z-index:500;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;transition:background .3s,box-shadow .3s;}
 #snav.scrolled{background:rgba(255,255,255,.97);box-shadow:0 2px 14px rgba(0,0,0,.07);backdrop-filter:blur(10px);}
 .nav-brand{display:flex;align-items:center;gap:10px;}
@@ -239,14 +194,8 @@ button{cursor:pointer;font-family:var(--fb);}
 .nav-links a{font-size:.8rem;font-weight:700;color:var(--mid);text-decoration:none;letter-spacing:.5px;transition:color .2s;}
 .nav-links a:hover{color:var(--red);}
 @media(max-width:600px){.nav-links{display:none;}}
-
-/* ═══════════════════════════════════════════════
-   MAIN SITE
-   ═══════════════════════════════════════════════ */
 #main{display:none;opacity:0;transition:opacity .7s;}
 #main.on{display:block;opacity:1;}
-
-/* ─── HERO ─── */
 .hero{min-height:100vh;min-height:100dvh;position:relative;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:78px 20px 60px;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 75% 55% at 50% 40%,#fff5f7 0%,#fff 65%);pointer-events:none;}
 .hero-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 45% 35% at 15% 75%,rgba(214,43,43,.05) 0%,transparent 70%),radial-gradient(ellipse 40% 30% at 85% 15%,rgba(201,150,58,.07) 0%,transparent 70%);}
@@ -262,13 +211,9 @@ button{cursor:pointer;font-family:var(--fb);}
 .hero-div-line{height:1px;width:55px;background:linear-gradient(90deg,transparent,var(--gold-light),transparent);}
 .hero-rsvp{padding:14px 42px;background:var(--red);color:#fff;border:none;border-radius:50px;font-size:.9rem;font-weight:700;letter-spacing:.5px;box-shadow:var(--shadow-red);transition:var(--tr);position:relative;z-index:1;}
 .hero-rsvp:hover{background:var(--red-dark);transform:translateY(-2px);}
-
-/* red band */
 .red-band{background:var(--red);padding:13px 20px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;scroll-snap-align:none;}
 .red-band img{height:26px;} 
 .red-band-t{font-family:var(--fh);color:#fff;font-size:clamp(.82rem,2vw,1.05rem);font-style:italic;}
-
-/* ─── COUNTDOWN — in hero section ─── */
 .hero-cd{
   margin-top:28px;
   text-align:center;
@@ -292,8 +237,6 @@ button{cursor:pointer;font-family:var(--fb);}
 }
 .cd-n{font-family:var(--fh);font-size:clamp(1.4rem,5vw,2rem);font-weight:900;color:var(--red);line-height:1;}
 .cd-u{font-size:.5rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:3px;}
-
-/* ─── SECTIONS ─── */
 .sec{padding:68px 20px;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;width:100%;overflow-x:hidden;}
 .si{max-width:1080px;margin:0 auto;width:100%;}
 .ey{font-size:.68rem;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:var(--red);text-align:center;margin-bottom:8px;}
@@ -303,8 +246,6 @@ button{cursor:pointer;font-family:var(--fb);}
 .divider{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:32px;}
 .div-l{height:1px;width:48px;background:linear-gradient(90deg,transparent,rgba(214,43,43,.35));}
 .div-l.r{background:linear-gradient(90deg,rgba(214,43,43,.35),transparent);}
-
-/* ─── REEL (Full-screen cinematic slideshow) ─── */
 #reel-sec{
   padding:0 !important;
   background:#000 !important;
@@ -320,7 +261,6 @@ button{cursor:pointer;font-family:var(--fb);}
   flex-direction:column;
   position:relative;
 }
-/* Reel takes full screen */
 .reel-wrap{
   position:relative;
   width:100%;
@@ -334,8 +274,6 @@ button{cursor:pointer;font-family:var(--fb);}
   aspect-ratio:unset;
   box-shadow:none;
 }
-
-/* ─── BLURRED BACKDROP (portrait/contained photos) ─── */
 .reel-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;background:#000;}
 .reel-slide.active{opacity:1;}
 .reel-blur-bg{
@@ -344,7 +282,7 @@ button{cursor:pointer;font-family:var(--fb);}
   background-size:cover;
   background-position:center;
   filter:blur(28px) brightness(.55) saturate(1.4);
-  transform:scale(1.08); /* prevents blur edge fringing */
+  transform:scale(1.08);
   z-index:0;
   opacity:0;
   transition:opacity .6s ease;
@@ -374,8 +312,6 @@ button{cursor:pointer;font-family:var(--fb);}
 }
 .reel-slide video{object-fit:contain;background:transparent;}
 @media(max-width:600px){.reel-slide video{object-fit:cover;}}
-
-/* Dark overlay gradient at top & bottom for text readability */
 .reel-wrap::after{
   content:'';
   position:absolute;inset:0;
@@ -384,7 +320,6 @@ button{cursor:pointer;font-family:var(--fb);}
   pointer-events:none;
   z-index:2;
 }
-/* Title overlay at top */
 .reel-top-label{
   position:absolute;top:0;left:0;right:0;
   padding:28px 24px 0;
@@ -403,7 +338,6 @@ button{cursor:pointer;font-family:var(--fb);}
   text-shadow:0 2px 12px rgba(0,0,0,.5);
   display:block;
 }
-/* Counter and dots at bottom */
 .reel-bottom{
   position:absolute;bottom:0;left:0;right:0;
   padding:0 24px 28px;
@@ -414,7 +348,6 @@ button{cursor:pointer;font-family:var(--fb);}
 .rdot{display:none;}
 .rdot.active{display:none;}
 .reel-ctr{display:none;}
-/* Nav arrows — bigger, on sides */
 .reel-prev,.reel-next{
   position:absolute;top:50%;transform:translateY(-50%);
   width:52px;height:52px;
@@ -436,8 +369,6 @@ button{cursor:pointer;font-family:var(--fb);}
 .reel-e-icon{font-size:4rem;opacity:.3;}
 .reel-e-text{font-family:var(--fh);font-size:1.1rem;font-style:italic;}
 .reel-e-hint{font-size:.78rem;color:rgba(255,255,255,.3);}
-
-/* ─── EVENT CARD ─── */
 .ev-wrap{background:linear-gradient(135deg,#fff8f8 0%,#fffdf5 100%);}
 .ev-card{max-width:560px;margin:0 auto;background:#fff;border-radius:var(--radius-xl);overflow:hidden;box-shadow:0 16px 50px rgba(0,0,0,.09),0 0 0 1px rgba(214,43,43,.07);}
 .ev-head{background:var(--red);padding:26px 22px;text-align:center;}
@@ -458,8 +389,6 @@ button{cursor:pointer;font-family:var(--fb);}
 .btn-primary:hover{background:var(--red-dark);transform:translateY(-1px);}
 .btn-sec{flex:1;min-width:120px;padding:12px 16px;background:#fff;color:var(--red);border:1.5px solid rgba(214,43,43,.3);border-radius:50px;font-size:.83rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:5px;transition:var(--tr);}
 .btn-sec:hover{border-color:var(--red);background:#fff5f5;}
-
-/* ─── FORM CARD (RSVP + WISHES combined) ─── */
 .form-sec{background:var(--cream);overflow-x:hidden;}
 .fc{max-width:660px;margin:0 auto;background:#fff;border-radius:var(--radius-xl);overflow:hidden;box-shadow:0 14px 48px rgba(0,0,0,.07);}
 .fc-head{background:var(--red);padding:22px;display:flex;align-items:center;gap:12px;}
@@ -471,7 +400,6 @@ button{cursor:pointer;font-family:var(--fb);}
 .ctabs{display:flex;border-bottom:2px solid #f0e0e0;margin-bottom:26px;}
 .ctab{flex:1;padding:11px 6px;background:none;border:none;font-size:.86rem;font-weight:700;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;transition:var(--tr);}
 .ctab.active{color:var(--red);border-bottom-color:var(--red);}
-/* inputs */
 .fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
 .fl{font-size:.73rem;font-weight:700;letter-spacing:.5px;color:var(--mid);}
 .fl .req{color:var(--red);}
@@ -496,8 +424,6 @@ button{cursor:pointer;font-family:var(--fb);}
 .si-s{color:var(--muted);font-size:.86rem;margin-bottom:18px;}
 .ob{padding:11px 26px;background:#fff;color:var(--red);border:1.5px solid var(--red);border-radius:50px;font-size:.84rem;font-weight:700;transition:var(--tr);}
 .ob:hover{background:#fff5f5;}
-
-/* upload zones */
 .upz{display:block;border:2px dashed rgba(214,43,43,.22);border-radius:var(--radius);padding:13px;text-align:center;cursor:pointer;color:var(--muted);font-size:.8rem;transition:var(--tr);position:relative;}
 .upz:hover{border-color:var(--red);background:#fff5f5;}
 .upz input{display:none;}
@@ -505,8 +431,6 @@ button{cursor:pointer;font-family:var(--fb);}
 .upz-cancel.on{display:flex;}
 .uprev{margin-top:8px;}
 .uprev img,.uprev video{max-width:100%;max-height:90px;border-radius:8px;object-fit:cover;}
-
-/* ─── WISHES GRID ─── */
 .wo{max-width:1080px;margin:0 auto;margin-top:40px;width:100%;padding:0 24px;}
 .wo > div[style*="position:relative"]{overflow:visible;}
 .wg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
@@ -523,8 +447,6 @@ button{cursor:pointer;font-family:var(--fb);}
 .wm-vid{margin-top:9px;}
 .wm-vid video{width:100%;border-radius:8px;max-height:120px;}
 .wread{font-size:.72rem;color:var(--red);font-weight:700;margin-top:6px;}
-
-/* ─── GALLERY ─── */
 .gal-sec{background:#fafafa;}
 .gup-card{max-width:540px;margin:0 auto 32px;background:#fff;border-radius:var(--radius-xl);padding:32px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.06);text-align:center;}
 @media(max-width:480px){.gup-card{padding:18px 14px;}}
@@ -535,7 +457,6 @@ button{cursor:pointer;font-family:var(--fb);}
 .gup-t{font-family:var(--fh);font-size:1.05rem;color:var(--mid);font-style:italic;margin-bottom:3px;}
 .gup-h{font-size:.74rem;color:var(--muted);}
 .gup-limit{font-size:.7rem;color:var(--muted);margin-top:8px;line-height:1.6;}
-/* pending approval strip */
 .gup-pending{margin-top:14px;padding:10px 14px;background:#fffbec;border:1px solid rgba(247,197,0,.4);border-radius:var(--radius);font-size:.78rem;color:#7a5500;text-align:left;line-height:1.6;}
 .gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;}
 .gi{border-radius:var(--radius);overflow:hidden;aspect-ratio:1;position:relative;cursor:pointer;background:#eee;box-shadow:0 3px 14px rgba(0,0,0,.08);transition:var(--tr);}
@@ -544,16 +465,17 @@ button{cursor:pointer;font-family:var(--fb);}
 .gi-ov{position:absolute;inset:0;background:rgba(0,0,0,.28);opacity:0;transition:.25s;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.7rem;}
 .gi:hover .gi-ov{opacity:1;}
 .gi-pending{position:absolute;bottom:0;left:0;right:0;background:rgba(247,197,0,.9);color:#3a2000;font-size:.68rem;font-weight:700;text-align:center;padding:3px;}
-
-/* ─── LIGHTBOX ─── */
 #lb{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:9950;display:none;align-items:center;justify-content:center;}
 #lb.on{display:flex;}
-#lb-close{position:absolute;top:16px;right:18px;background:none;border:none;color:#fff;font-size:1.7rem;transition:.2s;z-index:10;}
+#lb-close{position:absolute;top:16px;right:18px;background:none;border:none;color:#fff;font-size:1.7rem;transition:.2s;z-index:9970;}
 #lb-close:hover{transform:rotate(90deg);}
 #lb-wrap{display:flex;align-items:center;justify-content:center;max-width:92vw;max-height:90vh;}
 #lb-wrap img,#lb-wrap video{max-width:92vw;max-height:86vh;border-radius:var(--radius-lg);object-fit:contain;}
-
-/* ─── SNAP SCROLL — all handled by .sec + .hero above ─── */
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.3);border-radius:50%;color:#fff;font-size:1.6rem;display:flex;align-items:center;justify-content:center;z-index:9960;transition:.2s;}
+.lb-nav:hover{background:rgba(255,255,255,.25);transform:translateY(-50%) scale(1.08);}
+.lb-prev{left:16px;} .lb-next{right:16px;}
+.lb-counter{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.75);font-size:.78rem;letter-spacing:1px;z-index:9960;background:rgba(0,0,0,.35);padding:4px 14px;border-radius:50px;}
+@media(max-width:600px){.lb-nav{width:42px;height:42px;font-size:1.3rem;}.lb-prev{left:8px;}.lb-next{right:8px;}}
 footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padding:48px 20px calc(60px + var(--sab));position:relative;min-height:auto;}
 .ft-name{font-family:var(--fs);color:var(--yellow-light);font-size:1.6rem;display:block;margin-bottom:4px;}
 .ft-date{font-family:var(--fb);color:rgba(255,255,255,.5);font-size:.82rem;letter-spacing:3px;display:block;margin-bottom:12px;}
@@ -563,18 +485,10 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
 .ft-copy{display:block;font-size:.7rem;color:rgba(255,255,255,.3);letter-spacing:1px;margin-bottom:0;}
 #admin-trigger{display:inline-block;margin-top:20px;padding:10px 24px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:50px;color:rgba(255,255,255,.5);font-size:.78rem;letter-spacing:2px;transition:color .3s;}
 #admin-trigger:hover{color:#fff;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);}
-
-/* ─── CONFETTI ─── */
 .cp{position:fixed;pointer-events:none;z-index:9700;animation:cfall var(--d,3s) linear forwards;border-radius:var(--sh,2px);}
 @keyframes cfall{0%{transform:translateY(-10px) rotate(0);opacity:1;}100%{transform:translateY(100vh) rotate(720deg) translateX(var(--dx,0));opacity:0;}}
-
-/* ─── SCROLL REVEAL ─── */
 .rev{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
 .rev.vis{opacity:1;transform:translateY(0);}
-
-/* ═══════════════════════════════════════════════
-   ADMIN PANEL
-   ═══════════════════════════════════════════════ */
 .pop-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9950;display:none;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(4px);}
 .pop-ov.on{display:flex;}
 .pop-box{background:#fff;border-radius:var(--radius-xl);max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.3);position:relative;}
@@ -583,14 +497,10 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
 .pop-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.3rem;transition:.2s;}
 .pop-close:hover{transform:rotate(90deg);color:#fff;}
 .pop-body{padding:22px;}
-
-/* Admin login */
 .al-box{background:#fff;border-radius:var(--radius-xl);padding:34px;max-width:440px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.3);position:relative;}
 @media(max-width:480px){.al-box{padding:22px 16px;}}
 .al-t{font-family:var(--fh);font-size:1.4rem;color:var(--dark);font-style:italic;text-align:center;margin-bottom:20px;}
 .al-close{position:absolute;top:10px;right:12px;background:none;border:none;font-size:1.2rem;color:var(--muted);}
-
-/* Admin panel */
 #ap{position:fixed;inset:0;background:#f5f0f0;z-index:9900;display:none;flex-direction:column;overflow:hidden;}
 #ap.on{display:flex;}
 .ap-hd{background:var(--dark);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;gap:8px;flex-shrink:0;}
@@ -611,8 +521,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
 @media(max-width:580px){.ap-ct{padding:12px;}}
 .apc{display:none;}
 .apc.on{display:block;}
-
-/* Stats */
 .ap-stats{display:flex;flex-direction:column;gap:16px;margin-bottom:22px;}
 .aps-section{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.05);}
 .aps-heading{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
@@ -629,12 +537,9 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
 .aps-n-big{font-size:2.4rem;color:var(--red);}
 .aps-l{font-size:.62rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-top:3px;}
 .aps-tip{margin-top:10px;background:rgba(214,43,43,.06);border-radius:8px;padding:8px 12px;font-size:.78rem;color:var(--mid);border-left:3px solid var(--red);}
-/* drag handle for slides */
 .smi{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:1;background:#ddd;box-shadow:0 2px 10px rgba(0,0,0,.07);cursor:grab;transition:box-shadow .2s,transform .2s;}
 .smi.dragging{opacity:.5;box-shadow:0 8px 24px rgba(0,0,0,.2);cursor:grabbing;transform:scale(.97);}
 .smi.drag-over{box-shadow:0 0 0 3px var(--red);}
-
-/* Search + table */
 .ap-srch{padding:9px 13px;border:1.5px solid #ddd;border-radius:var(--radius);font-family:var(--fb);font-size:.84rem;outline:none;max-width:320px;width:100%;margin-bottom:12px;-webkit-appearance:none;}
 .ap-srch:focus{border-color:var(--red);}
 .tbl-w{overflow-x:auto;border-radius:var(--radius-lg);box-shadow:0 2px 14px rgba(0,0,0,.06);}
@@ -648,8 +553,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
 .db{padding:4px 10px;border:1px solid rgba(220,50,50,.3);border-radius:50px;background:none;color:#c62828;font-size:.7rem;}
 .db:hover{background:#ffebee;}
 .no-c{text-align:center;padding:36px;color:var(--muted);font-style:italic;font-size:.9rem;}
-
-/* Slideshow manager */
 .ss-up-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
 .ss-up-btn{padding:10px 20px;background:var(--red);color:#fff;border:none;border-radius:50px;font-size:.82rem;font-weight:700;box-shadow:var(--shadow-red);}
 .ss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
@@ -666,8 +569,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
 .smi-mv:hover{background:rgba(214,43,43,.85);}
 .smi-up{bottom:34px;right:5px;}
 .smi-dn{bottom:8px;right:5px;}
-
-/* Gallery approval */
 .ap-gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
 .ag-item{border-radius:var(--radius);overflow:hidden;position:relative;aspect-ratio:1;background:#eee;box-shadow:0 2px 10px rgba(0,0,0,.07);cursor:pointer;}
 .ag-item img,.ag-item video{width:100%;height:100%;object-fit:cover;}
@@ -677,16 +578,12 @@ footer{background:var(--dark);color:rgba(255,255,255,.55);text-align:center;padd
 .ag-approve{position:absolute;bottom:5px;left:5px;padding:3px 9px;border:none;border-radius:50px;background:rgba(46,125,50,.85);color:#fff;font-size:.64rem;font-weight:700;}
 .ag-del{position:absolute;bottom:5px;right:5px;padding:3px 9px;border:none;border-radius:50px;background:rgba(200,0,0,.7);color:#fff;font-size:.64rem;font-weight:700;}
 .ag-dl{position:absolute;top:5px;right:5px;padding:3px 9px;border:none;border-radius:50px;background:rgba(0,0,0,.5);color:#fff;font-size:.64rem;text-decoration:none;}
-
-/* wish/gallery popup body */
 .pw-av{width:52px;height:52px;border-radius:50%;background:var(--red);color:#fff;font-family:var(--fh);font-size:1.3rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
 .pw-name{font-family:var(--fh);font-size:1.15rem;font-style:italic;color:var(--dark);}
 .pw-date{font-size:.72rem;color:var(--muted);margin-bottom:10px;}
 .pw-msg{font-size:.95rem;color:var(--mid);line-height:1.85;font-style:italic;padding:12px 14px;background:#fff9f9;border-radius:var(--radius);border-left:3px solid var(--red);margin-bottom:12px;}
 .pw-media img,.pw-media video{width:100%;border-radius:var(--radius);margin-top:8px;max-height:55vh;object-fit:contain;}
 .gp-media img,.gp-media video{max-width:100%;max-height:68vh;border-radius:var(--radius-lg);object-fit:contain;display:block;margin:0 auto;}
-
-/* ─── FOCUS VISIBLE (keyboard navigation) ─── */
 :focus-visible{outline:2px solid var(--red);outline-offset:2px;border-radius:4px;}
 button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset:3px;}
 </style>
@@ -695,13 +592,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
 
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
-<!-- ═══════════════════════════════════════════════
-     INTRO / ENVELOPE
-     ═══════════════════════════════════════════════ -->
 <div id="intro">
   <div id="intro-stars"></div>
 
-  <!-- floating accents, NO bee image -->
   <div class="int-float" style="top:8%;left:5%;--d:4s;--dl:0s;--r:-5deg;--r2:4deg;">🎈</div>
   <div class="int-float" style="top:12%;right:6%;--d:5s;--dl:.7s;--r:4deg;--r2:-4deg;">💛</div>
   <div class="int-float" style="bottom:14%;left:4%;--d:6s;--dl:1.4s;--r:-4deg;--r2:5deg;">✨</div>
@@ -709,12 +602,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
   <div class="int-float" style="top:42%;left:2%;--d:5.5s;--dl:2s;--r:-3deg;--r2:3deg;">🎀</div>
   <div class="int-float" style="top:52%;right:2.5%;--d:4.2s;--dl:1s;--r:3deg;--r2:-3deg;">🎊</div>
 
-  <!-- Envelope -->
   <div class="env-scene" id="env-scene" role="button" tabindex="0" aria-label="Open invitation">
     <div class="env-back">
       <div class="env-fold-l"></div>
       <div class="env-fold-r"></div>
-      <!-- The card lives INSIDE — hidden until open -->
       <div class="env-card" id="env-card">
         <span class="env-card-crown">👑🎂👑</span>
         <span style="font-family:var(--fb);color:var(--mid);font-size:clamp(.82rem,2.5vw,.97rem);line-height:1.75;margin-top:4px;margin-bottom:6px;display:block;">
@@ -738,9 +629,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
   <button type="button" id="open-btn" onclick="openEnv()">✨ Open Invitation</button>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     MAIN SITE
-     ═══════════════════════════════════════════════ -->
 <div id="main" role="main">
 
 <nav id="snav">
@@ -756,7 +644,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-arch"></div>
@@ -772,7 +659,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
   </div>
   <button type="button" class="hero-rsvp" onclick="document.getElementById('form-sec').scrollIntoView({behavior:'smooth'})">Reserve My Spot</button>
 
-  <!-- Countdown moved here from reel -->
   <div id="cd" class="hero-cd">
     <span class="cd-ey">The Big Day Is Coming</span>
     <span class="cd-ttl">Counting Down to <span>Kyrie's Day</span></span>
@@ -785,42 +671,31 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
   </div>
 </section>
 
-<!-- RED BAND -->
 <div class="red-band">
   <img src="data:image/svg+xml,%3Csvg%20height%3D%22313.049517%22%20viewBox%3D%220%200%20160%20156.44249%22%20width%3D%22319.438282%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20transform%3D%22matrix%28.32403135%200%200%20.32403135%200%20-2.721786%29%22%3E%3Cg%20fill%3D%22%23231f20%22%3E%3Cpath%20d%3D%22m272.82%2020.87c13.25-7.9%2028.57-13.36%2044.19-12.35%2011.85.71%2023.38%206.44%2030.72%2015.83%208.44%2010.38%2012.52%2024.51%209.45%2037.69-3.53%2016.65-16.48%2029.52-30.68%2037.95%202.16%207.93%204.35%2015.87%206.9%2023.7%203.27.04%206.53.07%209.8.06-.28-14.74%204.73-29.78%2014.87-40.63%202.89-2.95%206.22-5.63%2010.13-7.07%204.06-1.49%209.63-.02%2011.23%204.32%201.67%206.19-1.76%2012.13-4.94%2017.18-5.83%208.78-14.49%2016.52-15.59%2027.62%2026.42%203.31%2052.05%2015.01%2070.64%2034.28%2019.26%2019.33%2031.31%2045.89%2031.88%2073.29%209.86.5%2019.77%205.22%2024.98%2013.85%206.66%2011.1%208.32%2024.61%206.92%2037.31-2.1%2016.21-9.54%2031.23-18.85%2044.48-11.23%2015.87-25.16%2029.69-40.24%2041.89-2.65%202.3-6.09%203.9-7.73%207.17-4.65%208.1-11.33%2015.09-19.55%2019.6-13.86%207.56-30.37%2010.27-45.9%207.34-3.52-.52-6.87-1.75-10.34-2.41-24.63-2.33-49.36-4.19-73.75-8.46-17.95-3.34-35.85-8.48-51.66-17.82-13.28-7.78-24.91-19.43-29.98-34.22-3.43-10.04-4.66-21.35-1.18-31.53%202.78-8.07%208.66-14.65%2015.41-19.69-5.84-13.98-8.49-29.13-8.71-44.23.58-23.82%208.42-47.47%2022.12-66.95-2.45-2.51-4.76-5.13-7-7.81-10.14%205.51-22.18%207.37-33.49%204.97-12.22-2.34-24.27-9.08-30.38-20.28-5.99-11.15-6.6-25.32-.86-36.7%205.04-10.17%2014.07-17.68%2023.69-23.34%2015.73-9.2%2033.53-14.14%2051.35-17.3%207.55-24.2%2025.01-44.7%2046.55-57.74m1.65%205.62c-24.3%2014.72-40.43%2040-48.94%2066.65-.94%202.41-1.5%206.38-4.88%206.3-.1-5.18%202.14-9.97%203.29-14.93-16.03%203.38-32.09%207.87-46.37%2016.12-8.65%205.03-16.77%2011.77-21.27%2020.9-5.89%2011.94-4.12%2027.36%204.77%2037.37%206.05%206.77%2014.73%2010.71%2023.57%2012.26%209.03%201.37%2018.87%201.06%2026.85-3.88-7.4-6.52-14.74-13.12-22.58-19.11-1.05-.68-1.81-1.64-1.85-2.93%2015.1%204.66%2026.75%2016.09%2037.59%2027.07.68.53%201.77%202.38%202.68%201.19%2012.1-14.99%2028.25-26.31%2045.57-34.5-5.03-9.53-8.73-20.06-8.3-30.98.23-6.81%201.04-13.96%204.54-19.94%202.56-4.23%207.98-6.9%2012.78-4.97%202.95%201.14%204.58%204.17%205.38%207.07%203.41%2013.77-2.51%2028.14%201.94%2041.79%2012.3-3.75%2024.84-7.26%2037.78-7.72-3.8-14.22-8.04-28.43-9.5-43.13-.3-4.43-.51-8.96.42-13.34.37-.16%201.1-.47%201.47-.63%201.38%209.04%203.49%2017.93%205.49%2026.84%2013.19-7.41%2024.3-20.19%2027.08-35.38%203.47-19.43-10.58-40.32-30.15-43.84-16.59-2.6-33.26%203.33-47.36%2011.72m93.93%2054.11c-4.33%201.45-7.7%204.83-10.39%208.41-5.19%207.48-9.48%2015.83-10.75%2024.94-1.63%208.69-.66%2017.56-1.06%2026.32-3.6-2.45-2.17-7.77-2.93-11.53-17.72-.81-35.34%202.61-52.09%208.22%201.25%204.84%205.28%208.53%205.89%2013.53-1.24-.53-2.36-1.29-3.2-2.35-5.26-5.96-9.23-13.27-10.41-21.2-1.39-7.62.44-15.28.31-22.93-.12-5.05.51-10.81-2.7-15.08-2.59-1.81-6.36-.46-8.02%202.01-3.11%204.7-3.9%2010.52-3.92%2016.05-.29%2014.03%204.76%2027.76%2012.73%2039.18%201.69%203.21%204.98%205.68%205.47%209.43-5.53-2.28-7.88-8.5-12.08-12.09-7.01%203.27-13.71%207.21-20.05%2011.65-21.25%2014.73-37.09%2036.89-44.33%2061.7-7.35%2023.09-5.65%2048.55%203.08%2071.02%2013.72-6.98%2030.38-6.66%2044.3-.42.35.69.69%201.39%201.02%202.09-7.41-1.07-14.81-2.44-22.33-2.33-10.07-.24-20.26%203.19-27.87%209.83-6.09%205.3-10.26%2012.83-11.21%2020.87-1.4%2014.83%204.3%2029.96%2014.65%2040.6%2012.96%2013.49%2030.72%2021.31%2048.65%2025.69%2025.26%206.17%2051.18%208.92%2077.04%2011.09-2.46-1.83-5.07-3.62-6.82-6.18l.37-1.44c4.89%201.13%209.31%203.81%2014.07%205.42%2015.6%206.89%2033.9%208.91%2050.04%202.67%2014.22-5.12%2025.87-16.66%2030.91-30.93%201.11-1.9.96-5.14%203.4-5.83.09%202.34.11%204.69.13%207.04%2013.6-10.52%2026.14-22.5%2036.49-36.27%209.31-12.4%2017-26.42%2020.03-41.76%202.35-11.61%201.48-23.93-2.97-34.94-2.76-6.65-8.2-12.18-14.99-14.68-8.53-3.31-18.22-1.77-26.24%202.22l-.02-1.56c3.92-3.25%208.81-4.91%2013.72-5.98-.65-31.62-16.79-62.4-42.35-81-16.45-11.91-35.9-20.08-56.21-21.91-.31%203.83-.32%207.69-.72%2011.52-1.93-1.21-2.16-3.56-2.27-5.61-.32-6.71-.08-13.68%202.66-19.93%204.05-9.59%2011.72-17.01%2016.47-26.21%201.25-2.55%202.47-5.94.48-8.45-1.42-1.76-4.05-1.32-5.98-.89z%22/%3E%3Cpath%20d%3D%22m384.06%20183.8c8.06-2.53%2016.91-.14%2023.77%204.42%208%205.36%2013.43%2013.67%2017.48%2022.24%204.62%209.61%206.86%2020.28%207.13%2030.91%201.65-.01%203.83.25%202.7%202.5-12.13%206.78-24.99%2012.15-37.23%2018.71-4.27%202.08-8.27%204.74-12.74%206.39-7.66-9.47-12.59-20.85-15.91-32.49-2.88-10.83-4.98-22.4-2.33-33.49%202.04-8.69%208.37-16.65%2017.13-19.19m-11.05%2014.98c-4.13%209.53-3.6%2020.57-.95%2030.42.95-6.14%203.49-12.61%209.13-15.87%207.22-4.66%2017.34-3.95%2023.7%201.9-2.13%205.34-4.67%2010.51-6.76%2015.86%204.51-2.73%208.9-5.66%2013.23-8.66%204.67%207.52%207.52%2016.31%207.47%2025.21%203.27-1.39%206.51-2.83%209.7-4.4-.72-16.48-5.87-33.3-17.01-45.77-5.41-6.06-13.16-10.92-21.58-10.14-7.25.16-14.12%204.73-16.93%2011.45z%22/%3E%3Cpath%20d%3D%22m294.15%20203.09c12.19-.55%2023.21%207.09%2030.43%2016.36%209.38%2012.1%2012.43%2027.74%2013.52%2042.67.39%206.84.26%2013.71-.58%2020.51-7.53-.04-15.06.02-22.59.16-14.46.57-28.83%202.46-43.12%204.73-.33-.66-1-1.99-1.34-2.66%201.19-.58%202.38-1.15%203.58-1.71-6.73-12.67-11.36-26.75-11.38-41.2.01-10.86%203.44-22.18%2011.48-29.82%205.45-5%2012.39-9.1%2020-9.04m-5.33%205.87c-7.8%202.11-13.79%208.37-17.36%2015.4-4.58%209.24-5.44%2020.25-2.59%2030.13.8-9.77%207.6-19.36%2017.3-21.92%207.14-2.02%2014.7.75%2020.39%205.12-2.59%206.11-5.46%2012.14-7.52%2018.45%204.96-3.1%209.75-6.48%2014.92-9.24%205.54%209.55%206.23%2021.03%204.6%2031.74%204.94-.04%209.88-.09%2014.82-.19.76-13.63-.29-27.52-4.51-40.55-3.59-10.98-10.73-21.25-21.08-26.76-5.74-3.14-12.67-3.83-18.97-2.18z%22/%3E%3Cpath%20d%3D%22m436.93%20279.66c2.74-.44%205.21-2.35%208.07-1.98-3.62%204.79-10.34%205.68-13.63%2010.77-9.53%2012.41-17.2%2026.22-22.98%2040.74-3.92%209.01-9.19%2018.39-18.27%2023.02-9.31%204.14-20.36%203.5-29.54-.72-8.63-3.75-16.14-9.58-24.7-13.46-10.96-5.04-22.2-9.51-33.73-13.07-2.65-.67-5.45-1.93-8.17-.85-5.21%201.63-10.79%202.04-16.15.99.2-.33.61-.98.81-1.3%206.57-.94%2013.27-3.24%2017.81-8.32%201.53-1.37%202.48-3.93%204.88-3.86.42%202.73-.77%205.22-2%207.56%206.93%202.76%2014.39%203.74%2021.74%204.79%2020.64%202.48%2042.05%202.42%2062.03-3.91%2015.26-4.9%2029.97-13.21%2040.03-25.92%202.11-2.84%204.33-5.69%205.52-9.06-2.95-.5-6.55-1.49-7.4-4.78%205.23.13%2010.55.85%2015.68-.64m-56.21%2053.52c1.32%201.96%202.75%203.85%203.87%205.94-10.27-7.22-24.66-5.67-34.82.94%208.31%206.32%2018.66%2010.94%2029.29%2010.14%2010.33-.92%2019.06-8.79%2022.8-18.2-3.43-1.41-7-2.93-10.78-2.62-3.78.11-7.23%201.83-10.36%203.8z%22/%3E%3Cpath%20d%3D%22m382.52%20284.06c2.51%201.84%204.42%204.66%204.34%207.88.33%204.21-2.82%207.81-6.28%209.76-5.33%202.63-11.72%202.74-17.37%201.19-4.24-1.44-9.31-3.99-10.06-8.89%206.1%203.99%2013.73%205.62%2020.86%203.81%203.82-.86%207.65-3.03%209.34-6.71.97-2.39-.06-4.78-.83-7.04z%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22m274.47%2026.49c14.1-8.39%2030.77-14.32%2047.36-11.72%2019.57%203.52%2033.62%2024.41%2030.15%2043.84-2.78%2015.19-13.89%2027.97-27.08%2035.38-2-8.91-4.11-17.8-5.49-26.84-.37.16-1.1.47-1.47.63-.93%204.38-.72%208.91-.42%2013.34%201.46%2014.7%205.7%2028.91%209.5%2043.13-12.94.46-25.48%203.97-37.78%207.72-4.45-13.65%201.47-28.02-1.94-41.79-.8-2.9-2.43-5.93-5.38-7.07-4.8-1.93-10.22.74-12.78%204.97-3.5%205.98-4.31%2013.13-4.54%2019.94-.43%2010.92%203.27%2021.45%208.3%2030.98-17.32%208.19-33.47%2019.51-45.57%2034.5-.91%201.19-2-.66-2.68-1.19-10.84-10.98-22.49-22.41-37.59-27.07.04%201.29.8%202.25%201.85%202.93%207.84%205.99%2015.18%2012.59%2022.58%2019.11-7.98%204.94-17.82%205.25-26.85%203.88-8.84-1.55-17.52-5.49-23.57-12.26-8.89-10.01-10.66-25.43-4.77-37.37%204.5-9.13%2012.62-15.87%2021.27-20.9%2014.28-8.25%2030.34-12.74%2046.37-16.12-1.15%204.96-3.39%209.75-3.29%2014.93%203.38.08%203.94-3.89%204.88-6.3%208.51-26.65%2024.64-51.93%2048.94-66.65z%22/%3E%3Cpath%20d%3D%22m369.59%20168.54c8.49-3.85%2018.37-5.04%2027.38-2.35%2010.3%202.96%2018.76%2010.18%2025.64%2018.16%2013.32%2014.84%2019.6%2035.01%2019.99%2054.71l.02%201.56c8.02-3.99%2017.71-5.53%2026.24-2.22%206.79%202.5%2012.23%208.03%2014.99%2014.68%204.45%2011.01%205.32%2023.33%202.97%2034.94-3.03%2015.34-10.72%2029.36-20.03%2041.76-10.35%2013.77-22.89%2025.75-36.49%2036.27-.02-2.35-.04-4.7-.13-7.04-2.44.69-2.29%203.93-3.4%205.83-5.04%2014.27-16.69%2025.81-30.91%2030.93-16.14%206.24-34.44%204.22-50.04-2.67-4.76-1.61-9.18-4.29-14.07-5.42l-.37%201.44c1.75%202.56%204.36%204.35%206.82%206.18-25.86-2.17-51.78-4.92-77.04-11.09-17.93-4.38-35.69-12.2-48.65-25.69-10.35-10.64-16.05-25.77-14.65-40.6.95-8.04%205.12-15.57%2011.21-20.87%207.61-6.64%2017.8-10.07%2027.87-9.83%207.52-.11%2014.92%201.26%2022.33%202.33-.33-.7-.67-1.4-1.02-2.09-10.41-19.8-15.92-43.29-10.47-65.39%203.13-13.2%2011.29-25.4%2023.2-32.18%2012.18-7.08%2027.63-8.9%2040.83-3.57%2015.46%206.11%2028.03%2018.42%2035.97%2032.87.08-7.87-.58-15.9%201.65-23.56%202.96-11.08%209.55-21.95%2020.16-27.09m14.47%2015.26c-8.76%202.54-15.09%2010.5-17.13%2019.19-2.65%2011.09-.55%2022.66%202.33%2033.49%203.32%2011.64%208.25%2023.02%2015.91%2032.49%204.47-1.65%208.47-4.31%2012.74-6.39%2012.24-6.56%2025.1-11.93%2037.23-18.71%201.13-2.25-1.05-2.51-2.7-2.5-.27-10.63-2.51-21.3-7.13-30.91-4.05-8.57-9.48-16.88-17.48-22.24-6.86-4.56-15.71-6.95-23.77-4.42m-89.91%2019.29c-7.61-.06-14.55%204.04-20%209.04-8.04%207.64-11.47%2018.96-11.48%2029.82.02%2014.45%204.65%2028.53%2011.38%2041.2-1.2.56-2.39%201.13-3.58%201.71.34.67%201.01%202%201.34%202.66%2014.29-2.27%2028.66-4.16%2043.12-4.73%207.53-.14%2015.06-.2%2022.59-.16.84-6.8.97-13.67.58-20.51-1.09-14.93-4.14-30.57-13.52-42.67-7.22-9.27-18.24-16.91-30.43-16.36m142.78%2076.57c-5.13%201.49-10.45.77-15.68.64.85%203.29%204.45%204.28%207.4%204.78-1.19%203.37-3.41%206.22-5.52%209.06-10.06%2012.71-24.77%2021.02-40.03%2025.92-19.98%206.33-41.39%206.39-62.03%203.91-7.35-1.05-14.81-2.03-21.74-4.79%201.23-2.34%202.42-4.83%202-7.56-2.4-.07-3.35%202.49-4.88%203.86-4.54%205.08-11.24%207.38-17.81%208.32-.2.32-.61.97-.81%201.3%205.36%201.05%2010.94.64%2016.15-.99%202.72-1.08%205.52.18%208.17.85%2011.53%203.56%2022.77%208.03%2033.73%2013.07%208.56%203.88%2016.07%209.71%2024.7%2013.46%209.18%204.22%2020.23%204.86%2029.54.72%209.08-4.63%2014.35-14.01%2018.27-23.02%205.78-14.52%2013.45-28.33%2022.98-40.74%203.29-5.09%2010.01-5.98%2013.63-10.77-2.86-.37-5.33%201.54-8.07%201.98m-54.41%204.4c.77%202.26%201.8%204.65.83%207.04-1.69%203.68-5.52%205.85-9.34%206.71-7.13%201.81-14.76.18-20.86-3.81.75%204.9%205.82%207.45%2010.06%208.89%205.65%201.55%2012.04%201.44%2017.37-1.19%203.46-1.95%206.61-5.55%206.28-9.76.08-3.22-1.83-6.04-4.34-7.88m.46%2080.59c-9.91%202.16-19.76-1.38-28.78-5.16%207.05%208.97%2019.84%2011.56%2030.59%209.31%209.47-1.86%2018.32-8.65%2020.72-18.28-5.88%206.81-13.43%2012.66-22.53%2014.13z%22/%3E%3Cpath%20d%3D%22m373.01%20198.78c2.81-6.72%209.68-11.29%2016.93-11.45%208.42-.78%2016.17%204.08%2021.58%2010.14%2011.14%2012.47%2016.29%2029.29%2017.01%2045.77-3.19%201.57-6.43%203.01-9.7%204.4.05-8.9-2.8-17.69-7.47-25.21-4.33%203-8.72%205.93-13.23%208.66%202.09-5.35%204.63-10.52%206.76-15.86-6.36-5.85-16.48-6.56-23.7-1.9-5.64%203.26-8.18%209.73-9.13%2015.87-2.65-9.85-3.18-20.89.95-30.42z%22/%3E%3Cpath%20d%3D%22m288.82%20208.96c6.3-1.65%2013.23-.96%2018.97%202.18%2010.35%205.51%2017.49%2015.78%2021.08%2026.76%204.22%2013.03%205.27%2026.92%204.51%2040.55-4.94.1-9.88.15-14.82.19%201.63-10.71.94-22.19-4.6-31.74-5.17%202.76-9.96%206.14-14.92%209.24%202.06-6.31%204.93-12.34%207.52-18.45-5.69-4.37-13.25-7.14-20.39-5.12-9.7%202.56-16.5%2012.15-17.3%2021.92-2.85-9.88-1.99-20.89%202.59-30.13%203.57-7.03%209.56-13.29%2017.36-15.4z%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23e5173f%22%3E%3Cpath%20d%3D%22m368.4%2080.6c1.93-.43%204.56-.87%205.98.89%201.99%202.51.77%205.9-.48%208.45-4.75%209.2-12.42%2016.62-16.47%2026.21-2.74%206.25-2.98%2013.22-2.66%2019.93.11%202.05.34%204.4%202.27%205.61.4-3.83.41-7.69.72-11.52%2020.31%201.83%2039.76%2010%2056.21%2021.91%2025.56%2018.6%2041.7%2049.38%2042.35%2081-4.91%201.07-9.8%202.73-13.72%205.98-.39-19.7-6.67-39.87-19.99-54.71-6.88-7.98-15.34-15.2-25.64-18.16-9.01-2.69-18.89-1.5-27.38%202.35-10.61%205.14-17.2%2016.01-20.16%2027.09-2.23%207.66-1.57%2015.69-1.65%2023.56-7.94-14.45-20.51-26.76-35.97-32.87-13.2-5.33-28.65-3.51-40.83%203.57-11.91%206.78-20.07%2018.98-23.2%2032.18-5.45%2022.1.06%2045.59%2010.47%2065.39-13.92-6.24-30.58-6.56-44.3.42-8.73-22.47-10.43-47.93-3.08-71.02%207.24-24.81%2023.08-46.97%2044.33-61.7%206.34-4.44%2013.04-8.38%2020.05-11.65%204.2%203.59%206.55%209.81%2012.08%2012.09-.49-3.75-3.78-6.22-5.47-9.43-7.97-11.42-13.02-25.15-12.73-39.18.02-5.53.81-11.35%203.92-16.05%201.66-2.47%205.43-3.82%208.02-2.01%203.21%204.27%202.58%2010.03%202.7%2015.08.13%207.65-1.7%2015.31-.31%2022.93%201.18%207.93%205.15%2015.24%2010.41%2021.2.84%201.06%201.96%201.82%203.2%202.35-.61-5-4.64-8.69-5.89-13.53%2016.75-5.61%2034.37-9.03%2052.09-8.22.76%203.76-.67%209.08%202.93%2011.53.4-8.76-.57-17.63%201.06-26.32%201.27-9.11%205.56-17.46%2010.75-24.94%202.69-3.58%206.06-6.96%2010.39-8.41z%22/%3E%3Cpath%20d%3D%22m380.72%20333.18c3.13-1.97%206.58-3.69%2010.36-3.8%203.78-.31%207.35%201.21%2010.78%202.62-3.74%209.41-12.47%2017.28-22.8%2018.2-10.63.8-20.98-3.82-29.29-10.14%2010.16-6.61%2024.55-8.16%2034.82-.94-1.12-2.09-2.55-3.98-3.87-5.94z%22/%3E%3Cpath%20d%3D%22m212.62%20391.07c5.04-.88%2010.5%201.79%2012.88%206.33%203.33%206.02.78%2014.57-5.7%2017.28-7.17%203.65-16.89-1.55-17.55-9.62-1.12-6.52%203.86-13.12%2010.37-13.99z%22/%3E%3Cpath%20d%3D%22m43.94%20400.93c3.63-3.8%209.98-4.28%2014.25-1.3%203.04%202.04%204.55%205.78%204.51%209.37.04%2014.98.04%2029.97.06%2044.96.35%208.22-.04%2017.01-4.83%2024.05-7.79%2012.28-24.6%2015.75-37.81%2011.39-9.65-3.04-17.61-11.13-20.12-20.97v-3.96c.91-6.82%209.05-10.13%2014.93-7.31%204.93%202.34%206.27%208.31%2010.47%2011.48%204%202.97%2010.55%202.49%2013.49-1.75%201.96-2.55%201.95-5.89%201.95-8.95-.08-15.65.04-31.3-.09-46.95-.08-3.56.55-7.45%203.19-10.06z%22/%3E%3Cpath%20d%3D%22m235.21%20407.9c-.02-6.8%207.54-11.8%2013.87-9.78%204.87%201.12%208.27%205.96%208.3%2010.86.1%206.73-.02%2013.46.05%2020.2%2013.25-4.98%2029.52.37%2037.14%2012.31%206.87%2010.33%206.71%2024.69-.18%2034.96-4.03%206.32-10.42%2011-17.55%2013.23-7.34%202.22-15.36%201.7-22.57-.76-7.7-2.66-14.12-8.81-16.89-16.5-1.81-4.58-2.29-9.55-2.21-14.43.06-16.7-.12-33.4.04-50.09m30.47%2039.12c-5.77.75-10.49%206.19-10.22%2012.03-.02%206.46%206.08%2012.17%2012.54%2011.6%205.7-.12%2010.63-4.96%2011.24-10.57%201.04-7.37-6.25-14.39-13.56-13.06z%22/%3E%3Cpath%20d%3D%22m180.45%20403.66c3.58-.83%207.61%200%2010.23%202.67%202.69%202.42%203.52%206.19%203.49%209.69-.05%2020.68.03%2041.36-.04%2062.05.18%205.4-3.72%2010.83-9.26%2011.47-6.31%201.21-12.65-4.17-12.48-10.58-.04-21.63-.03-43.26%200-64.89-.07-4.77%203.39-9.33%208.06-10.41z%22/%3E%3Cpath%20d%3D%22m146.42%20404.75c6.46-4.03%2016%20.81%2016.2%208.51.12%2021.92.05%2043.84.04%2065.75.12%205.67-4.96%2010.83-10.67%2010.61-5.75.35-11.06-4.85-10.85-10.6-.03-14.34-.44-28.69.01-43.03%200-7.68-.42-15.36.07-23.03.12-3.42%202.34-6.49%205.2-8.21z%22/%3E%3Cpath%20d%3D%22m438.57%20423.77c5.29-.78%209.9%205.3%207.5%2010.18-1.87%204.72-8.75%205.94-12.06%202.06-4-4.06-1.26-11.89%204.56-12.24m-.48%201.24c-3.03.77-5.4%203.79-4.73%207%20.51%204.96%207.61%207.05%2010.65%203%204-4.04-.57-11.49-5.92-10z%22/%3E%3Cpath%20d%3D%22m98.59%20426.07c16.28-2%2032.63%2010.3%2035.23%2026.5%203.55%2016.54-8.16%2034.32-24.69%2037.72-13.66%203.43-29.04-3.31-35.78-15.68-5.96-10.37-5.55-24.08%201.15-34.01%205.27-8.17%2014.42-13.65%2024.09-14.53m1.39%2020.78c-5.33.82-10%205.65-9.88%2011.18-.58%205.82%204.13%2011.26%209.79%2012.18%206.71%201.24%2013.57-4.44%2013.63-11.26.53-7.14-6.54-13.35-13.54-12.1z%22/%3E%3Cpath%20d%3D%22m312.15%20436.18c9.03-10.56%2025.46-13.19%2037.65-6.8%207.87%204.02%2013.42%2012.01%2014.81%2020.7.56%203.55%201.31%207.45-.34%2010.83-1.65%203.39-5.75%204.46-9.22%204.6-9.94.2-19.9-.15-29.84.18%204.28%208.06%2014.98%208.22%2022.62%205.7%203.62-1.19%208.15-2.24%2011.43.32%203.17%202.55%203.11%207.54%201.02%2010.76-2.59%203.9-7.14%205.8-11.41%207.21-11.69%203.18-25.34%201.29-34.41-7.2-12.79-11.62-13.63-33.4-2.31-46.3m12.76%2015.38c7.1.06%2014.21.06%2021.31%200-.71-3.53-2.79-6.95-6.31-8.21-6.13-2.8-14.47%201.19-15%208.21z%22/%3E%3Cpath%20d%3D%22m210.47%20426.73c6.54-2.67%2014.65%202.03%2014.88%209.23.14%2014.33.05%2028.67.04%2043.01.08%205.59-4.78%2010.72-10.43%2010.67-5.9.47-11.24-4.74-11.25-10.6-.07-14.01-.03-28.03-.02-42.04-.05-4.36%202.64-8.72%206.78-10.27z%22/%3E%3Cpath%20d%3D%22m386.39%20429.38c9.84-5.05%2022.42-4.59%2031.66%201.61%209.06%205.92%2013.65%2017.37%2012.46%2027.96-.74%204.44-5.56%206.5-9.63%206.54-9.97.2-19.94-.05-29.91.12%201.48%203.8%205.32%206.04%209.16%206.8%204.96.81%2010.08.21%2014.8-1.48%203.46-1.01%208.02-1.54%2010.64%201.51%202.89%203.22%201.99%208.33-.74%2011.37-3.04%203.31-7.4%205.02-11.64%206.2-11.03%202.6-23.67.84-32.35-6.84-9.91-8.38-13.44-22.9-9.6-35.14%202.29-7.91%207.8-14.88%2015.15-18.65m3.95%2022.19c7.16.04%2014.33.05%2021.5%200-.83-5.15-5.5-9.37-10.81-9.06-5.26-.21-10%203.87-10.69%209.06z%22/%3E%3Cpath%20d%3D%22m436.5%20427.36c1.88.07%203.85-.24%205.64.5.4%202.54.16%205.16.04%207.73-.6-1.25-1.14-2.51-1.62-3.79-.68-.04-2.04-.12-2.73-.17-.02.79-.08%202.35-.11%203.14-.3-.02-.91-.07-1.21-.09-.02-2.44-.02-4.88-.01-7.32m1.53%201.48c-1.22%201.6%201.73%202.61%202.68%201.44%201.21-1.61-1.75-2.67-2.68-1.44z%22/%3E%3C/g%3E%3Cpath%20d%3D%22m382.98%20364.65c9.1-1.47%2016.65-7.32%2022.53-14.13-2.4%209.63-11.25%2016.42-20.72%2018.28-10.75%202.25-23.54-.34-30.59-9.31%209.02%203.78%2018.87%207.32%2028.78%205.16z%22%20fill%3D%22%23221e1f%22/%3E%3C/g%3E%3C/svg%3E" alt="Jollibee">
   <span class="red-band-t">Celebrating at Jollibee Doha Souq Mall — The Home of Happiness!</span>
 </div>
 
-<!-- MERGED REEL + COUNTDOWN (one full-screen section) -->
 <section class="sec" id="reel-sec" style="background:#000;">
   <div class="si">
     <div class="reel-wrap" id="reel-wrap">
-
-      <!-- Top label overlay -->
       <div class="reel-top-label">
         <span class="reel-ey">Meet Our Princess</span>
         <span class="reel-title">Kyrie 👑</span>
       </div>
-
-      <!-- Empty state -->
       <div class="reel-empty" id="reel-empty">
         <div class="reel-e-icon">👑</div>
         <div class="reel-e-text">Kyrie's photos &amp; videos</div>
         <div class="reel-e-hint">Upload in Admin → Slideshow</div>
       </div>
-
-      <!-- Bottom: dots + countdown overlaid on photo -->
       <div class="reel-bottom">
         <div class="reel-dots" id="reel-dots"></div>
         <div class="reel-ctr" id="reel-ctr"></div>
       </div>
-
-
-
     </div>
   </div>
 </section>
-<!-- EVENT DETAILS -->
+
 <section class="sec ev-wrap" id="event">
   <div class="si">
     <div class="divider rev"><div class="div-l r"></div><img src="data:image/svg+xml,%3Csvg%20height%3D%22313.049517%22%20viewBox%3D%220%200%20160%20156.44249%22%20width%3D%22319.438282%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20transform%3D%22matrix%28.32403135%200%200%20.32403135%200%20-2.721786%29%22%3E%3Cg%20fill%3D%22%23231f20%22%3E%3Cpath%20d%3D%22m272.82%2020.87c13.25-7.9%2028.57-13.36%2044.19-12.35%2011.85.71%2023.38%206.44%2030.72%2015.83%208.44%2010.38%2012.52%2024.51%209.45%2037.69-3.53%2016.65-16.48%2029.52-30.68%2037.95%202.16%207.93%204.35%2015.87%206.9%2023.7%203.27.04%206.53.07%209.8.06-.28-14.74%204.73-29.78%2014.87-40.63%202.89-2.95%206.22-5.63%2010.13-7.07%204.06-1.49%209.63-.02%2011.23%204.32%201.67%206.19-1.76%2012.13-4.94%2017.18-5.83%208.78-14.49%2016.52-15.59%2027.62%2026.42%203.31%2052.05%2015.01%2070.64%2034.28%2019.26%2019.33%2031.31%2045.89%2031.88%2073.29%209.86.5%2019.77%205.22%2024.98%2013.85%206.66%2011.1%208.32%2024.61%206.92%2037.31-2.1%2016.21-9.54%2031.23-18.85%2044.48-11.23%2015.87-25.16%2029.69-40.24%2041.89-2.65%202.3-6.09%203.9-7.73%207.17-4.65%208.1-11.33%2015.09-19.55%2019.6-13.86%207.56-30.37%2010.27-45.9%207.34-3.52-.52-6.87-1.75-10.34-2.41-24.63-2.33-49.36-4.19-73.75-8.46-17.95-3.34-35.85-8.48-51.66-17.82-13.28-7.78-24.91-19.43-29.98-34.22-3.43-10.04-4.66-21.35-1.18-31.53%202.78-8.07%208.66-14.65%2015.41-19.69-5.84-13.98-8.49-29.13-8.71-44.23.58-23.82%208.42-47.47%2022.12-66.95-2.45-2.51-4.76-5.13-7-7.81-10.14%205.51-22.18%207.37-33.49%204.97-12.22-2.34-24.27-9.08-30.38-20.28-5.99-11.15-6.6-25.32-.86-36.7%205.04-10.17%2014.07-17.68%2023.69-23.34%2015.73-9.2%2033.53-14.14%2051.35-17.3%207.55-24.2%2025.01-44.7%2046.55-57.74m1.65%205.62c-24.3%2014.72-40.43%2040-48.94%2066.65-.94%202.41-1.5%206.38-4.88%206.3-.1-5.18%202.14-9.97%203.29-14.93-16.03%203.38-32.09%207.87-46.37%2016.12-8.65%205.03-16.77%2011.77-21.27%2020.9-5.89%2011.94-4.12%2027.36%204.77%2037.37%206.05%206.77%2014.73%2010.71%2023.57%2012.26%209.03%201.37%2018.87%201.06%2026.85-3.88-7.4-6.52-14.74-13.12-22.58-19.11-1.05-.68-1.81-1.64-1.85-2.93%2015.1%204.66%2026.75%2016.09%2037.59%2027.07.68.53%201.77%202.38%202.68%201.19%2012.1-14.99%2028.25-26.31%2045.57-34.5-5.03-9.53-8.73-20.06-8.3-30.98.23-6.81%201.04-13.96%204.54-19.94%202.56-4.23%207.98-6.9%2012.78-4.97%202.95%201.14%204.58%204.17%205.38%207.07%203.41%2013.77-2.51%2028.14%201.94%2041.79%2012.3-3.75%2024.84-7.26%2037.78-7.72-3.8-14.22-8.04-28.43-9.5-43.13-.3-4.43-.51-8.96.42-13.34.37-.16%201.1-.47%201.47-.63%201.38%209.04%203.49%2017.93%205.49%2026.84%2013.19-7.41%2024.3-20.19%2027.08-35.38%203.47-19.43-10.58-40.32-30.15-43.84-16.59-2.6-33.26%203.33-47.36%2011.72m93.93%2054.11c-4.33%201.45-7.7%204.83-10.39%208.41-5.19%207.48-9.48%2015.83-10.75%2024.94-1.63%208.69-.66%2017.56-1.06%2026.32-3.6-2.45-2.17-7.77-2.93-11.53-17.72-.81-35.34%202.61-52.09%208.22%201.25%204.84%205.28%208.53%205.89%2013.53-1.24-.53-2.36-1.29-3.2-2.35-5.26-5.96-9.23-13.27-10.41-21.2-1.39-7.62.44-15.28.31-22.93-.12-5.05.51-10.81-2.7-15.08-2.59-1.81-6.36-.46-8.02%202.01-3.11%204.7-3.9%2010.52-3.92%2016.05-.29%2014.03%204.76%2027.76%2012.73%2039.18%201.69%203.21%204.98%205.68%205.47%209.43-5.53-2.28-7.88-8.5-12.08-12.09-7.01%203.27-13.71%207.21-20.05%2011.65-21.25%2014.73-37.09%2036.89-44.33%2061.7-7.35%2023.09-5.65%2048.55%203.08%2071.02%2013.72-6.98%2030.38-6.66%2044.3-.42.35.69.69%201.39%201.02%202.09-7.41-1.07-14.81-2.44-22.33-2.33-10.07-.24-20.26%203.19-27.87%209.83-6.09%205.3-10.26%2012.83-11.21%2020.87-1.4%2014.83%204.3%2029.96%2014.65%2040.6%2012.96%2013.49%2030.72%2021.31%2048.65%2025.69%2025.26%206.17%2051.18%208.92%2077.04%2011.09-2.46-1.83-5.07-3.62-6.82-6.18l.37-1.44c4.89%201.13%209.31%203.81%2014.07%205.42%2015.6%206.89%2033.9%208.91%2050.04%202.67%2014.22-5.12%2025.87-16.66%2030.91-30.93%201.11-1.9.96-5.14%203.4-5.83.09%202.34.11%204.69.13%207.04%2013.6-10.52%2026.14-22.5%2036.49-36.27%209.31-12.4%2017-26.42%2020.03-41.76%202.35-11.61%201.48-23.93-2.97-34.94-2.76-6.65-8.2-12.18-14.99-14.68-8.53-3.31-18.22-1.77-26.24%202.22l-.02-1.56c3.92-3.25%208.81-4.91%2013.72-5.98-.65-31.62-16.79-62.4-42.35-81-16.45-11.91-35.9-20.08-56.21-21.91-.31%203.83-.32%207.69-.72%2011.52-1.93-1.21-2.16-3.56-2.27-5.61-.32-6.71-.08-13.68%202.66-19.93%204.05-9.59%2011.72-17.01%2016.47-26.21%201.25-2.55%202.47-5.94.48-8.45-1.42-1.76-4.05-1.32-5.98-.89z%22/%3E%3Cpath%20d%3D%22m384.06%20183.8c8.06-2.53%2016.91-.14%2023.77%204.42%208%205.36%2013.43%2013.67%2017.48%2022.24%204.62%209.61%206.86%2020.28%207.13%2030.91%201.65-.01%203.83.25%202.7%202.5-12.13%206.78-24.99%2012.15-37.23%2018.71-4.27%202.08-8.27%204.74-12.74%206.39-7.66-9.47-12.59-20.85-15.91-32.49-2.88-10.83-4.98-22.4-2.33-33.49%202.04-8.69%208.37-16.65%2017.13-19.19m-11.05%2014.98c-4.13%209.53-3.6%2020.57-.95%2030.42.95-6.14%203.49-12.61%209.13-15.87%207.22-4.66%2017.34-3.95%2023.7%201.9-2.13%205.34-4.67%2010.51-6.76%2015.86%204.51-2.73%208.9-5.66%2013.23-8.66%204.67%207.52%207.52%2016.31%207.47%2025.21%203.27-1.39%206.51-2.83%209.7-4.4-.72-16.48-5.87-33.3-17.01-45.77-5.41-6.06-13.16-10.92-21.58-10.14-7.25.16-14.12%204.73-16.93%2011.45z%22/%3E%3Cpath%20d%3D%22m294.15%20203.09c12.19-.55%2023.21%207.09%2030.43%2016.36%209.38%2012.1%2012.43%2027.74%2013.52%2042.67.39%206.84.26%2013.71-.58%2020.51-7.53-.04-15.06.02-22.59.16-14.46.57-28.83%202.46-43.12%204.73-.33-.66-1-1.99-1.34-2.66%201.19-.58%202.38-1.15%203.58-1.71-6.73-12.67-11.36-26.75-11.38-41.2.01-10.86%203.44-22.18%2011.48-29.82%205.45-5%2012.39-9.1%2020-9.04m-5.33%205.87c-7.8%202.11-13.79%208.37-17.36%2015.4-4.58%209.24-5.44%2020.25-2.59%2030.13.8-9.77%207.6-19.36%2017.3-21.92%207.14-2.02%2014.7.75%2020.39%205.12-2.59%206.11-5.46%2012.14-7.52%2018.45%204.96-3.1%209.75-6.48%2014.92-9.24%205.54%209.55%206.23%2021.03%204.6%2031.74%204.94-.04%209.88-.09%2014.82-.19.76-13.63-.29-27.52-4.51-40.55-3.59-10.98-10.73-21.25-21.08-26.76-5.74-3.14-12.67-3.83-18.97-2.18z%22/%3E%3Cpath%20d%3D%22m436.93%20279.66c2.74-.44%205.21-2.35%208.07-1.98-3.62%204.79-10.34%205.68-13.63%2010.77-9.53%2012.41-17.2%2026.22-22.98%2040.74-3.92%209.01-9.19%2018.39-18.27%2023.02-9.31%204.14-20.36%203.5-29.54-.72-8.63-3.75-16.14-9.58-24.7-13.46-10.96-5.04-22.2-9.51-33.73-13.07-2.65-.67-5.45-1.93-8.17-.85-5.21%201.63-10.79%202.04-16.15.99.2-.33.61-.98.81-1.3%206.57-.94%2013.27-3.24%2017.81-8.32%201.53-1.37%202.48-3.93%204.88-3.86.42%202.73-.77%205.22-2%207.56%206.93%202.76%2014.39%203.74%2021.74%204.79%2020.64%202.48%2042.05%202.42%2062.03-3.91%2015.26-4.9%2029.97-13.21%2040.03-25.92%202.11-2.84%204.33-5.69%205.52-9.06-2.95-.5-6.55-1.49-7.4-4.78%205.23.13%2010.55.85%2015.68-.64m-56.21%2053.52c1.32%201.96%202.75%203.85%203.87%205.94-10.27-7.22-24.66-5.67-34.82.94%208.31%206.32%2018.66%2010.94%2029.29%2010.14%2010.33-.92%2019.06-8.79%2022.8-18.2-3.43-1.41-7-2.93-10.78-2.62-3.78.11-7.23%201.83-10.36%203.8z%22/%3E%3Cpath%20d%3D%22m382.52%20284.06c2.51%201.84%204.42%204.66%204.34%207.88.33%204.21-2.82%207.81-6.28%209.76-5.33%202.63-11.72%202.74-17.37%201.19-4.24-1.44-9.31-3.99-10.06-8.89%206.1%203.99%2013.73%205.62%2020.86%203.81%203.82-.86%207.65-3.03%209.34-6.71.97-2.39-.06-4.78-.83-7.04z%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22m274.47%2026.49c14.1-8.39%2030.77-14.32%2047.36-11.72%2019.57%203.52%2033.62%2024.41%2030.15%2043.84-2.78%2015.19-13.89%2027.97-27.08%2035.38-2-8.91-4.11-17.8-5.49-26.84-.37.16-1.1.47-1.47.63-.93%204.38-.72%208.91-.42%2013.34%201.46%2014.7%205.7%2028.91%209.5%2043.13-12.94.46-25.48%203.97-37.78%207.72-4.45-13.65%201.47-28.02-1.94-41.79-.8-2.9-2.43-5.93-5.38-7.07-4.8-1.93-10.22.74-12.78%204.97-3.5%205.98-4.31%2013.13-4.54%2019.94-.43%2010.92%203.27%2021.45%208.3%2030.98-17.32%208.19-33.47%2019.51-45.57%2034.5-.91%201.19-2-.66-2.68-1.19-10.84-10.98-22.49-22.41-37.59-27.07.04%201.29.8%202.25%201.85%202.93%207.84%205.99%2015.18%2012.59%2022.58%2019.11-7.98%204.94-17.82%205.25-26.85%203.88-8.84-1.55-17.52-5.49-23.57-12.26-8.89-10.01-10.66-25.43-4.77-37.37%204.5-9.13%2012.62-15.87%2021.27-20.9%2014.28-8.25%2030.34-12.74%2046.37-16.12-1.15%204.96-3.39%209.75-3.29%2014.93%203.38.08%203.94-3.89%204.88-6.3%208.51-26.65%2024.64-51.93%2048.94-66.65z%22/%3E%3Cpath%20d%3D%22m369.59%20168.54c8.49-3.85%2018.37-5.04%2027.38-2.35%2010.3%202.96%2018.76%2010.18%2025.64%2018.16%2013.32%2014.84%2019.6%2035.01%2019.99%2054.71l.02%201.56c8.02-3.99%2017.71-5.53%2026.24-2.22%206.79%202.5%2012.23%208.03%2014.99%2014.68%204.45%2011.01%205.32%2023.33%202.97%2034.94-3.03%2015.34-10.72%2029.36-20.03%2041.76-10.35%2013.77-22.89%2025.75-36.49%2036.27-.02-2.35-.04-4.7-.13-7.04-2.44.69-2.29%203.93-3.4%205.83-5.04%2014.27-16.69%2025.81-30.91%2030.93-16.14%206.24-34.44%204.22-50.04-2.67-4.76-1.61-9.18-4.29-14.07-5.42l-.37%201.44c1.75%202.56%204.36%204.35%206.82%206.18-25.86-2.17-51.78-4.92-77.04-11.09-17.93-4.38-35.69-12.2-48.65-25.69-10.35-10.64-16.05-25.77-14.65-40.6.95-8.04%205.12-15.57%2011.21-20.87%207.61-6.64%2017.8-10.07%2027.87-9.83%207.52-.11%2014.92%201.26%2022.33%202.33-.33-.7-.67-1.4-1.02-2.09-10.41-19.8-15.92-43.29-10.47-65.39%203.13-13.2%2011.29-25.4%2023.2-32.18%2012.18-7.08%2027.63-8.9%2040.83-3.57%2015.46%206.11%2028.03%2018.42%2035.97%2032.87.08-7.87-.58-15.9%201.65-23.56%202.96-11.08%209.55-21.95%2020.16-27.09m14.47%2015.26c-8.76%202.54-15.09%2010.5-17.13%2019.19-2.65%2011.09-.55%2022.66%202.33%2033.49%203.32%2011.64%208.25%2023.02%2015.91%2032.49%204.47-1.65%208.47-4.31%2012.74-6.39%2012.24-6.56%2025.1-11.93%2037.23-18.71%201.13-2.25-1.05-2.51-2.7-2.5-.27-10.63-2.51-21.3-7.13-30.91-4.05-8.57-9.48-16.88-17.48-22.24-6.86-4.56-15.71-6.95-23.77-4.42m-89.91%2019.29c-7.61-.06-14.55%204.04-20%209.04-8.04%207.64-11.47%2018.96-11.48%2029.82.02%2014.45%204.65%2028.53%2011.38%2041.2-1.2.56-2.39%201.13-3.58%201.71.34.67%201.01%202%201.34%202.66%2014.29-2.27%2028.66-4.16%2043.12-4.73%207.53-.14%2015.06-.2%2022.59-.16.84-6.8.97-13.67.58-20.51-1.09-14.93-4.14-30.57-13.52-42.67-7.22-9.27-18.24-16.91-30.43-16.36m142.78%2076.57c-5.13%201.49-10.45.77-15.68.64.85%203.29%204.45%204.28%207.4%204.78-1.19%203.37-3.41%206.22-5.52%209.06-10.06%2012.71-24.77%2021.02-40.03%2025.92-19.98%206.33-41.39%206.39-62.03%203.91-7.35-1.05-14.81-2.03-21.74-4.79%201.23-2.34%202.42-4.83%202-7.56-2.4-.07-3.35%202.49-4.88%203.86-4.54%205.08-11.24%207.38-17.81%208.32-.2.32-.61.97-.81%201.3%205.36%201.05%2010.94.64%2016.15-.99%202.72-1.08%205.52.18%208.17.85%2011.53%203.56%2022.77%208.03%2033.73%2013.07%208.56%203.88%2016.07%209.71%2024.7%2013.46%209.18%204.22%2020.23%204.86%2029.54.72%209.08-4.63%2014.35-14.01%2018.27-23.02%205.78-14.52%2013.45-28.33%2022.98-40.74%203.29-5.09%2010.01-5.98%2013.63-10.77-2.86-.37-5.33%201.54-8.07%201.98m-54.41%204.4c.77%202.26%201.8%204.65.83%207.04-1.69%203.68-5.52%205.85-9.34%206.71-7.13%201.81-14.76.18-20.86-3.81.75%204.9%205.82%207.45%2010.06%208.89%205.65%201.55%2012.04%201.44%2017.37-1.19%203.46-1.95%206.61-5.55%206.28-9.76.08-3.22-1.83-6.04-4.34-7.88m.46%2080.59c-9.91%202.16-19.76-1.38-28.78-5.16%207.05%208.97%2019.84%2011.56%2030.59%209.31%209.47-1.86%2018.32-8.65%2020.72-18.28-5.88%206.81-13.43%2012.66-22.53%2014.13z%22/%3E%3Cpath%20d%3D%22m373.01%20198.78c2.81-6.72%209.68-11.29%2016.93-11.45%208.42-.78%2016.17%204.08%2021.58%2010.14%2011.14%2012.47%2016.29%2029.29%2017.01%2045.77-3.19%201.57-6.43%203.01-9.7%204.4.05-8.9-2.8-17.69-7.47-25.21-4.33%203-8.72%205.93-13.23%208.66%202.09-5.35%204.63-10.52%206.76-15.86-6.36-5.85-16.48-6.56-23.7-1.9-5.64%203.26-8.18%209.73-9.13%2015.87-2.65-9.85-3.18-20.89.95-30.42z%22/%3E%3Cpath%20d%3D%22m288.82%20208.96c6.3-1.65%2013.23-.96%2018.97%202.18%2010.35%205.51%2017.49%2015.78%2021.08%2026.76%204.22%2013.03%205.27%2026.92%204.51%2040.55-4.94.1-9.88.15-14.82.19%201.63-10.71.94-22.19-4.6-31.74-5.17%202.76-9.96%206.14-14.92%209.24%202.06-6.31%204.93-12.34%207.52-18.45-5.69-4.37-13.25-7.14-20.39-5.12-9.7%202.56-16.5%2012.15-17.3%2021.92-2.85-9.88-1.99-20.89%202.59-30.13%203.57-7.03%209.56-13.29%2017.36-15.4z%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23e5173f%22%3E%3Cpath%20d%3D%22m368.4%2080.6c1.93-.43%204.56-.87%205.98.89%201.99%202.51.77%205.9-.48%208.45-4.75%209.2-12.42%2016.62-16.47%2026.21-2.74%206.25-2.98%2013.22-2.66%2019.93.11%202.05.34%204.4%202.27%205.61.4-3.83.41-7.69.72-11.52%2020.31%201.83%2039.76%2010%2056.21%2021.91%2025.56%2018.6%2041.7%2049.38%2042.35%2081-4.91%201.07-9.8%202.73-13.72%205.98-.39-19.7-6.67-39.87-19.99-54.71-6.88-7.98-15.34-15.2-25.64-18.16-9.01-2.69-18.89-1.5-27.38%202.35-10.61%205.14-17.2%2016.01-20.16%2027.09-2.23%207.66-1.57%2015.69-1.65%2023.56-7.94-14.45-20.51-26.76-35.97-32.87-13.2-5.33-28.65-3.51-40.83%203.57-11.91%206.78-20.07%2018.98-23.2%2032.18-5.45%2022.1.06%2045.59%2010.47%2065.39-13.92-6.24-30.58-6.56-44.3.42-8.73-22.47-10.43-47.93-3.08-71.02%207.24-24.81%2023.08-46.97%2044.33-61.7%206.34-4.44%2013.04-8.38%2020.05-11.65%204.2%203.59%206.55%209.81%2012.08%2012.09-.49-3.75-3.78-6.22-5.47-9.43-7.97-11.42-13.02-25.15-12.73-39.18.02-5.53.81-11.35%203.92-16.05%201.66-2.47%205.43-3.82%208.02-2.01%203.21%204.27%202.58%2010.03%202.7%2015.08.13%207.65-1.7%2015.31-.31%2022.93%201.18%207.93%205.15%2015.24%2010.41%2021.2.84%201.06%201.96%201.82%203.2%202.35-.61-5-4.64-8.69-5.89-13.53%2016.75-5.61%2034.37-9.03%2052.09-8.22.76%203.76-.67%209.08%202.93%2011.53.4-8.76-.57-17.63%201.06-26.32%201.27-9.11%205.56-17.46%2010.75-24.94%202.69-3.58%206.06-6.96%2010.39-8.41z%22/%3E%3Cpath%20d%3D%22m380.72%20333.18c3.13-1.97%206.58-3.69%2010.36-3.8%203.78-.31%207.35%201.21%2010.78%202.62-3.74%209.41-12.47%2017.28-22.8%2018.2-10.63.8-20.98-3.82-29.29-10.14%2010.16-6.61%2024.55-8.16%2034.82-.94-1.12-2.09-2.55-3.98-3.87-5.94z%22/%3E%3Cpath%20d%3D%22m212.62%20391.07c5.04-.88%2010.5%201.79%2012.88%206.33%203.33%206.02.78%2014.57-5.7%2017.28-7.17%203.65-16.89-1.55-17.55-9.62-1.12-6.52%203.86-13.12%2010.37-13.99z%22/%3E%3Cpath%20d%3D%22m43.94%20400.93c3.63-3.8%209.98-4.28%2014.25-1.3%203.04%202.04%204.55%205.78%204.51%209.37.04%2014.98.04%2029.97.06%2044.96.35%208.22-.04%2017.01-4.83%2024.05-7.79%2012.28-24.6%2015.75-37.81%2011.39-9.65-3.04-17.61-11.13-20.12-20.97v-3.96c.91-6.82%209.05-10.13%2014.93-7.31%204.93%202.34%206.27%208.31%2010.47%2011.48%204%202.97%2010.55%202.49%2013.49-1.75%201.96-2.55%201.95-5.89%201.95-8.95-.08-15.65.04-31.3-.09-46.95-.08-3.56.55-7.45%203.19-10.06z%22/%3E%3Cpath%20d%3D%22m235.21%20407.9c-.02-6.8%207.54-11.8%2013.87-9.78%204.87%201.12%208.27%205.96%208.3%2010.86.1%206.73-.02%2013.46.05%2020.2%2013.25-4.98%2029.52.37%2037.14%2012.31%206.87%2010.33%206.71%2024.69-.18%2034.96-4.03%206.32-10.42%2011-17.55%2013.23-7.34%202.22-15.36%201.7-22.57-.76-7.7-2.66-14.12-8.81-16.89-16.5-1.81-4.58-2.29-9.55-2.21-14.43.06-16.7-.12-33.4.04-50.09m30.47%2039.12c-5.77.75-10.49%206.19-10.22%2012.03-.02%206.46%206.08%2012.17%2012.54%2011.6%205.7-.12%2010.63-4.96%2011.24-10.57%201.04-7.37-6.25-14.39-13.56-13.06z%22/%3E%3Cpath%20d%3D%22m180.45%20403.66c3.58-.83%207.61%200%2010.23%202.67%202.69%202.42%203.52%206.19%203.49%209.69-.05%2020.68.03%2041.36-.04%2062.05.18%205.4-3.72%2010.83-9.26%2011.47-6.31%201.21-12.65-4.17-12.48-10.58-.04-21.63-.03-43.26%200-64.89-.07-4.77%203.39-9.33%208.06-10.41z%22/%3E%3Cpath%20d%3D%22m146.42%20404.75c6.46-4.03%2016%20.81%2016.2%208.51.12%2021.92.05%2043.84.04%2065.75.12%205.67-4.96%2010.83-10.67%2010.61-5.75.35-11.06-4.85-10.85-10.6-.03-14.34-.44-28.69.01-43.03%200-7.68-.42-15.36.07-23.03.12-3.42%202.34-6.49%205.2-8.21z%22/%3E%3Cpath%20d%3D%22m438.57%20423.77c5.29-.78%209.9%205.3%207.5%2010.18-1.87%204.72-8.75%205.94-12.06%202.06-4-4.06-1.26-11.89%204.56-12.24m-.48%201.24c-3.03.77-5.4%203.79-4.73%207%20.51%204.96%207.61%207.05%2010.65%203%204-4.04-.57-11.49-5.92-10z%22/%3E%3Cpath%20d%3D%22m98.59%20426.07c16.28-2%2032.63%2010.3%2035.23%2026.5%203.55%2016.54-8.16%2034.32-24.69%2037.72-13.66%203.43-29.04-3.31-35.78-15.68-5.96-10.37-5.55-24.08%201.15-34.01%205.27-8.17%2014.42-13.65%2024.09-14.53m1.39%2020.78c-5.33.82-10%205.65-9.88%2011.18-.58%205.82%204.13%2011.26%209.79%2012.18%206.71%201.24%2013.57-4.44%2013.63-11.26.53-7.14-6.54-13.35-13.54-12.1z%22/%3E%3Cpath%20d%3D%22m312.15%20436.18c9.03-10.56%2025.46-13.19%2037.65-6.8%207.87%204.02%2013.42%2012.01%2014.81%2020.7.56%203.55%201.31%207.45-.34%2010.83-1.65%203.39-5.75%204.46-9.22%204.6-9.94.2-19.9-.15-29.84.18%204.28%208.06%2014.98%208.22%2022.62%205.7%203.62-1.19%208.15-2.24%2011.43.32%203.17%202.55%203.11%207.54%201.02%2010.76-2.59%203.9-7.14%205.8-11.41%207.21-11.69%203.18-25.34%201.29-34.41-7.2-12.79-11.62-13.63-33.4-2.31-46.3m12.76%2015.38c7.1.06%2014.21.06%2021.31%200-.71-3.53-2.79-6.95-6.31-8.21-6.13-2.8-14.47%201.19-15%208.21z%22/%3E%3Cpath%20d%3D%22m210.47%20426.73c6.54-2.67%2014.65%202.03%2014.88%209.23.14%2014.33.05%2028.67.04%2043.01.08%205.59-4.78%2010.72-10.43%2010.67-5.9.47-11.24-4.74-11.25-10.6-.07-14.01-.03-28.03-.02-42.04-.05-4.36%202.64-8.72%206.78-10.27z%22/%3E%3Cpath%20d%3D%22m386.39%20429.38c9.84-5.05%2022.42-4.59%2031.66%201.61%209.06%205.92%2013.65%2017.37%2012.46%2027.96-.74%204.44-5.56%206.5-9.63%206.54-9.97.2-19.94-.05-29.91.12%201.48%203.8%205.32%206.04%209.16%206.8%204.96.81%2010.08.21%2014.8-1.48%203.46-1.01%208.02-1.54%2010.64%201.51%202.89%203.22%201.99%208.33-.74%2011.37-3.04%203.31-7.4%205.02-11.64%206.2-11.03%202.6-23.67.84-32.35-6.84-9.91-8.38-13.44-22.9-9.6-35.14%202.29-7.91%207.8-14.88%2015.15-18.65m3.95%2022.19c7.16.04%2014.33.05%2021.5%200-.83-5.15-5.5-9.37-10.81-9.06-5.26-.21-10%203.87-10.69%209.06z%22/%3E%3Cpath%20d%3D%22m436.5%20427.36c1.88.07%203.85-.24%205.64.5.4%202.54.16%205.16.04%207.73-.6-1.25-1.14-2.51-1.62-3.79-.68-.04-2.04-.12-2.73-.17-.02.79-.08%202.35-.11%203.14-.3-.02-.91-.07-1.21-.09-.02-2.44-.02-4.88-.01-7.32m1.53%201.48c-1.22%201.6%201.73%202.61%202.68%201.44%201.21-1.61-1.75-2.67-2.68-1.44z%22/%3E%3C/g%3E%3Cpath%20d%3D%22m382.98%20364.65c9.1-1.47%2016.65-7.32%2022.53-14.13-2.4%209.63-11.25%2016.42-20.72%2018.28-10.75%202.25-23.54-.34-30.59-9.31%209.02%203.78%2018.87%207.32%2028.78%205.16z%22%20fill%3D%22%23221e1f%22/%3E%3C/g%3E%3C/svg%3E" alt="" style="height:18px;opacity:.45;"><div class="div-l"></div></div>
@@ -840,81 +715,33 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
         <div class="ev-row"><div class="ev-ic">🗺️</div><div><div class="ev-info-l">Address</div><div class="ev-info-v">Al Mirqab Al Jadeed St, Doha, Qatar</div></div></div>
       </div>
       <div class="ev-btns">
-        <a class="btn-primary" href="https://maps.app.goo.gl/KY11nzyfGpWEoGuJA" target="_blank" rel="noopener" rel="noopener noreferrer">🗺️ Open in Google Maps</a>
+        <a class="btn-primary" href="https://maps.app.goo.gl/KY11nzyfGpWEoGuJA" target="_blank" rel="noopener noreferrer">🗺️ Open in Google Maps</a>
         <button type="button" class="btn-sec" onclick="copyAddr()">📋 Copy Address</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- RSVP + WISHES -->
 <section class="sec form-sec" id="form-sec">
   <div class="si">
     <div class="divider rev"><div class="div-l r"></div><img src="data:image/svg+xml,%3Csvg%20height%3D%22313.049517%22%20viewBox%3D%220%200%20160%20156.44249%22%20width%3D%22319.438282%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20transform%3D%22matrix%28.32403135%200%200%20.32403135%200%20-2.721786%29%22%3E%3Cg%20fill%3D%22%23231f20%22%3E%3Cpath%20d%3D%22m272.82%2020.87c13.25-7.9%2028.57-13.36%2044.19-12.35%2011.85.71%2023.38%206.44%2030.72%2015.83%208.44%2010.38%2012.52%2024.51%209.45%2037.69-3.53%2016.65-16.48%2029.52-30.68%2037.95%202.16%207.93%204.35%2015.87%206.9%2023.7%203.27.04%206.53.07%209.8.06-.28-14.74%204.73-29.78%2014.87-40.63%202.89-2.95%206.22-5.63%2010.13-7.07%204.06-1.49%209.63-.02%2011.23%204.32%201.67%206.19-1.76%2012.13-4.94%2017.18-5.83%208.78-14.49%2016.52-15.59%2027.62%2026.42%203.31%2052.05%2015.01%2070.64%2034.28%2019.26%2019.33%2031.31%2045.89%2031.88%2073.29%209.86.5%2019.77%205.22%2024.98%2013.85%206.66%2011.1%208.32%2024.61%206.92%2037.31-2.1%2016.21-9.54%2031.23-18.85%2044.48-11.23%2015.87-25.16%2029.69-40.24%2041.89-2.65%202.3-6.09%203.9-7.73%207.17-4.65%208.1-11.33%2015.09-19.55%2019.6-13.86%207.56-30.37%2010.27-45.9%207.34-3.52-.52-6.87-1.75-10.34-2.41-24.63-2.33-49.36-4.19-73.75-8.46-17.95-3.34-35.85-8.48-51.66-17.82-13.28-7.78-24.91-19.43-29.98-34.22-3.43-10.04-4.66-21.35-1.18-31.53%202.78-8.07%208.66-14.65%2015.41-19.69-5.84-13.98-8.49-29.13-8.71-44.23.58-23.82%208.42-47.47%2022.12-66.95-2.45-2.51-4.76-5.13-7-7.81-10.14%205.51-22.18%207.37-33.49%204.97-12.22-2.34-24.27-9.08-30.38-20.28-5.99-11.15-6.6-25.32-.86-36.7%205.04-10.17%2014.07-17.68%2023.69-23.34%2015.73-9.2%2033.53-14.14%2051.35-17.3%207.55-24.2%2025.01-44.7%2046.55-57.74m1.65%205.62c-24.3%2014.72-40.43%2040-48.94%2066.65-.94%202.41-1.5%206.38-4.88%206.3-.1-5.18%202.14-9.97%203.29-14.93-16.03%203.38-32.09%207.87-46.37%2016.12-8.65%205.03-16.77%2011.77-21.27%2020.9-5.89%2011.94-4.12%2027.36%204.77%2037.37%206.05%206.77%2014.73%2010.71%2023.57%2012.26%209.03%201.37%2018.87%201.06%2026.85-3.88-7.4-6.52-14.74-13.12-22.58-19.11-1.05-.68-1.81-1.64-1.85-2.93%2015.1%204.66%2026.75%2016.09%2037.59%2027.07.68.53%201.77%202.38%202.68%201.19%2012.1-14.99%2028.25-26.31%2045.57-34.5-5.03-9.53-8.73-20.06-8.3-30.98.23-6.81%201.04-13.96%204.54-19.94%202.56-4.23%207.98-6.9%2012.78-4.97%202.95%201.14%204.58%204.17%205.38%207.07%203.41%2013.77-2.51%2028.14%201.94%2041.79%2012.3-3.75%2024.84-7.26%2037.78-7.72-3.8-14.22-8.04-28.43-9.5-43.13-.3-4.43-.51-8.96.42-13.34.37-.16%201.1-.47%201.47-.63%201.38%209.04%203.49%2017.93%205.49%2026.84%2013.19-7.41%2024.3-20.19%2027.08-35.38%203.47-19.43-10.58-40.32-30.15-43.84-16.59-2.6-33.26%203.33-47.36%2011.72m93.93%2054.11c-4.33%201.45-7.7%204.83-10.39%208.41-5.19%207.48-9.48%2015.83-10.75%2024.94-1.63%208.69-.66%2017.56-1.06%2026.32-3.6-2.45-2.17-7.77-2.93-11.53-17.72-.81-35.34%202.61-52.09%208.22%201.25%204.84%205.28%208.53%205.89%2013.53-1.24-.53-2.36-1.29-3.2-2.35-5.26-5.96-9.23-13.27-10.41-21.2-1.39-7.62.44-15.28.31-22.93-.12-5.05.51-10.81-2.7-15.08-2.59-1.81-6.36-.46-8.02%202.01-3.11%204.7-3.9%2010.52-3.92%2016.05-.29%2014.03%204.76%2027.76%2012.73%2039.18%201.69%203.21%204.98%205.68%205.47%209.43-5.53-2.28-7.88-8.5-12.08-12.09-7.01%203.27-13.71%207.21-20.05%2011.65-21.25%2014.73-37.09%2036.89-44.33%2061.7-7.35%2023.09-5.65%2048.55%203.08%2071.02%2013.72-6.98%2030.38-6.66%2044.3-.42.35.69.69%201.39%201.02%202.09-7.41-1.07-14.81-2.44-22.33-2.33-10.07-.24-20.26%203.19-27.87%209.83-6.09%205.3-10.26%2012.83-11.21%2020.87-1.4%2014.83%204.3%2029.96%2014.65%2040.6%2012.96%2013.49%2030.72%2021.31%2048.65%2025.69%2025.26%206.17%2051.18%208.92%2077.04%2011.09-2.46-1.83-5.07-3.62-6.82-6.18l.37-1.44c4.89%201.13%209.31%203.81%2014.07%205.42%2015.6%206.89%2033.9%208.91%2050.04%202.67%2014.22-5.12%2025.87-16.66%2030.91-30.93%201.11-1.9.96-5.14%203.4-5.83.09%202.34.11%204.69.13%207.04%2013.6-10.52%2026.14-22.5%2036.49-36.27%209.31-12.4%2017-26.42%2020.03-41.76%202.35-11.61%201.48-23.93-2.97-34.94-2.76-6.65-8.2-12.18-14.99-14.68-8.53-3.31-18.22-1.77-26.24%202.22l-.02-1.56c3.92-3.25%208.81-4.91%2013.72-5.98-.65-31.62-16.79-62.4-42.35-81-16.45-11.91-35.9-20.08-56.21-21.91-.31%203.83-.32%207.69-.72%2011.52-1.93-1.21-2.16-3.56-2.27-5.61-.32-6.71-.08-13.68%202.66-19.93%204.05-9.59%2011.72-17.01%2016.47-26.21%201.25-2.55%202.47-5.94.48-8.45-1.42-1.76-4.05-1.32-5.98-.89z%22/%3E%3Cpath%20d%3D%22m384.06%20183.8c8.06-2.53%2016.91-.14%2023.77%204.42%208%205.36%2013.43%2013.67%2017.48%2022.24%204.62%209.61%206.86%2020.28%207.13%2030.91%201.65-.01%203.83.25%202.7%202.5-12.13%206.78-24.99%2012.15-37.23%2018.71-4.27%202.08-8.27%204.74-12.74%206.39-7.66-9.47-12.59-20.85-15.91-32.49-2.88-10.83-4.98-22.4-2.33-33.49%202.04-8.69%208.37-16.65%2017.13-19.19m-11.05%2014.98c-4.13%209.53-3.6%2020.57-.95%2030.42.95-6.14%203.49-12.61%209.13-15.87%207.22-4.66%2017.34-3.95%2023.7%201.9-2.13%205.34-4.67%2010.51-6.76%2015.86%204.51-2.73%208.9-5.66%2013.23-8.66%204.67%207.52%207.52%2016.31%207.47%2025.21%203.27-1.39%206.51-2.83%209.7-4.4-.72-16.48-5.87-33.3-17.01-45.77-5.41-6.06-13.16-10.92-21.58-10.14-7.25.16-14.12%204.73-16.93%2011.45z%22/%3E%3Cpath%20d%3D%22m294.15%20203.09c12.19-.55%2023.21%207.09%2030.43%2016.36%209.38%2012.1%2012.43%2027.74%2013.52%2042.67.39%206.84.26%2013.71-.58%2020.51-7.53-.04-15.06.02-22.59.16-14.46.57-28.83%202.46-43.12%204.73-.33-.66-1-1.99-1.34-2.66%201.19-.58%202.38-1.15%203.58-1.71-6.73-12.67-11.36-26.75-11.38-41.2.01-10.86%203.44-22.18%2011.48-29.82%205.45-5%2012.39-9.1%2020-9.04m-5.33%205.87c-7.8%202.11-13.79%208.37-17.36%2015.4-4.58%209.24-5.44%2020.25-2.59%2030.13.8-9.77%207.6-19.36%2017.3-21.92%207.14-2.02%2014.7.75%2020.39%205.12-2.59%206.11-5.46%2012.14-7.52%2018.45%204.96-3.1%209.75-6.48%2014.92-9.24%205.54%209.55%206.23%2021.03%204.6%2031.74%204.94-.04%209.88-.09%2014.82-.19.76-13.63-.29-27.52-4.51-40.55-3.59-10.98-10.73-21.25-21.08-26.76-5.74-3.14-12.67-3.83-18.97-2.18z%22/%3E%3Cpath%20d%3D%22m436.93%20279.66c2.74-.44%205.21-2.35%208.07-1.98-3.62%204.79-10.34%205.68-13.63%2010.77-9.53%2012.41-17.2%2026.22-22.98%2040.74-3.92%209.01-9.19%2018.39-18.27%2023.02-9.31%204.14-20.36%203.5-29.54-.72-8.63-3.75-16.14-9.58-24.7-13.46-10.96-5.04-22.2-9.51-33.73-13.07-2.65-.67-5.45-1.93-8.17-.85-5.21%201.63-10.79%202.04-16.15.99.2-.33.61-.98.81-1.3%206.57-.94%2013.27-3.24%2017.81-8.32%201.53-1.37%202.48-3.93%204.88-3.86.42%202.73-.77%205.22-2%207.56%206.93%202.76%2014.39%203.74%2021.74%204.79%2020.64%202.48%2042.05%202.42%2062.03-3.91%2015.26-4.9%2029.97-13.21%2040.03-25.92%202.11-2.84%204.33-5.69%205.52-9.06-2.95-.5-6.55-1.49-7.4-4.78%205.23.13%2010.55.85%2015.68-.64m-56.21%2053.52c1.32%201.96%202.75%203.85%203.87%205.94-10.27-7.22-24.66-5.67-34.82.94%208.31%206.32%2018.66%2010.94%2029.29%2010.14%2010.33-.92%2019.06-8.79%2022.8-18.2-3.43-1.41-7-2.93-10.78-2.62-3.78.11-7.23%201.83-10.36%203.8z%22/%3E%3Cpath%20d%3D%22m382.52%20284.06c2.51%201.84%204.42%204.66%204.34%207.88.33%204.21-2.82%207.81-6.28%209.76-5.33%202.63-11.72%202.74-17.37%201.19-4.24-1.44-9.31-3.99-10.06-8.89%206.1%203.99%2013.73%205.62%2020.86%203.81%203.82-.86%207.65-3.03%209.34-6.71.97-2.39-.06-4.78-.83-7.04z%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22m274.47%2026.49c14.1-8.39%2030.77-14.32%2047.36-11.72%2019.57%203.52%2033.62%2024.41%2030.15%2043.84-2.78%2015.19-13.89%2027.97-27.08%2035.38-2-8.91-4.11-17.8-5.49-26.84-.37.16-1.1.47-1.47.63-.93%204.38-.72%208.91-.42%2013.34%201.46%2014.7%205.7%2028.91%209.5%2043.13-12.94.46-25.48%203.97-37.78%207.72-4.45-13.65%201.47-28.02-1.94-41.79-.8-2.9-2.43-5.93-5.38-7.07-4.8-1.93-10.22.74-12.78%204.97-3.5%205.98-4.31%2013.13-4.54%2019.94-.43%2010.92%203.27%2021.45%208.3%2030.98-17.32%208.19-33.47%2019.51-45.57%2034.5-.91%201.19-2-.66-2.68-1.19-10.84-10.98-22.49-22.41-37.59-27.07.04%201.29.8%202.25%201.85%202.93%207.84%205.99%2015.18%2012.59%2022.58%2019.11-7.98%204.94-17.82%205.25-26.85%203.88-8.84-1.55-17.52-5.49-23.57-12.26-8.89-10.01-10.66-25.43-4.77-37.37%204.5-9.13%2012.62-15.87%2021.27-20.9%2014.28-8.25%2030.34-12.74%2046.37-16.12-1.15%204.96-3.39%209.75-3.29%2014.93%203.38.08%203.94-3.89%204.88-6.3%208.51-26.65%2024.64-51.93%2048.94-66.65z%22/%3E%3Cpath%20d%3D%22m369.59%20168.54c8.49-3.85%2018.37-5.04%2027.38-2.35%2010.3%202.96%2018.76%2010.18%2025.64%2018.16%2013.32%2014.84%2019.6%2035.01%2019.99%2054.71l.02%201.56c8.02-3.99%2017.71-5.53%2026.24-2.22%206.79%202.5%2012.23%208.03%2014.99%2014.68%204.45%2011.01%205.32%2023.33%202.97%2034.94-3.03%2015.34-10.72%2029.36-20.03%2041.76-10.35%2013.77-22.89%2025.75-36.49%2036.27-.02-2.35-.04-4.7-.13-7.04-2.44.69-2.29%203.93-3.4%205.83-5.04%2014.27-16.69%2025.81-30.91%2030.93-16.14%206.24-34.44%204.22-50.04-2.67-4.76-1.61-9.18-4.29-14.07-5.42l-.37%201.44c1.75%202.56%204.36%204.35%206.82%206.18-25.86-2.17-51.78-4.92-77.04-11.09-17.93-4.38-35.69-12.2-48.65-25.69-10.35-10.64-16.05-25.77-14.65-40.6.95-8.04%205.12-15.57%2011.21-20.87%207.61-6.64%2017.8-10.07%2027.87-9.83%207.52-.11%2014.92%201.26%2022.33%202.33-.33-.7-.67-1.4-1.02-2.09-10.41-19.8-15.92-43.29-10.47-65.39%203.13-13.2%2011.29-25.4%2023.2-32.18%2012.18-7.08%2027.63-8.9%2040.83-3.57%2015.46%206.11%2028.03%2018.42%2035.97%2032.87.08-7.87-.58-15.9%201.65-23.56%202.96-11.08%209.55-21.95%2020.16-27.09m14.47%2015.26c-8.76%202.54-15.09%2010.5-17.13%2019.19-2.65%2011.09-.55%2022.66%202.33%2033.49%203.32%2011.64%208.25%2023.02%2015.91%2032.49%204.47-1.65%208.47-4.31%2012.74-6.39%2012.24-6.56%2025.1-11.93%2037.23-18.71%201.13-2.25-1.05-2.51-2.7-2.5-.27-10.63-2.51-21.3-7.13-30.91-4.05-8.57-9.48-16.88-17.48-22.24-6.86-4.56-15.71-6.95-23.77-4.42m-89.91%2019.29c-7.61-.06-14.55%204.04-20%209.04-8.04%207.64-11.47%2018.96-11.48%2029.82.02%2014.45%204.65%2028.53%2011.38%2041.2-1.2.56-2.39%201.13-3.58%201.71.34.67%201.01%202%201.34%202.66%2014.29-2.27%2028.66-4.16%2043.12-4.73%207.53-.14%2015.06-.2%2022.59-.16.84-6.8.97-13.67.58-20.51-1.09-14.93-4.14-30.57-13.52-42.67-7.22-9.27-18.24-16.91-30.43-16.36m142.78%2076.57c-5.13%201.49-10.45.77-15.68.64.85%203.29%204.45%204.28%207.4%204.78-1.19%203.37-3.41%206.22-5.52%209.06-10.06%2012.71-24.77%2021.02-40.03%2025.92-19.98%206.33-41.39%206.39-62.03%203.91-7.35-1.05-14.81-2.03-21.74-4.79%201.23-2.34%202.42-4.83%202-7.56-2.4-.07-3.35%202.49-4.88%203.86-4.54%205.08-11.24%207.38-17.81%208.32-.2.32-.61.97-.81%201.3%205.36%201.05%2010.94.64%2016.15-.99%202.72-1.08%205.52.18%208.17.85%2011.53%203.56%2022.77%208.03%2033.73%2013.07%208.56%203.88%2016.07%209.71%2024.7%2013.46%209.18%204.22%2020.23%204.86%2029.54.72%209.08-4.63%2014.35-14.01%2018.27-23.02%205.78-14.52%2013.45-28.33%2022.98-40.74%203.29-5.09%2010.01-5.98%2013.63-10.77-2.86-.37-5.33%201.54-8.07%201.98m-54.41%204.4c.77%202.26%201.8%204.65.83%207.04-1.69%203.68-5.52%205.85-9.34%206.71-7.13%201.81-14.76.18-20.86-3.81.75%204.9%205.82%207.45%2010.06%208.89%205.65%201.55%2012.04%201.44%2017.37-1.19%203.46-1.95%206.61-5.55%206.28-9.76.08-3.22-1.83-6.04-4.34-7.88m.46%2080.59c-9.91%202.16-19.76-1.38-28.78-5.16%207.05%208.97%2019.84%2011.56%2030.59%209.31%209.47-1.86%2018.32-8.65%2020.72-18.28-5.88%206.81-13.43%2012.66-22.53%2014.13z%22/%3E%3Cpath%20d%3D%22m373.01%20198.78c2.81-6.72%209.68-11.29%2016.93-11.45%208.42-.78%2016.17%204.08%2021.58%2010.14%2011.14%2012.47%2016.29%2029.29%2017.01%2045.77-3.19%201.57-6.43%203.01-9.7%204.4.05-8.9-2.8-17.69-7.47-25.21-4.33%203-8.72%205.93-13.23%208.66%202.09-5.35%204.63-10.52%206.76-15.86-6.36-5.85-16.48-6.56-23.7-1.9-5.64%203.26-8.18%209.73-9.13%2015.87-2.65-9.85-3.18-20.89.95-30.42z%22/%3E%3Cpath%20d%3D%22m288.82%20208.96c6.3-1.65%2013.23-.96%2018.97%202.18%2010.35%205.51%2017.49%2015.78%2021.08%2026.76%204.22%2013.03%205.27%2026.92%204.51%2040.55-4.94.1-9.88.15-14.82.19%201.63-10.71.94-22.19-4.6-31.74-5.17%202.76-9.96%206.14-14.92%209.24%202.06-6.31%204.93-12.34%207.52-18.45-5.69-4.37-13.25-7.14-20.39-5.12-9.7%202.56-16.5%2012.15-17.3%2021.92-2.85-9.88-1.99-20.89%202.59-30.13%203.57-7.03%209.56-13.29%2017.36-15.4z%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23e5173f%22%3E%3Cpath%20d%3D%22m368.4%2080.6c1.93-.43%204.56-.87%205.98.89%201.99%202.51.77%205.9-.48%208.45-4.75%209.2-12.42%2016.62-16.47%2026.21-2.74%206.25-2.98%2013.22-2.66%2019.93.11%202.05.34%204.4%202.27%205.61.4-3.83.41-7.69.72-11.52%2020.31%201.83%2039.76%2010%2056.21%2021.91%2025.56%2018.6%2041.7%2049.38%2042.35%2081-4.91%201.07-9.8%202.73-13.72%205.98-.39-19.7-6.67-39.87-19.99-54.71-6.88-7.98-15.34-15.2-25.64-18.16-9.01-2.69-18.89-1.5-27.38%202.35-10.61%205.14-17.2%2016.01-20.16%2027.09-2.23%207.66-1.57%2015.69-1.65%2023.56-7.94-14.45-20.51-26.76-35.97-32.87-13.2-5.33-28.65-3.51-40.83%203.57-11.91%206.78-20.07%2018.98-23.2%2032.18-5.45%2022.1.06%2045.59%2010.47%2065.39-13.92-6.24-30.58-6.56-44.3.42-8.73-22.47-10.43-47.93-3.08-71.02%207.24-24.81%2023.08-46.97%2044.33-61.7%206.34-4.44%2013.04-8.38%2020.05-11.65%204.2%203.59%206.55%209.81%2012.08%2012.09-.49-3.75-3.78-6.22-5.47-9.43-7.97-11.42-13.02-25.15-12.73-39.18.02-5.53.81-11.35%203.92-16.05%201.66-2.47%205.43-3.82%208.02-2.01%203.21%204.27%202.58%2010.03%202.7%2015.08.13%207.65-1.7%2015.31-.31%2022.93%201.18%207.93%205.15%2015.24%2010.41%2021.2.84%201.06%201.96%201.82%203.2%202.35-.61-5-4.64-8.69-5.89-13.53%2016.75-5.61%2034.37-9.03%2052.09-8.22.76%203.76-.67%209.08%202.93%2011.53.4-8.76-.57-17.63%201.06-26.32%201.27-9.11%205.56-17.46%2010.75-24.94%202.69-3.58%206.06-6.96%2010.39-8.41z%22/%3E%3Cpath%20d%3D%22m380.72%20333.18c3.13-1.97%206.58-3.69%2010.36-3.8%203.78-.31%207.35%201.21%2010.78%202.62-3.74%209.41-12.47%2017.28-22.8%2018.2-10.63.8-20.98-3.82-29.29-10.14%2010.16-6.61%2024.55-8.16%2034.82-.94-1.12-2.09-2.55-3.98-3.87-5.94z%22/%3E%3Cpath%20d%3D%22m212.62%20391.07c5.04-.88%2010.5%201.79%2012.88%206.33%203.33%206.02.78%2014.57-5.7%2017.28-7.17%203.65-16.89-1.55-17.55-9.62-1.12-6.52%203.86-13.12%2010.37-13.99z%22/%3E%3Cpath%20d%3D%22m43.94%20400.93c3.63-3.8%209.98-4.28%2014.25-1.3%203.04%202.04%204.55%205.78%204.51%209.37.04%2014.98.04%2029.97.06%2044.96.35%208.22-.04%2017.01-4.83%2024.05-7.79%2012.28-24.6%2015.75-37.81%2011.39-9.65-3.04-17.61-11.13-20.12-20.97v-3.96c.91-6.82%209.05-10.13%2014.93-7.31%204.93%202.34%206.27%208.31%2010.47%2011.48%204%202.97%2010.55%202.49%2013.49-1.75%201.96-2.55%201.95-5.89%201.95-8.95-.08-15.65.04-31.3-.09-46.95-.08-3.56.55-7.45%203.19-10.06z%22/%3E%3Cpath%20d%3D%22m235.21%20407.9c-.02-6.8%207.54-11.8%2013.87-9.78%204.87%201.12%208.27%205.96%208.3%2010.86.1%206.73-.02%2013.46.05%2020.2%2013.25-4.98%2029.52.37%2037.14%2012.31%206.87%2010.33%206.71%2024.69-.18%2034.96-4.03%206.32-10.42%2011-17.55%2013.23-7.34%202.22-15.36%201.7-22.57-.76-7.7-2.66-14.12-8.81-16.89-16.5-1.81-4.58-2.29-9.55-2.21-14.43.06-16.7-.12-33.4.04-50.09m30.47%2039.12c-5.77.75-10.49%206.19-10.22%2012.03-.02%206.46%206.08%2012.17%2012.54%2011.6%205.7-.12%2010.63-4.96%2011.24-10.57%201.04-7.37-6.25-14.39-13.56-13.06z%22/%3E%3Cpath%20d%3D%22m180.45%20403.66c3.58-.83%207.61%200%2010.23%202.67%202.69%202.42%203.52%206.19%203.49%209.69-.05%2020.68.03%2041.36-.04%2062.05.18%205.4-3.72%2010.83-9.26%2011.47-6.31%201.21-12.65-4.17-12.48-10.58-.04-21.63-.03-43.26%200-64.89-.07-4.77%203.39-9.33%208.06-10.41z%22/%3E%3Cpath%20d%3D%22m146.42%20404.75c6.46-4.03%2016%20.81%2016.2%208.51.12%2021.92.05%2043.84.04%2065.75.12%205.67-4.96%2010.83-10.67%2010.61-5.75.35-11.06-4.85-10.85-10.6-.03-14.34-.44-28.69.01-43.03%200-7.68-.42-15.36.07-23.03.12-3.42%202.34-6.49%205.2-8.21z%22/%3E%3Cpath%20d%3D%22m438.57%20423.77c5.29-.78%209.9%205.3%207.5%2010.18-1.87%204.72-8.75%205.94-12.06%202.06-4-4.06-1.26-11.89%204.56-12.24m-.48%201.24c-3.03.77-5.4%203.79-4.73%207%20.51%204.96%207.61%207.05%2010.65%203%204-4.04-.57-11.49-5.92-10z%22/%3E%3Cpath%20d%3D%22m98.59%20426.07c16.28-2%2032.63%2010.3%2035.23%2026.5%203.55%2016.54-8.16%2034.32-24.69%2037.72-13.66%203.43-29.04-3.31-35.78-15.68-5.96-10.37-5.55-24.08%201.15-34.01%205.27-8.17%2014.42-13.65%2024.09-14.53m1.39%2020.78c-5.33.82-10%205.65-9.88%2011.18-.58%205.82%204.13%2011.26%209.79%2012.18%206.71%201.24%2013.57-4.44%2013.63-11.26.53-7.14-6.54-13.35-13.54-12.1z%22/%3E%3Cpath%20d%3D%22m312.15%20436.18c9.03-10.56%2025.46-13.19%2037.65-6.8%207.87%204.02%2013.42%2012.01%2014.81%2020.7.56%203.55%201.31%207.45-.34%2010.83-1.65%203.39-5.75%204.46-9.22%204.6-9.94.2-19.9-.15-29.84.18%204.28%208.06%2014.98%208.22%2022.62%205.7%203.62-1.19%208.15-2.24%2011.43.32%203.17%202.55%203.11%207.54%201.02%2010.76-2.59%203.9-7.14%205.8-11.41%207.21-11.69%203.18-25.34%201.29-34.41-7.2-12.79-11.62-13.63-33.4-2.31-46.3m12.76%2015.38c7.1.06%2014.21.06%2021.31%200-.71-3.53-2.79-6.95-6.31-8.21-6.13-2.8-14.47%201.19-15%208.21z%22/%3E%3Cpath%20d%3D%22m210.47%20426.73c6.54-2.67%2014.65%202.03%2014.88%209.23.14%2014.33.05%2028.67.04%2043.01.08%205.59-4.78%2010.72-10.43%2010.67-5.9.47-11.24-4.74-11.25-10.6-.07-14.01-.03-28.03-.02-42.04-.05-4.36%202.64-8.72%206.78-10.27z%22/%3E%3Cpath%20d%3D%22m386.39%20429.38c9.84-5.05%2022.42-4.59%2031.66%201.61%209.06%205.92%2013.65%2017.37%2012.46%2027.96-.74%204.44-5.56%206.5-9.63%206.54-9.97.2-19.94-.05-29.91.12%201.48%203.8%205.32%206.04%209.16%206.8%204.96.81%2010.08.21%2014.8-1.48%203.46-1.01%208.02-1.54%2010.64%201.51%202.89%203.22%201.99%208.33-.74%2011.37-3.04%203.31-7.4%205.02-11.64%206.2-11.03%202.6-23.67.84-32.35-6.84-9.91-8.38-13.44-22.9-9.6-35.14%202.29-7.91%207.8-14.88%2015.15-18.65m3.95%2022.19c7.16.04%2014.33.05%2021.5%200-.83-5.15-5.5-9.37-10.81-9.06-5.26-.21-10%203.87-10.69%209.06z%22/%3E%3Cpath%20d%3D%22m436.5%20427.36c1.88.07%203.85-.24%205.64.5.4%202.54.16%205.16.04%207.73-.6-1.25-1.14-2.51-1.62-3.79-.68-.04-2.04-.12-2.73-.17-.02.79-.08%202.35-.11%203.14-.3-.02-.91-.07-1.21-.09-.02-2.44-.02-4.88-.01-7.32m1.53%201.48c-1.22%201.6%201.73%202.61%202.68%201.44%201.21-1.61-1.75-2.67-2.68-1.44z%22/%3E%3C/g%3E%3Cpath%20d%3D%22m382.98%20364.65c9.1-1.47%2016.65-7.32%2022.53-14.13-2.4%209.63-11.25%2016.42-20.72%2018.28-10.75%202.25-23.54-.34-30.59-9.31%209.02%203.78%2018.87%207.32%2028.78%205.16z%22%20fill%3D%22%23221e1f%22/%3E%3C/g%3E%3C/svg%3E" alt="" style="height:18px;opacity:.45;"><div class="div-l"></div></div>
     <p class="ey rev">Be Part of the Celebration</p>
     <h2 class="st rev">RSVP &amp; <span>Birthday Wishes</span></h2>
-    <p class="ss rev">Confirm your attendance and leave a wish for Princess Kyrie</p>
+    <p class="ss rev">Thank you to everyone who celebrated with us!</p>
     <div class="fc rev">
       <div class="fc-head">
         <img src="data:image/svg+xml,%3Csvg%20height%3D%22313.049517%22%20viewBox%3D%220%200%20160%20156.44249%22%20width%3D%22319.438282%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20transform%3D%22matrix%28.32403135%200%200%20.32403135%200%20-2.721786%29%22%3E%3Cg%20fill%3D%22%23231f20%22%3E%3Cpath%20d%3D%22m272.82%2020.87c13.25-7.9%2028.57-13.36%2044.19-12.35%2011.85.71%2023.38%206.44%2030.72%2015.83%208.44%2010.38%2012.52%2024.51%209.45%2037.69-3.53%2016.65-16.48%2029.52-30.68%2037.95%202.16%207.93%204.35%2015.87%206.9%2023.7%203.27.04%206.53.07%209.8.06-.28-14.74%204.73-29.78%2014.87-40.63%202.89-2.95%206.22-5.63%2010.13-7.07%204.06-1.49%209.63-.02%2011.23%204.32%201.67%206.19-1.76%2012.13-4.94%2017.18-5.83%208.78-14.49%2016.52-15.59%2027.62%2026.42%203.31%2052.05%2015.01%2070.64%2034.28%2019.26%2019.33%2031.31%2045.89%2031.88%2073.29%209.86.5%2019.77%205.22%2024.98%2013.85%206.66%2011.1%208.32%2024.61%206.92%2037.31-2.1%2016.21-9.54%2031.23-18.85%2044.48-11.23%2015.87-25.16%2029.69-40.24%2041.89-2.65%202.3-6.09%203.9-7.73%207.17-4.65%208.1-11.33%2015.09-19.55%2019.6-13.86%207.56-30.37%2010.27-45.9%207.34-3.52-.52-6.87-1.75-10.34-2.41-24.63-2.33-49.36-4.19-73.75-8.46-17.95-3.34-35.85-8.48-51.66-17.82-13.28-7.78-24.91-19.43-29.98-34.22-3.43-10.04-4.66-21.35-1.18-31.53%202.78-8.07%208.66-14.65%2015.41-19.69-5.84-13.98-8.49-29.13-8.71-44.23.58-23.82%208.42-47.47%2022.12-66.95-2.45-2.51-4.76-5.13-7-7.81-10.14%205.51-22.18%207.37-33.49%204.97-12.22-2.34-24.27-9.08-30.38-20.28-5.99-11.15-6.6-25.32-.86-36.7%205.04-10.17%2014.07-17.68%2023.69-23.34%2015.73-9.2%2033.53-14.14%2051.35-17.3%207.55-24.2%2025.01-44.7%2046.55-57.74m1.65%205.62c-24.3%2014.72-40.43%2040-48.94%2066.65-.94%202.41-1.5%206.38-4.88%206.3-.1-5.18%202.14-9.97%203.29-14.93-16.03%203.38-32.09%207.87-46.37%2016.12-8.65%205.03-16.77%2011.77-21.27%2020.9-5.89%2011.94-4.12%2027.36%204.77%2037.37%206.05%206.77%2014.73%2010.71%2023.57%2012.26%209.03%201.37%2018.87%201.06%2026.85-3.88-7.4-6.52-14.74-13.12-22.58-19.11-1.05-.68-1.81-1.64-1.85-2.93%2015.1%204.66%2026.75%2016.09%2037.59%2027.07.68.53%201.77%202.38%202.68%201.19%2012.1-14.99%2028.25-26.31%2045.57-34.5-5.03-9.53-8.73-20.06-8.3-30.98.23-6.81%201.04-13.96%204.54-19.94%202.56-4.23%207.98-6.9%2012.78-4.97%202.95%201.14%204.58%204.17%205.38%207.07%203.41%2013.77-2.51%2028.14%201.94%2041.79%2012.3-3.75%2024.84-7.26%2037.78-7.72-3.8-14.22-8.04-28.43-9.5-43.13-.3-4.43-.51-8.96.42-13.34.37-.16%201.1-.47%201.47-.63%201.38%209.04%203.49%2017.93%205.49%2026.84%2013.19-7.41%2024.3-20.19%2027.08-35.38%203.47-19.43-10.58-40.32-30.15-43.84-16.59-2.6-33.26%203.33-47.36%2011.72m93.93%2054.11c-4.33%201.45-7.7%204.83-10.39%208.41-5.19%207.48-9.48%2015.83-10.75%2024.94-1.63%208.69-.66%2017.56-1.06%2026.32-3.6-2.45-2.17-7.77-2.93-11.53-17.72-.81-35.34%202.61-52.09%208.22%201.25%204.84%205.28%208.53%205.89%2013.53-1.24-.53-2.36-1.29-3.2-2.35-5.26-5.96-9.23-13.27-10.41-21.2-1.39-7.62.44-15.28.31-22.93-.12-5.05.51-10.81-2.7-15.08-2.59-1.81-6.36-.46-8.02%202.01-3.11%204.7-3.9%2010.52-3.92%2016.05-.29%2014.03%204.76%2027.76%2012.73%2039.18%201.69%203.21%204.98%205.68%205.47%209.43-5.53-2.28-7.88-8.5-12.08-12.09-7.01%203.27-13.71%207.21-20.05%2011.65-21.25%2014.73-37.09%2036.89-44.33%2061.7-7.35%2023.09-5.65%2048.55%203.08%2071.02%2013.72-6.98%2030.38-6.66%2044.3-.42.35.69.69%201.39%201.02%202.09-7.41-1.07-14.81-2.44-22.33-2.33-10.07-.24-20.26%203.19-27.87%209.83-6.09%205.3-10.26%2012.83-11.21%2020.87-1.4%2014.83%204.3%2029.96%2014.65%2040.6%2012.96%2013.49%2030.72%2021.31%2048.65%2025.69%2025.26%206.17%2051.18%208.92%2077.04%2011.09-2.46-1.83-5.07-3.62-6.82-6.18l.37-1.44c4.89%201.13%209.31%203.81%2014.07%205.42%2015.6%206.89%2033.9%208.91%2050.04%202.67%2014.22-5.12%2025.87-16.66%2030.91-30.93%201.11-1.9.96-5.14%203.4-5.83.09%202.34.11%204.69.13%207.04%2013.6-10.52%2026.14-22.5%2036.49-36.27%209.31-12.4%2017-26.42%2020.03-41.76%202.35-11.61%201.48-23.93-2.97-34.94-2.76-6.65-8.2-12.18-14.99-14.68-8.53-3.31-18.22-1.77-26.24%202.22l-.02-1.56c3.92-3.25%208.81-4.91%2013.72-5.98-.65-31.62-16.79-62.4-42.35-81-16.45-11.91-35.9-20.08-56.21-21.91-.31%203.83-.32%207.69-.72%2011.52-1.93-1.21-2.16-3.56-2.27-5.61-.32-6.71-.08-13.68%202.66-19.93%204.05-9.59%2011.72-17.01%2016.47-26.21%201.25-2.55%202.47-5.94.48-8.45-1.42-1.76-4.05-1.32-5.98-.89z%22/%3E%3Cpath%20d%3D%22m384.06%20183.8c8.06-2.53%2016.91-.14%2023.77%204.42%208%205.36%2013.43%2013.67%2017.48%2022.24%204.62%209.61%206.86%2020.28%207.13%2030.91%201.65-.01%203.83.25%202.7%202.5-12.13%206.78-24.99%2012.15-37.23%2018.71-4.27%202.08-8.27%204.74-12.74%206.39-7.66-9.47-12.59-20.85-15.91-32.49-2.88-10.83-4.98-22.4-2.33-33.49%202.04-8.69%208.37-16.65%2017.13-19.19m-11.05%2014.98c-4.13%209.53-3.6%2020.57-.95%2030.42.95-6.14%203.49-12.61%209.13-15.87%207.22-4.66%2017.34-3.95%2023.7%201.9-2.13%205.34-4.67%2010.51-6.76%2015.86%204.51-2.73%208.9-5.66%2013.23-8.66%204.67%207.52%207.52%2016.31%207.47%2025.21%203.27-1.39%206.51-2.83%209.7-4.4-.72-16.48-5.87-33.3-17.01-45.77-5.41-6.06-13.16-10.92-21.58-10.14-7.25.16-14.12%204.73-16.93%2011.45z%22/%3E%3Cpath%20d%3D%22m294.15%20203.09c12.19-.55%2023.21%207.09%2030.43%2016.36%209.38%2012.1%2012.43%2027.74%2013.52%2042.67.39%206.84.26%2013.71-.58%2020.51-7.53-.04-15.06.02-22.59.16-14.46.57-28.83%202.46-43.12%204.73-.33-.66-1-1.99-1.34-2.66%201.19-.58%202.38-1.15%203.58-1.71-6.73-12.67-11.36-26.75-11.38-41.2.01-10.86%203.44-22.18%2011.48-29.82%205.45-5%2012.39-9.1%2020-9.04m-5.33%205.87c-7.8%202.11-13.79%208.37-17.36%2015.4-4.58%209.24-5.44%2020.25-2.59%2030.13.8-9.77%207.6-19.36%2017.3-21.92%207.14-2.02%2014.7.75%2020.39%205.12-2.59%206.11-5.46%2012.14-7.52%2018.45%204.96-3.1%209.75-6.48%2014.92-9.24%205.54%209.55%206.23%2021.03%204.6%2031.74%204.94-.04%209.88-.09%2014.82-.19.76-13.63-.29-27.52-4.51-40.55-3.59-10.98-10.73-21.25-21.08-26.76-5.74-3.14-12.67-3.83-18.97-2.18z%22/%3E%3Cpath%20d%3D%22m436.93%20279.66c2.74-.44%205.21-2.35%208.07-1.98-3.62%204.79-10.34%205.68-13.63%2010.77-9.53%2012.41-17.2%2026.22-22.98%2040.74-3.92%209.01-9.19%2018.39-18.27%2023.02-9.31%204.14-20.36%203.5-29.54-.72-8.63-3.75-16.14-9.58-24.7-13.46-10.96-5.04-22.2-9.51-33.73-13.07-2.65-.67-5.45-1.93-8.17-.85-5.21%201.63-10.79%202.04-16.15.99.2-.33.61-.98.81-1.3%206.57-.94%2013.27-3.24%2017.81-8.32%201.53-1.37%202.48-3.93%204.88-3.86.42%202.73-.77%205.22-2%207.56%206.93%202.76%2014.39%203.74%2021.74%204.79%2020.64%202.48%2042.05%202.42%2062.03-3.91%2015.26-4.9%2029.97-13.21%2040.03-25.92%202.11-2.84%204.33-5.69%205.52-9.06-2.95-.5-6.55-1.49-7.4-4.78%205.23.13%2010.55.85%2015.68-.64m-56.21%2053.52c1.32%201.96%202.75%203.85%203.87%205.94-10.27-7.22-24.66-5.67-34.82.94%208.31%206.32%2018.66%2010.94%2029.29%2010.14%2010.33-.92%2019.06-8.79%2022.8-18.2-3.43-1.41-7-2.93-10.78-2.62-3.78.11-7.23%201.83-10.36%203.8z%22/%3E%3Cpath%20d%3D%22m382.52%20284.06c2.51%201.84%204.42%204.66%204.34%207.88.33%204.21-2.82%207.81-6.28%209.76-5.33%202.63-11.72%202.74-17.37%201.19-4.24-1.44-9.31-3.99-10.06-8.89%206.1%203.99%2013.73%205.62%2020.86%203.81%203.82-.86%207.65-3.03%209.34-6.71.97-2.39-.06-4.78-.83-7.04z%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22m274.47%2026.49c14.1-8.39%2030.77-14.32%2047.36-11.72%2019.57%203.52%2033.62%2024.41%2030.15%2043.84-2.78%2015.19-13.89%2027.97-27.08%2035.38-2-8.91-4.11-17.8-5.49-26.84-.37.16-1.1.47-1.47.63-.93%204.38-.72%208.91-.42%2013.34%201.46%2014.7%205.7%2028.91%209.5%2043.13-12.94.46-25.48%203.97-37.78%207.72-4.45-13.65%201.47-28.02-1.94-41.79-.8-2.9-2.43-5.93-5.38-7.07-4.8-1.93-10.22.74-12.78%204.97-3.5%205.98-4.31%2013.13-4.54%2019.94-.43%2010.92%203.27%2021.45%208.3%2030.98-17.32%208.19-33.47%2019.51-45.57%2034.5-.91%201.19-2-.66-2.68-1.19-10.84-10.98-22.49-22.41-37.59-27.07.04%201.29.8%202.25%201.85%202.93%207.84%205.99%2015.18%2012.59%2022.58%2019.11-7.98%204.94-17.82%205.25-26.85%203.88-8.84-1.55-17.52-5.49-23.57-12.26-8.89-10.01-10.66-25.43-4.77-37.37%204.5-9.13%2012.62-15.87%2021.27-20.9%2014.28-8.25%2030.34-12.74%2046.37-16.12-1.15%204.96-3.39%209.75-3.29%2014.93%203.38.08%203.94-3.89%204.88-6.3%208.51-26.65%2024.64-51.93%2048.94-66.65z%22/%3E%3Cpath%20d%3D%22m369.59%20168.54c8.49-3.85%2018.37-5.04%2027.38-2.35%2010.3%202.96%2018.76%2010.18%2025.64%2018.16%2013.32%2014.84%2019.6%2035.01%2019.99%2054.71l.02%201.56c8.02-3.99%2017.71-5.53%2026.24-2.22%206.79%202.5%2012.23%208.03%2014.99%2014.68%204.45%2011.01%205.32%2023.33%202.97%2034.94-3.03%2015.34-10.72%2029.36-20.03%2041.76-10.35%2013.77-22.89%2025.75-36.49%2036.27-.02-2.35-.04-4.7-.13-7.04-2.44.69-2.29%203.93-3.4%205.83-5.04%2014.27-16.69%2025.81-30.91%2030.93-16.14%206.24-34.44%204.22-50.04-2.67-4.76-1.61-9.18-4.29-14.07-5.42l-.37%201.44c1.75%202.56%204.36%204.35%206.82%206.18-25.86-2.17-51.78-4.92-77.04-11.09-17.93-4.38-35.69-12.2-48.65-25.69-10.35-10.64-16.05-25.77-14.65-40.6.95-8.04%205.12-15.57%2011.21-20.87%207.61-6.64%2017.8-10.07%2027.87-9.83%207.52-.11%2014.92%201.26%2022.33%202.33-.33-.7-.67-1.4-1.02-2.09-10.41-19.8-15.92-43.29-10.47-65.39%203.13-13.2%2011.29-25.4%2023.2-32.18%2012.18-7.08%2027.63-8.9%2040.83-3.57%2015.46%206.11%2028.03%2018.42%2035.97%2032.87.08-7.87-.58-15.9%201.65-23.56%202.96-11.08%209.55-21.95%2020.16-27.09m14.47%2015.26c-8.76%202.54-15.09%2010.5-17.13%2019.19-2.65%2011.09-.55%2022.66%202.33%2033.49%203.32%2011.64%208.25%2023.02%2015.91%2032.49%204.47-1.65%208.47-4.31%2012.74-6.39%2012.24-6.56%2025.1-11.93%2037.23-18.71%201.13-2.25-1.05-2.51-2.7-2.5-.27-10.63-2.51-21.3-7.13-30.91-4.05-8.57-9.48-16.88-17.48-22.24-6.86-4.56-15.71-6.95-23.77-4.42m-89.91%2019.29c-7.61-.06-14.55%204.04-20%209.04-8.04%207.64-11.47%2018.96-11.48%2029.82.02%2014.45%204.65%2028.53%2011.38%2041.2-1.2.56-2.39%201.13-3.58%201.71.34.67%201.01%202%201.34%202.66%2014.29-2.27%2028.66-4.16%2043.12-4.73%207.53-.14%2015.06-.2%2022.59-.16.84-6.8.97-13.67.58-20.51-1.09-14.93-4.14-30.57-13.52-42.67-7.22-9.27-18.24-16.91-30.43-16.36m142.78%2076.57c-5.13%201.49-10.45.77-15.68.64.85%203.29%204.45%204.28%207.4%204.78-1.19%203.37-3.41%206.22-5.52%209.06-10.06%2012.71-24.77%2021.02-40.03%2025.92-19.98%206.33-41.39%206.39-62.03%203.91-7.35-1.05-14.81-2.03-21.74-4.79%201.23-2.34%202.42-4.83%202-7.56-2.4-.07-3.35%202.49-4.88%203.86-4.54%205.08-11.24%207.38-17.81%208.32-.2.32-.61.97-.81%201.3%205.36%201.05%2010.94.64%2016.15-.99%202.72-1.08%205.52.18%208.17.85%2011.53%203.56%2022.77%208.03%2033.73%2013.07%208.56%203.88%2016.07%209.71%2024.7%2013.46%209.18%204.22%2020.23%204.86%2029.54.72%209.08-4.63%2014.35-14.01%2018.27-23.02%205.78-14.52%2013.45-28.33%2022.98-40.74%203.29-5.09%2010.01-5.98%2013.63-10.77-2.86-.37-5.33%201.54-8.07%201.98m-54.41%204.4c.77%202.26%201.8%204.65.83%207.04-1.69%203.68-5.52%205.85-9.34%206.71-7.13%201.81-14.76.18-20.86-3.81.75%204.9%205.82%207.45%2010.06%208.89%205.65%201.55%2012.04%201.44%2017.37-1.19%203.46-1.95%206.61-5.55%206.28-9.76.08-3.22-1.83-6.04-4.34-7.88m.46%2080.59c-9.91%202.16-19.76-1.38-28.78-5.16%207.05%208.97%2019.84%2011.56%2030.59%209.31%209.47-1.86%2018.32-8.65%2020.72-18.28-5.88%206.81-13.43%2012.66-22.53%2014.13z%22/%3E%3Cpath%20d%3D%22m373.01%20198.78c2.81-6.72%209.68-11.29%2016.93-11.45%208.42-.78%2016.17%204.08%2021.58%2010.14%2011.14%2012.47%2016.29%2029.29%2017.01%2045.77-3.19%201.57-6.43%203.01-9.7%204.4.05-8.9-2.8-17.69-7.47-25.21-4.33%203-8.72%205.93-13.23%208.66%202.09-5.35%204.63-10.52%206.76-15.86-6.36-5.85-16.48-6.56-23.7-1.9-5.64%203.26-8.18%209.73-9.13%2015.87-2.65-9.85-3.18-20.89.95-30.42z%22/%3E%3Cpath%20d%3D%22m288.82%20208.96c6.3-1.65%2013.23-.96%2018.97%202.18%2010.35%205.51%2017.49%2015.78%2021.08%2026.76%204.22%2013.03%205.27%2026.92%204.51%2040.55-4.94.1-9.88.15-14.82.19%201.63-10.71.94-22.19-4.6-31.74-5.17%202.76-9.96%206.14-14.92%209.24%202.06-6.31%204.93-12.34%207.52-18.45-5.69-4.37-13.25-7.14-20.39-5.12-9.7%202.56-16.5%2012.15-17.3%2021.92-2.85-9.88-1.99-20.89%202.59-30.13%203.57-7.03%209.56-13.29%2017.36-15.4z%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23e5173f%22%3E%3Cpath%20d%3D%22m368.4%2080.6c1.93-.43%204.56-.87%205.98.89%201.99%202.51.77%205.9-.48%208.45-4.75%209.2-12.42%2016.62-16.47%2026.21-2.74%206.25-2.98%2013.22-2.66%2019.93.11%202.05.34%204.4%202.27%205.61.4-3.83.41-7.69.72-11.52%2020.31%201.83%2039.76%2010%2056.21%2021.91%2025.56%2018.6%2041.7%2049.38%2042.35%2081-4.91%201.07-9.8%202.73-13.72%205.98-.39-19.7-6.67-39.87-19.99-54.71-6.88-7.98-15.34-15.2-25.64-18.16-9.01-2.69-18.89-1.5-27.38%202.35-10.61%205.14-17.2%2016.01-20.16%2027.09-2.23%207.66-1.57%2015.69-1.65%2023.56-7.94-14.45-20.51-26.76-35.97-32.87-13.2-5.33-28.65-3.51-40.83%203.57-11.91%206.78-20.07%2018.98-23.2%2032.18-5.45%2022.1.06%2045.59%2010.47%2065.39-13.92-6.24-30.58-6.56-44.3.42-8.73-22.47-10.43-47.93-3.08-71.02%207.24-24.81%2023.08-46.97%2044.33-61.7%206.34-4.44%2013.04-8.38%2020.05-11.65%204.2%203.59%206.55%209.81%2012.08%2012.09-.49-3.75-3.78-6.22-5.47-9.43-7.97-11.42-13.02-25.15-12.73-39.18.02-5.53.81-11.35%203.92-16.05%201.66-2.47%205.43-3.82%208.02-2.01%203.21%204.27%202.58%2010.03%202.7%2015.08.13%207.65-1.7%2015.31-.31%2022.93%201.18%207.93%205.15%2015.24%2010.41%2021.2.84%201.06%201.96%201.82%203.2%202.35-.61-5-4.64-8.69-5.89-13.53%2016.75-5.61%2034.37-9.03%2052.09-8.22.76%203.76-.67%209.08%202.93%2011.53.4-8.76-.57-17.63%201.06-26.32%201.27-9.11%205.56-17.46%2010.75-24.94%202.69-3.58%206.06-6.96%2010.39-8.41z%22/%3E%3Cpath%20d%3D%22m380.72%20333.18c3.13-1.97%206.58-3.69%2010.36-3.8%203.78-.31%207.35%201.21%2010.78%202.62-3.74%209.41-12.47%2017.28-22.8%2018.2-10.63.8-20.98-3.82-29.29-10.14%2010.16-6.61%2024.55-8.16%2034.82-.94-1.12-2.09-2.55-3.98-3.87-5.94z%22/%3E%3Cpath%20d%3D%22m212.62%20391.07c5.04-.88%2010.5%201.79%2012.88%206.33%203.33%206.02.78%2014.57-5.7%2017.28-7.17%203.65-16.89-1.55-17.55-9.62-1.12-6.52%203.86-13.12%2010.37-13.99z%22/%3E%3Cpath%20d%3D%22m43.94%20400.93c3.63-3.8%209.98-4.28%2014.25-1.3%203.04%202.04%204.55%205.78%204.51%209.37.04%2014.98.04%2029.97.06%2044.96.35%208.22-.04%2017.01-4.83%2024.05-7.79%2012.28-24.6%2015.75-37.81%2011.39-9.65-3.04-17.61-11.13-20.12-20.97v-3.96c.91-6.82%209.05-10.13%2014.93-7.31%204.93%202.34%206.27%208.31%2010.47%2011.48%204%202.97%2010.55%202.49%2013.49-1.75%201.96-2.55%201.95-5.89%201.95-8.95-.08-15.65.04-31.3-.09-46.95-.08-3.56.55-7.45%203.19-10.06z%22/%3E%3Cpath%20d%3D%22m235.21%20407.9c-.02-6.8%207.54-11.8%2013.87-9.78%204.87%201.12%208.27%205.96%208.3%2010.86.1%206.73-.02%2013.46.05%2020.2%2013.25-4.98%2029.52.37%2037.14%2012.31%206.87%2010.33%206.71%2024.69-.18%2034.96-4.03%206.32-10.42%2011-17.55%2013.23-7.34%202.22-15.36%201.7-22.57-.76-7.7-2.66-14.12-8.81-16.89-16.5-1.81-4.58-2.29-9.55-2.21-14.43.06-16.7-.12-33.4.04-50.09m30.47%2039.12c-5.77.75-10.49%206.19-10.22%2012.03-.02%206.46%206.08%2012.17%2012.54%2011.6%205.7-.12%2010.63-4.96%2011.24-10.57%201.04-7.37-6.25-14.39-13.56-13.06z%22/%3E%3Cpath%20d%3D%22m180.45%20403.66c3.58-.83%207.61%200%2010.23%202.67%202.69%202.42%203.52%206.19%203.49%209.69-.05%2020.68.03%2041.36-.04%2062.05.18%205.4-3.72%2010.83-9.26%2011.47-6.31%201.21-12.65-4.17-12.48-10.58-.04-21.63-.03-43.26%200-64.89-.07-4.77%203.39-9.33%208.06-10.41z%22/%3E%3Cpath%20d%3D%22m146.42%20404.75c6.46-4.03%2016%20.81%2016.2%208.51.12%2021.92.05%2043.84.04%2065.75.12%205.67-4.96%2010.83-10.67%2010.61-5.75.35-11.06-4.85-10.85-10.6-.03-14.34-.44-28.69.01-43.03%200-7.68-.42-15.36.07-23.03.12-3.42%202.34-6.49%205.2-8.21z%22/%3E%3Cpath%20d%3D%22m438.57%20423.77c5.29-.78%209.9%205.3%207.5%2010.18-1.87%204.72-8.75%205.94-12.06%202.06-4-4.06-1.26-11.89%204.56-12.24m-.48%201.24c-3.03.77-5.4%203.79-4.73%207%20.51%204.96%207.61%207.05%2010.65%203%204-4.04-.57-11.49-5.92-10z%22/%3E%3Cpath%20d%3D%22m98.59%20426.07c16.28-2%2032.63%2010.3%2035.23%2026.5%203.55%2016.54-8.16%2034.32-24.69%2037.72-13.66%203.43-29.04-3.31-35.78-15.68-5.96-10.37-5.55-24.08%201.15-34.01%205.27-8.17%2014.42-13.65%2024.09-14.53m1.39%2020.78c-5.33.82-10%205.65-9.88%2011.18-.58%205.82%204.13%2011.26%209.79%2012.18%206.71%201.24%2013.57-4.44%2013.63-11.26.53-7.14-6.54-13.35-13.54-12.1z%22/%3E%3Cpath%20d%3D%22m312.15%20436.18c9.03-10.56%2025.46-13.19%2037.65-6.8%207.87%204.02%2013.42%2012.01%2014.81%2020.7.56%203.55%201.31%207.45-.34%2010.83-1.65%203.39-5.75%204.46-9.22%204.6-9.94.2-19.9-.15-29.84.18%204.28%208.06%2014.98%208.22%2022.62%205.7%203.62-1.19%208.15-2.24%2011.43.32%203.17%202.55%203.11%207.54%201.02%2010.76-2.59%203.9-7.14%205.8-11.41%207.21-11.69%203.18-25.34%201.29-34.41-7.2-12.79-11.62-13.63-33.4-2.31-46.3m12.76%2015.38c7.1.06%2014.21.06%2021.31%200-.71-3.53-2.79-6.95-6.31-8.21-6.13-2.8-14.47%201.19-15%208.21z%22/%3E%3Cpath%20d%3D%22m210.47%20426.73c6.54-2.67%2014.65%202.03%2014.88%209.23.14%2014.33.05%2028.67.04%2043.01.08%205.59-4.78%2010.72-10.43%2010.67-5.9.47-11.24-4.74-11.25-10.6-.07-14.01-.03-28.03-.02-42.04-.05-4.36%202.64-8.72%206.78-10.27z%22/%3E%3Cpath%20d%3D%22m386.39%20429.38c9.84-5.05%2022.42-4.59%2031.66%201.61%209.06%205.92%2013.65%2017.37%2012.46%2027.96-.74%204.44-5.56%206.5-9.63%206.54-9.97.2-19.94-.05-29.91.12%201.48%203.8%205.32%206.04%209.16%206.8%204.96.81%2010.08.21%2014.8-1.48%203.46-1.01%208.02-1.54%2010.64%201.51%202.89%203.22%201.99%208.33-.74%2011.37-3.04%203.31-7.4%205.02-11.64%206.2-11.03%202.6-23.67.84-32.35-6.84-9.91-8.38-13.44-22.9-9.6-35.14%202.29-7.91%207.8-14.88%2015.15-18.65m3.95%2022.19c7.16.04%2014.33.05%2021.5%200-.83-5.15-5.5-9.37-10.81-9.06-5.26-.21-10%203.87-10.69%209.06z%22/%3E%3Cpath%20d%3D%22m436.5%20427.36c1.88.07%203.85-.24%205.64.5.4%202.54.16%205.16.04%207.73-.6-1.25-1.14-2.51-1.62-3.79-.68-.04-2.04-.12-2.73-.17-.02.79-.08%202.35-.11%203.14-.3-.02-.91-.07-1.21-.09-.02-2.44-.02-4.88-.01-7.32m1.53%201.48c-1.22%201.6%201.73%202.61%202.68%201.44%201.21-1.61-1.75-2.67-2.68-1.44z%22/%3E%3C/g%3E%3Cpath%20d%3D%22m382.98%20364.65c9.1-1.47%2016.65-7.32%2022.53-14.13-2.4%209.63-11.25%2016.42-20.72%2018.28-10.75%202.25-23.54-.34-30.59-9.31%209.02%203.78%2018.87%207.32%2028.78%205.16z%22%20fill%3D%22%23221e1f%22/%3E%3C/g%3E%3C/svg%3E" alt="Jollibee">
         <div><div class="fc-head-t">Join the Celebration</div><div class="fc-head-s">Princess Kyrie's 1st Birthday</div></div>
       </div>
       <div class="fc-body">
-        
-
-        <!-- RSVP -->
-        <div id="tab-rsvp">
-          <div id="rsvp-fw">
-            <div class="row2">
-              <div class="fg"><label class="fl">Full Name <span class="req">*</span></label><input class="fi" id="r-name" type="text" placeholder="Your full name" autocomplete="name" autocomplete="name"></div>
-              <div class="fg"><label class="fl">Mobile Number <span class="req">*</span></label><input class="fi" id="r-mob" type="tel" placeholder="+974 xxxx xxxx" autocomplete="tel" autocomplete="tel" inputmode="tel"></div>
-            </div>
-            <div class="fg"><label class="fl">Will You Attend? <span class="req">*</span></label>
-              <div class="att-wrap">
-                <button type="button" class="att" data-v="Yes" onclick="pickA(this)">✅ Yes, I'll be there!</button>
-                <button type="button" class="att" data-v="No" onclick="pickA(this)">❌ Can't make it</button>
-                <button type="button" class="att" data-v="Maybe" onclick="pickA(this)">🤔 Maybe</button>
-              </div>
-            </div>
-            <div class="row2">
-              <div class="fg"><label class="fl">Adults</label><input class="fi" id="r-adults" type="number" min="0" max="20" value="1"></div>
-              <div class="fg"><label class="fl">Kids</label><input class="fi" id="r-kids" type="number" min="0" max="20" value="0"></div>
-            </div>
-            <div style="margin:20px 0 4px;border-top:1px dashed #f0d0d0;padding-top:20px;">
-              <div class="fg"><label class="fl">Birthday Wish for Kyrie 💝 <span style="font-size:.75rem;font-weight:400;color:var(--muted);">(optional)</span></label><textarea class="ft" id="r-wish" placeholder="Write a sweet birthday wish for Princess Kyrie... 💝" style="min-height:90px;"></textarea></div>
-              <div class="row2">
-                <div class="fg">
-                  <label class="fl">Optional: Photo</label>
-                  <label class="upz" id="wpz-photo" for="w-photo">
-                    <input type="file" id="w-photo" accept="image/*,.heic,.heif,.avif,.webp,.tiff,.bmp" onchange="prevWish(this,'w-pp','img')">
-                    📷 Add a photo
-                    <button type="button" class="upz-cancel" id="wpc-photo" onclick="cancelWishFile(event,'w-photo','w-pp','wpc-photo','img')">✕</button>
-                  </label>
-                  <div class="uprev" id="w-pp"></div>
-                </div>
-                <div class="fg">
-                  <label class="fl">Optional: Video <span style="font-size:.65rem;color:var(--muted);">(max 100 MB)</span></label>
-                  <label class="upz" id="wpz-video" for="w-video">
-                    <input type="file" id="w-video" accept="video/*,.mov,.avi,.mkv,.wmv,.m4v,.3gp" onchange="prevWish(this,'w-vp','vid')">
-                    🎬 Add a video
-                    <button type="button" class="upz-cancel" id="wpc-video" onclick="cancelWishFile(event,'w-video','w-vp','wpc-video','vid')">✕</button>
-                  </label>
-                  <div class="uprev" id="w-vp"></div>
-                </div>
-              </div>
-            </div>
-            <button type="button" class="sbtn" id="rsvp-submit-btn" onclick="submitRSVP()">💌 Submit RSVP</button>
-          </div>
-          <div class="succ" id="rsvp-ok">
-            <div class="si-icon">🎉</div>
-            <div class="si-t">Thank You!</div>
-            <div class="si-s">Your RSVP was received!<br>Can't wait to celebrate with you at Jollibee! 🍗</div>
-          </div>
+        <div style="text-align:center;padding:30px 12px;">
+          <div style="font-size:3.5rem;margin-bottom:10px;">🎉</div>
+          <div style="font-family:var(--fh);font-size:1.4rem;color:var(--red);font-style:italic;margin-bottom:8px;">The Celebration Has Ended</div>
+          <div style="color:var(--muted);font-size:.9rem;line-height:1.7;">Thank you so much to everyone who joined and sent their love for Kyrie's 1st birthday! RSVP submissions are now closed.</div>
         </div>
       </div>
     </div>
 
-    <!-- Wishes display — horizontal carousel -->
     <div class="wo">
       <h3 style="font-family:var(--fh);font-size:1.45rem;color:var(--dark);text-align:center;font-style:italic;margin-bottom:14px;">Wishes from <span style="color:var(--red);">Loved Ones</span></h3>
       <div style="position:relative;">
@@ -930,32 +757,23 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
   </div>
 </section>
 
-<!-- GALLERY -->
 <section class="sec gal-sec" id="gal-sec">
   <div class="si">
     <div class="divider rev"><div class="div-l r"></div><img src="data:image/svg+xml,%3Csvg%20height%3D%22313.049517%22%20viewBox%3D%220%200%20160%20156.44249%22%20width%3D%22319.438282%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20transform%3D%22matrix%28.32403135%200%200%20.32403135%200%20-2.721786%29%22%3E%3Cg%20fill%3D%22%23231f20%22%3E%3Cpath%20d%3D%22m272.82%2020.87c13.25-7.9%2028.57-13.36%2044.19-12.35%2011.85.71%2023.38%206.44%2030.72%2015.83%208.44%2010.38%2012.52%2024.51%209.45%2037.69-3.53%2016.65-16.48%2029.52-30.68%2037.95%202.16%207.93%204.35%2015.87%206.9%2023.7%203.27.04%206.53.07%209.8.06-.28-14.74%204.73-29.78%2014.87-40.63%202.89-2.95%206.22-5.63%2010.13-7.07%204.06-1.49%209.63-.02%2011.23%204.32%201.67%206.19-1.76%2012.13-4.94%2017.18-5.83%208.78-14.49%2016.52-15.59%2027.62%2026.42%203.31%2052.05%2015.01%2070.64%2034.28%2019.26%2019.33%2031.31%2045.89%2031.88%2073.29%209.86.5%2019.77%205.22%2024.98%2013.85%206.66%2011.1%208.32%2024.61%206.92%2037.31-2.1%2016.21-9.54%2031.23-18.85%2044.48-11.23%2015.87-25.16%2029.69-40.24%2041.89-2.65%202.3-6.09%203.9-7.73%207.17-4.65%208.1-11.33%2015.09-19.55%2019.6-13.86%207.56-30.37%2010.27-45.9%207.34-3.52-.52-6.87-1.75-10.34-2.41-24.63-2.33-49.36-4.19-73.75-8.46-17.95-3.34-35.85-8.48-51.66-17.82-13.28-7.78-24.91-19.43-29.98-34.22-3.43-10.04-4.66-21.35-1.18-31.53%202.78-8.07%208.66-14.65%2015.41-19.69-5.84-13.98-8.49-29.13-8.71-44.23.58-23.82%208.42-47.47%2022.12-66.95-2.45-2.51-4.76-5.13-7-7.81-10.14%205.51-22.18%207.37-33.49%204.97-12.22-2.34-24.27-9.08-30.38-20.28-5.99-11.15-6.6-25.32-.86-36.7%205.04-10.17%2014.07-17.68%2023.69-23.34%2015.73-9.2%2033.53-14.14%2051.35-17.3%207.55-24.2%2025.01-44.7%2046.55-57.74m1.65%205.62c-24.3%2014.72-40.43%2040-48.94%2066.65-.94%202.41-1.5%206.38-4.88%206.3-.1-5.18%202.14-9.97%203.29-14.93-16.03%203.38-32.09%207.87-46.37%2016.12-8.65%205.03-16.77%2011.77-21.27%2020.9-5.89%2011.94-4.12%2027.36%204.77%2037.37%206.05%206.77%2014.73%2010.71%2023.57%2012.26%209.03%201.37%2018.87%201.06%2026.85-3.88-7.4-6.52-14.74-13.12-22.58-19.11-1.05-.68-1.81-1.64-1.85-2.93%2015.1%204.66%2026.75%2016.09%2037.59%2027.07.68.53%201.77%202.38%202.68%201.19%2012.1-14.99%2028.25-26.31%2045.57-34.5-5.03-9.53-8.73-20.06-8.3-30.98.23-6.81%201.04-13.96%204.54-19.94%202.56-4.23%207.98-6.9%2012.78-4.97%202.95%201.14%204.58%204.17%205.38%207.07%203.41%2013.77-2.51%2028.14%201.94%2041.79%2012.3-3.75%2024.84-7.26%2037.78-7.72-3.8-14.22-8.04-28.43-9.5-43.13-.3-4.43-.51-8.96.42-13.34.37-.16%201.1-.47%201.47-.63%201.38%209.04%203.49%2017.93%205.49%2026.84%2013.19-7.41%2024.3-20.19%2027.08-35.38%203.47-19.43-10.58-40.32-30.15-43.84-16.59-2.6-33.26%203.33-47.36%2011.72m93.93%2054.11c-4.33%201.45-7.7%204.83-10.39%208.41-5.19%207.48-9.48%2015.83-10.75%2024.94-1.63%208.69-.66%2017.56-1.06%2026.32-3.6-2.45-2.17-7.77-2.93-11.53-17.72-.81-35.34%202.61-52.09%208.22%201.25%204.84%205.28%208.53%205.89%2013.53-1.24-.53-2.36-1.29-3.2-2.35-5.26-5.96-9.23-13.27-10.41-21.2-1.39-7.62.44-15.28.31-22.93-.12-5.05.51-10.81-2.7-15.08-2.59-1.81-6.36-.46-8.02%202.01-3.11%204.7-3.9%2010.52-3.92%2016.05-.29%2014.03%204.76%2027.76%2012.73%2039.18%201.69%203.21%204.98%205.68%205.47%209.43-5.53-2.28-7.88-8.5-12.08-12.09-7.01%203.27-13.71%207.21-20.05%2011.65-21.25%2014.73-37.09%2036.89-44.33%2061.7-7.35%2023.09-5.65%2048.55%203.08%2071.02%2013.72-6.98%2030.38-6.66%2044.3-.42.35.69.69%201.39%201.02%202.09-7.41-1.07-14.81-2.44-22.33-2.33-10.07-.24-20.26%203.19-27.87%209.83-6.09%205.3-10.26%2012.83-11.21%2020.87-1.4%2014.83%204.3%2029.96%2014.65%2040.6%2012.96%2013.49%2030.72%2021.31%2048.65%2025.69%2025.26%206.17%2051.18%208.92%2077.04%2011.09-2.46-1.83-5.07-3.62-6.82-6.18l.37-1.44c4.89%201.13%209.31%203.81%2014.07%205.42%2015.6%206.89%2033.9%208.91%2050.04%202.67%2014.22-5.12%2025.87-16.66%2030.91-30.93%201.11-1.9.96-5.14%203.4-5.83.09%202.34.11%204.69.13%207.04%2013.6-10.52%2026.14-22.5%2036.49-36.27%209.31-12.4%2017-26.42%2020.03-41.76%202.35-11.61%201.48-23.93-2.97-34.94-2.76-6.65-8.2-12.18-14.99-14.68-8.53-3.31-18.22-1.77-26.24%202.22l-.02-1.56c3.92-3.25%208.81-4.91%2013.72-5.98-.65-31.62-16.79-62.4-42.35-81-16.45-11.91-35.9-20.08-56.21-21.91-.31%203.83-.32%207.69-.72%2011.52-1.93-1.21-2.16-3.56-2.27-5.61-.32-6.71-.08-13.68%202.66-19.93%204.05-9.59%2011.72-17.01%2016.47-26.21%201.25-2.55%202.47-5.94.48-8.45-1.42-1.76-4.05-1.32-5.98-.89z%22/%3E%3Cpath%20d%3D%22m384.06%20183.8c8.06-2.53%2016.91-.14%2023.77%204.42%208%205.36%2013.43%2013.67%2017.48%2022.24%204.62%209.61%206.86%2020.28%207.13%2030.91%201.65-.01%203.83.25%202.7%202.5-12.13%206.78-24.99%2012.15-37.23%2018.71-4.27%202.08-8.27%204.74-12.74%206.39-7.66-9.47-12.59-20.85-15.91-32.49-2.88-10.83-4.98-22.4-2.33-33.49%202.04-8.69%208.37-16.65%2017.13-19.19m-11.05%2014.98c-4.13%209.53-3.6%2020.57-.95%2030.42.95-6.14%203.49-12.61%209.13-15.87%207.22-4.66%2017.34-3.95%2023.7%201.9-2.13%205.34-4.67%2010.51-6.76%2015.86%204.51-2.73%208.9-5.66%2013.23-8.66%204.67%207.52%207.52%2016.31%207.47%2025.21%203.27-1.39%206.51-2.83%209.7-4.4-.72-16.48-5.87-33.3-17.01-45.77-5.41-6.06-13.16-10.92-21.58-10.14-7.25.16-14.12%204.73-16.93%2011.45z%22/%3E%3Cpath%20d%3D%22m294.15%20203.09c12.19-.55%2023.21%207.09%2030.43%2016.36%209.38%2012.1%2012.43%2027.74%2013.52%2042.67.39%206.84.26%2013.71-.58%2020.51-7.53-.04-15.06.02-22.59.16-14.46.57-28.83%202.46-43.12%204.73-.33-.66-1-1.99-1.34-2.66%201.19-.58%202.38-1.15%203.58-1.71-6.73-12.67-11.36-26.75-11.38-41.2.01-10.86%203.44-22.18%2011.48-29.82%205.45-5%2012.39-9.1%2020-9.04m-5.33%205.87c-7.8%202.11-13.79%208.37-17.36%2015.4-4.58%209.24-5.44%2020.25-2.59%2030.13.8-9.77%207.6-19.36%2017.3-21.92%207.14-2.02%2014.7.75%2020.39%205.12-2.59%206.11-5.46%2012.14-7.52%2018.45%204.96-3.1%209.75-6.48%2014.92-9.24%205.54%209.55%206.23%2021.03%204.6%2031.74%204.94-.04%209.88-.09%2014.82-.19.76-13.63-.29-27.52-4.51-40.55-3.59-10.98-10.73-21.25-21.08-26.76-5.74-3.14-12.67-3.83-18.97-2.18z%22/%3E%3Cpath%20d%3D%22m436.93%20279.66c2.74-.44%205.21-2.35%208.07-1.98-3.62%204.79-10.34%205.68-13.63%2010.77-9.53%2012.41-17.2%2026.22-22.98%2040.74-3.92%209.01-9.19%2018.39-18.27%2023.02-9.31%204.14-20.36%203.5-29.54-.72-8.63-3.75-16.14-9.58-24.7-13.46-10.96-5.04-22.2-9.51-33.73-13.07-2.65-.67-5.45-1.93-8.17-.85-5.21%201.63-10.79%202.04-16.15.99.2-.33.61-.98.81-1.3%206.57-.94%2013.27-3.24%2017.81-8.32%201.53-1.37%202.48-3.93%204.88-3.86.42%202.73-.77%205.22-2%207.56%206.93%202.76%2014.39%203.74%2021.74%204.79%2020.64%202.48%2042.05%202.42%2062.03-3.91%2015.26-4.9%2029.97-13.21%2040.03-25.92%202.11-2.84%204.33-5.69%205.52-9.06-2.95-.5-6.55-1.49-7.4-4.78%205.23.13%2010.55.85%2015.68-.64m-56.21%2053.52c1.32%201.96%202.75%203.85%203.87%205.94-10.27-7.22-24.66-5.67-34.82.94%208.31%206.32%2018.66%2010.94%2029.29%2010.14%2010.33-.92%2019.06-8.79%2022.8-18.2-3.43-1.41-7-2.93-10.78-2.62-3.78.11-7.23%201.83-10.36%203.8z%22/%3E%3Cpath%20d%3D%22m382.52%20284.06c2.51%201.84%204.42%204.66%204.34%207.88.33%204.21-2.82%207.81-6.28%209.76-5.33%202.63-11.72%202.74-17.37%201.19-4.24-1.44-9.31-3.99-10.06-8.89%206.1%203.99%2013.73%205.62%2020.86%203.81%203.82-.86%207.65-3.03%209.34-6.71.97-2.39-.06-4.78-.83-7.04z%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22m274.47%2026.49c14.1-8.39%2030.77-14.32%2047.36-11.72%2019.57%203.52%2033.62%2024.41%2030.15%2043.84-2.78%2015.19-13.89%2027.97-27.08%2035.38-2-8.91-4.11-17.8-5.49-26.84-.37.16-1.1.47-1.47.63-.93%204.38-.72%208.91-.42%2013.34%201.46%2014.7%205.7%2028.91%209.5%2043.13-12.94.46-25.48%203.97-37.78%207.72-4.45-13.65%201.47-28.02-1.94-41.79-.8-2.9-2.43-5.93-5.38-7.07-4.8-1.93-10.22.74-12.78%204.97-3.5%205.98-4.31%2013.13-4.54%2019.94-.43%2010.92%203.27%2021.45%208.3%2030.98-17.32%208.19-33.47%2019.51-45.57%2034.5-.91%201.19-2-.66-2.68-1.19-10.84-10.98-22.49-22.41-37.59-27.07.04%201.29.8%202.25%201.85%202.93%207.84%205.99%2015.18%2012.59%2022.58%2019.11-7.98%204.94-17.82%205.25-26.85%203.88-8.84-1.55-17.52-5.49-23.57-12.26-8.89-10.01-10.66-25.43-4.77-37.37%204.5-9.13%2012.62-15.87%2021.27-20.9%2014.28-8.25%2030.34-12.74%2046.37-16.12-1.15%204.96-3.39%209.75-3.29%2014.93%203.38.08%203.94-3.89%204.88-6.3%208.51-26.65%2024.64-51.93%2048.94-66.65z%22/%3E%3Cpath%20d%3D%22m369.59%20168.54c8.49-3.85%2018.37-5.04%2027.38-2.35%2010.3%202.96%2018.76%2010.18%2025.64%2018.16%2013.32%2014.84%2019.6%2035.01%2019.99%2054.71l.02%201.56c8.02-3.99%2017.71-5.53%2026.24-2.22%206.79%202.5%2012.23%208.03%2014.99%2014.68%204.45%2011.01%205.32%2023.33%202.97%2034.94-3.03%2015.34-10.72%2029.36-20.03%2041.76-10.35%2013.77-22.89%2025.75-36.49%2036.27-.02-2.35-.04-4.7-.13-7.04-2.44.69-2.29%203.93-3.4%205.83-5.04%2014.27-16.69%2025.81-30.91%2030.93-16.14%206.24-34.44%204.22-50.04-2.67-4.76-1.61-9.18-4.29-14.07-5.42l-.37%201.44c1.75%202.56%204.36%204.35%206.82%206.18-25.86-2.17-51.78-4.92-77.04-11.09-17.93-4.38-35.69-12.2-48.65-25.69-10.35-10.64-16.05-25.77-14.65-40.6.95-8.04%205.12-15.57%2011.21-20.87%207.61-6.64%2017.8-10.07%2027.87-9.83%207.52-.11%2014.92%201.26%2022.33%202.33-.33-.7-.67-1.4-1.02-2.09-10.41-19.8-15.92-43.29-10.47-65.39%203.13-13.2%2011.29-25.4%2023.2-32.18%2012.18-7.08%2027.63-8.9%2040.83-3.57%2015.46%206.11%2028.03%2018.42%2035.97%2032.87.08-7.87-.58-15.9%201.65-23.56%202.96-11.08%209.55-21.95%2020.16-27.09m14.47%2015.26c-8.76%202.54-15.09%2010.5-17.13%2019.19-2.65%2011.09-.55%2022.66%202.33%2033.49%203.32%2011.64%208.25%2023.02%2015.91%2032.49%204.47-1.65%208.47-4.31%2012.74-6.39%2012.24-6.56%2025.1-11.93%2037.23-18.71%201.13-2.25-1.05-2.51-2.7-2.5-.27-10.63-2.51-21.3-7.13-30.91-4.05-8.57-9.48-16.88-17.48-22.24-6.86-4.56-15.71-6.95-23.77-4.42m-89.91%2019.29c-7.61-.06-14.55%204.04-20%209.04-8.04%207.64-11.47%2018.96-11.48%2029.82.02%2014.45%204.65%2028.53%2011.38%2041.2-1.2.56-2.39%201.13-3.58%201.71.34.67%201.01%202%201.34%202.66%2014.29-2.27%2028.66-4.16%2043.12-4.73%207.53-.14%2015.06-.2%2022.59-.16.84-6.8.97-13.67.58-20.51-1.09-14.93-4.14-30.57-13.52-42.67-7.22-9.27-18.24-16.91-30.43-16.36m142.78%2076.57c-5.13%201.49-10.45.77-15.68.64.85%203.29%204.45%204.28%207.4%204.78-1.19%203.37-3.41%206.22-5.52%209.06-10.06%2012.71-24.77%2021.02-40.03%2025.92-19.98%206.33-41.39%206.39-62.03%203.91-7.35-1.05-14.81-2.03-21.74-4.79%201.23-2.34%202.42-4.83%202-7.56-2.4-.07-3.35%202.49-4.88%203.86-4.54%205.08-11.24%207.38-17.81%208.32-.2.32-.61.97-.81%201.3%205.36%201.05%2010.94.64%2016.15-.99%202.72-1.08%205.52.18%208.17.85%2011.53%203.56%2022.77%208.03%2033.73%2013.07%208.56%203.88%2016.07%209.71%2024.7%2013.46%209.18%204.22%2020.23%204.86%2029.54.72%209.08-4.63%2014.35-14.01%2018.27-23.02%205.78-14.52%2013.45-28.33%2022.98-40.74%203.29-5.09%2010.01-5.98%2013.63-10.77-2.86-.37-5.33%201.54-8.07%201.98m-54.41%204.4c.77%202.26%201.8%204.65.83%207.04-1.69%203.68-5.52%205.85-9.34%206.71-7.13%201.81-14.76.18-20.86-3.81.75%204.9%205.82%207.45%2010.06%208.89%205.65%201.55%2012.04%201.44%2017.37-1.19%203.46-1.95%206.61-5.55%206.28-9.76.08-3.22-1.83-6.04-4.34-7.88m.46%2080.59c-9.91%202.16-19.76-1.38-28.78-5.16%207.05%208.97%2019.84%2011.56%2030.59%209.31%209.47-1.86%2018.32-8.65%2020.72-18.28-5.88%206.81-13.43%2012.66-22.53%2014.13z%22/%3E%3Cpath%20d%3D%22m373.01%20198.78c2.81-6.72%209.68-11.29%2016.93-11.45%208.42-.78%2016.17%204.08%2021.58%2010.14%2011.14%2012.47%2016.29%2029.29%2017.01%2045.77-3.19%201.57-6.43%203.01-9.7%204.4.05-8.9-2.8-17.69-7.47-25.21-4.33%203-8.72%205.93-13.23%208.66%202.09-5.35%204.63-10.52%206.76-15.86-6.36-5.85-16.48-6.56-23.7-1.9-5.64%203.26-8.18%209.73-9.13%2015.87-2.65-9.85-3.18-20.89.95-30.42z%22/%3E%3Cpath%20d%3D%22m288.82%20208.96c6.3-1.65%2013.23-.96%2018.97%202.18%2010.35%205.51%2017.49%2015.78%2021.08%2026.76%204.22%2013.03%205.27%2026.92%204.51%2040.55-4.94.1-9.88.15-14.82.19%201.63-10.71.94-22.19-4.6-31.74-5.17%202.76-9.96%206.14-14.92%209.24%202.06-6.31%204.93-12.34%207.52-18.45-5.69-4.37-13.25-7.14-20.39-5.12-9.7%202.56-16.5%2012.15-17.3%2021.92-2.85-9.88-1.99-20.89%202.59-30.13%203.57-7.03%209.56-13.29%2017.36-15.4z%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23e5173f%22%3E%3Cpath%20d%3D%22m368.4%2080.6c1.93-.43%204.56-.87%205.98.89%201.99%202.51.77%205.9-.48%208.45-4.75%209.2-12.42%2016.62-16.47%2026.21-2.74%206.25-2.98%2013.22-2.66%2019.93.11%202.05.34%204.4%202.27%205.61.4-3.83.41-7.69.72-11.52%2020.31%201.83%2039.76%2010%2056.21%2021.91%2025.56%2018.6%2041.7%2049.38%2042.35%2081-4.91%201.07-9.8%202.73-13.72%205.98-.39-19.7-6.67-39.87-19.99-54.71-6.88-7.98-15.34-15.2-25.64-18.16-9.01-2.69-18.89-1.5-27.38%202.35-10.61%205.14-17.2%2016.01-20.16%2027.09-2.23%207.66-1.57%2015.69-1.65%2023.56-7.94-14.45-20.51-26.76-35.97-32.87-13.2-5.33-28.65-3.51-40.83%203.57-11.91%206.78-20.07%2018.98-23.2%2032.18-5.45%2022.1.06%2045.59%2010.47%2065.39-13.92-6.24-30.58-6.56-44.3.42-8.73-22.47-10.43-47.93-3.08-71.02%207.24-24.81%2023.08-46.97%2044.33-61.7%206.34-4.44%2013.04-8.38%2020.05-11.65%204.2%203.59%206.55%209.81%2012.08%2012.09-.49-3.75-3.78-6.22-5.47-9.43-7.97-11.42-13.02-25.15-12.73-39.18.02-5.53.81-11.35%203.92-16.05%201.66-2.47%205.43-3.82%208.02-2.01%203.21%204.27%202.58%2010.03%202.7%2015.08.13%207.65-1.7%2015.31-.31%2022.93%201.18%207.93%205.15%2015.24%2010.41%2021.2.84%201.06%201.96%201.82%203.2%202.35-.61-5-4.64-8.69-5.89-13.53%2016.75-5.61%2034.37-9.03%2052.09-8.22.76%203.76-.67%209.08%202.93%2011.53.4-8.76-.57-17.63%201.06-26.32%201.27-9.11%205.56-17.46%2010.75-24.94%202.69-3.58%206.06-6.96%2010.39-8.41z%22/%3E%3Cpath%20d%3D%22m380.72%20333.18c3.13-1.97%206.58-3.69%2010.36-3.8%203.78-.31%207.35%201.21%2010.78%202.62-3.74%209.41-12.47%2017.28-22.8%2018.2-10.63.8-20.98-3.82-29.29-10.14%2010.16-6.61%2024.55-8.16%2034.82-.94-1.12-2.09-2.55-3.98-3.87-5.94z%22/%3E%3Cpath%20d%3D%22m212.62%20391.07c5.04-.88%2010.5%201.79%2012.88%206.33%203.33%206.02.78%2014.57-5.7%2017.28-7.17%203.65-16.89-1.55-17.55-9.62-1.12-6.52%203.86-13.12%2010.37-13.99z%22/%3E%3Cpath%20d%3D%22m43.94%20400.93c3.63-3.8%209.98-4.28%2014.25-1.3%203.04%202.04%204.55%205.78%204.51%209.37.04%2014.98.04%2029.97.06%2044.96.35%208.22-.04%2017.01-4.83%2024.05-7.79%2012.28-24.6%2015.75-37.81%2011.39-9.65-3.04-17.61-11.13-20.12-20.97v-3.96c.91-6.82%209.05-10.13%2014.93-7.31%204.93%202.34%206.27%208.31%2010.47%2011.48%204%202.97%2010.55%202.49%2013.49-1.75%201.96-2.55%201.95-5.89%201.95-8.95-.08-15.65.04-31.3-.09-46.95-.08-3.56.55-7.45%203.19-10.06z%22/%3E%3Cpath%20d%3D%22m235.21%20407.9c-.02-6.8%207.54-11.8%2013.87-9.78%204.87%201.12%208.27%205.96%208.3%2010.86.1%206.73-.02%2013.46.05%2020.2%2013.25-4.98%2029.52.37%2037.14%2012.31%206.87%2010.33%206.71%2024.69-.18%2034.96-4.03%206.32-10.42%2011-17.55%2013.23-7.34%202.22-15.36%201.7-22.57-.76-7.7-2.66-14.12-8.81-16.89-16.5-1.81-4.58-2.29-9.55-2.21-14.43.06-16.7-.12-33.4.04-50.09m30.47%2039.12c-5.77.75-10.49%206.19-10.22%2012.03-.02%206.46%206.08%2012.17%2012.54%2011.6%205.7-.12%2010.63-4.96%2011.24-10.57%201.04-7.37-6.25-14.39-13.56-13.06z%22/%3E%3Cpath%20d%3D%22m180.45%20403.66c3.58-.83%207.61%200%2010.23%202.67%202.69%202.42%203.52%206.19%203.49%209.69-.05%2020.68.03%2041.36-.04%2062.05.18%205.4-3.72%2010.83-9.26%2011.47-6.31%201.21-12.65-4.17-12.48-10.58-.04-21.63-.03-43.26%200-64.89-.07-4.77%203.39-9.33%208.06-10.41z%22/%3E%3Cpath%20d%3D%22m146.42%20404.75c6.46-4.03%2016%20.81%2016.2%208.51.12%2021.92.05%2043.84.04%2065.75.12%205.67-4.96%2010.83-10.67%2010.61-5.75.35-11.06-4.85-10.85-10.6-.03-14.34-.44-28.69.01-43.03%200-7.68-.42-15.36.07-23.03.12-3.42%202.34-6.49%205.2-8.21z%22/%3E%3Cpath%20d%3D%22m438.57%20423.77c5.29-.78%209.9%205.3%207.5%2010.18-1.87%204.72-8.75%205.94-12.06%202.06-4-4.06-1.26-11.89%204.56-12.24m-.48%201.24c-3.03.77-5.4%203.79-4.73%207%20.51%204.96%207.61%207.05%2010.65%203%204-4.04-.57-11.49-5.92-10z%22/%3E%3Cpath%20d%3D%22m98.59%20426.07c16.28-2%2032.63%2010.3%2035.23%2026.5%203.55%2016.54-8.16%2034.32-24.69%2037.72-13.66%203.43-29.04-3.31-35.78-15.68-5.96-10.37-5.55-24.08%201.15-34.01%205.27-8.17%2014.42-13.65%2024.09-14.53m1.39%2020.78c-5.33.82-10%205.65-9.88%2011.18-.58%205.82%204.13%2011.26%209.79%2012.18%206.71%201.24%2013.57-4.44%2013.63-11.26.53-7.14-6.54-13.35-13.54-12.1z%22/%3E%3Cpath%20d%3D%22m312.15%20436.18c9.03-10.56%2025.46-13.19%2037.65-6.8%207.87%204.02%2013.42%2012.01%2014.81%2020.7.56%203.55%201.31%207.45-.34%2010.83-1.65%203.39-5.75%204.46-9.22%204.6-9.94.2-19.9-.15-29.84.18%204.28%208.06%2014.98%208.22%2022.62%205.7%203.62-1.19%208.15-2.24%2011.43.32%203.17%202.55%203.11%207.54%201.02%2010.76-2.59%203.9-7.14%205.8-11.41%207.21-11.69%203.18-25.34%201.29-34.41-7.2-12.79-11.62-13.63-33.4-2.31-46.3m12.76%2015.38c7.1.06%2014.21.06%2021.31%200-.71-3.53-2.79-6.95-6.31-8.21-6.13-2.8-14.47%201.19-15%208.21z%22/%3E%3Cpath%20d%3D%22m210.47%20426.73c6.54-2.67%2014.65%202.03%2014.88%209.23.14%2014.33.05%2028.67.04%2043.01.08%205.59-4.78%2010.72-10.43%2010.67-5.9.47-11.24-4.74-11.25-10.6-.07-14.01-.03-28.03-.02-42.04-.05-4.36%202.64-8.72%206.78-10.27z%22/%3E%3Cpath%20d%3D%22m386.39%20429.38c9.84-5.05%2022.42-4.59%2031.66%201.61%209.06%205.92%2013.65%2017.37%2012.46%2027.96-.74%204.44-5.56%206.5-9.63%206.54-9.97.2-19.94-.05-29.91.12%201.48%203.8%205.32%206.04%209.16%206.8%204.96.81%2010.08.21%2014.8-1.48%203.46-1.01%208.02-1.54%2010.64%201.51%202.89%203.22%201.99%208.33-.74%2011.37-3.04%203.31-7.4%205.02-11.64%206.2-11.03%202.6-23.67.84-32.35-6.84-9.91-8.38-13.44-22.9-9.6-35.14%202.29-7.91%207.8-14.88%2015.15-18.65m3.95%2022.19c7.16.04%2014.33.05%2021.5%200-.83-5.15-5.5-9.37-10.81-9.06-5.26-.21-10%203.87-10.69%209.06z%22/%3E%3Cpath%20d%3D%22m436.5%20427.36c1.88.07%203.85-.24%205.64.5.4%202.54.16%205.16.04%207.73-.6-1.25-1.14-2.51-1.62-3.79-.68-.04-2.04-.12-2.73-.17-.02.79-.08%202.35-.11%203.14-.3-.02-.91-.07-1.21-.09-.02-2.44-.02-4.88-.01-7.32m1.53%201.48c-1.22%201.6%201.73%202.61%202.68%201.44%201.21-1.61-1.75-2.67-2.68-1.44z%22/%3E%3C/g%3E%3Cpath%20d%3D%22m382.98%20364.65c9.1-1.47%2016.65-7.32%2022.53-14.13-2.4%209.63-11.25%2016.42-20.72%2018.28-10.75%202.25-23.54-.34-30.59-9.31%209.02%203.78%2018.87%207.32%2028.78%205.16z%22%20fill%3D%22%23221e1f%22/%3E%3C/g%3E%3C/svg%3E" alt="" style="height:18px;opacity:.45;"><div class="div-l"></div></div>
     <p class="ey rev">Memory Wall</p>
     <h2 class="st rev">Share Your <span>Memories</span></h2>
-    <p class="ss rev">Upload your photos &amp; videos — awaiting host approval before going live</p>
+    <p class="ss rev">Relive the moments — thank you for sharing!</p>
     <div class="gup-card rev">
-      <label class="gup-area" for="g-upload">
-        <input type="file" id="g-upload" accept="image/*,.heic,.heif,.avif,.webp,.tiff,.tif,.bmp,.svg,video/*,.mov,.avi,.mkv,.wmv,.flv,.m4v,.3gp" multiple onchange="handleGalUp(this)">
-        <div class="gup-icon">📸</div>
-        <div class="gup-t">Upload Your Memories</div>
-        <div class="gup-h">Photos &amp; Videos · Multiple files allowed</div>
-      </label>
-      <div class="gup-limit">
-        📷 <strong>Photos:</strong> JPG, PNG, HEIC, WEBP, AVIF — up to <strong>20 MB</strong> each<br>
-        🎬 <strong>Videos:</strong> MP4, MOV, WEBM — up to <strong>200 MB</strong> each<br>
-        ✅ Uploads are reviewed by the host before appearing publicly
+      <div style="padding:10px 6px;">
+        <div class="gup-icon">🔒</div>
+        <div class="gup-t">Uploads Are Now Closed</div>
+        <div class="gup-h">Thank you to everyone who shared their photos &amp; videos! Browse the memories below.</div>
       </div>
-      <div class="gup-pending" id="gup-pending" style="display:none;">⏳ Your upload is pending approval by the host. Once approved it will appear on the Memory Wall!</div>
     </div>
     <div class="gg" id="gg"></div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <span class="ft-name">Princess Kyrie 👑</span>
   <span class="ft-date">03 July 2026</span>
@@ -964,12 +782,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
   <span class="ft-copy">@RTM1S · All Rights Reserved 2026</span>
   <br><button type="button" id="admin-trigger" onclick="showALogin()">⚙ ADMIN</button>
 </footer>
-</div><!-- /main -->
+</div>
 
-<!-- LIGHTBOX -->
 <div id="lb"><button type="button" id="lb-close" onclick="closeLb()" aria-label="Close lightbox">✕</button><div id="lb-wrap"></div></div>
 
-<!-- ADMIN LOGIN -->
 <div class="pop-ov" id="al-ov">
   <div class="al-box">
     <button type="button" class="al-close" onclick="closeALogin()" aria-label="Close">✕</button>
@@ -981,7 +797,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
 <div id="ap">
   <div class="ap-hd">
     <span class="ap-hd-t">👑 Kyrie Admin</span>
@@ -1033,7 +848,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
   </div>
 </div>
 
-<!-- RSVP DETAIL POPUP -->
 <div class="pop-ov" id="rsvp-pop">
   <div class="pop-box">
     <div class="pop-head"><span class="pop-head-t">💌 RSVP Details</span><button type="button" class="pop-close" onclick="closeRSVPPop()" aria-label="Close">✕</button></div>
@@ -1041,7 +855,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
   </div>
 </div>
 
-<!-- WISH POPUP -->
 <div class="pop-ov" id="wish-pop">
   <div class="pop-box">
     <div class="pop-head"><span class="pop-head-t">💝 Birthday Wish</span><button type="button" class="pop-close" onclick="closeWPop()" aria-label="Close">✕</button></div>
@@ -1049,7 +862,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
   </div>
 </div>
 
-<!-- GALLERY POPUP -->
 <div class="pop-ov" id="gal-pop">
   <div class="pop-box">
     <div class="pop-head"><span class="pop-head-t">📸 Media Preview</span><button type="button" class="pop-close" onclick="closeGPop()" aria-label="Close">✕</button></div>
@@ -1058,72 +870,17 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset
 </div>
 
 <script>
-/* ════════════════════════════════════════════════
-   CONFIG — ⚠️ FILL IN YOUR CLOUDINARY + SUPABASE
-   ════════════════════════════════════════════════
-   
-   1. CLOUDINARY (free): cloudinary.com → create account →
-      Dashboard → copy Cloud Name.
-      Settings → Upload → Add upload preset (Unsigned) → copy preset name.
-   
-   2. SUPABASE (free): supabase.com → new project →
-      SQL Editor → run the schema below → copy Project URL + anon key.
-   
-   SQL Schema (run once in Supabase SQL Editor):
-   ──────────────────────────────────────────────
-   create table rsvps (
-     id uuid default gen_random_uuid() primary key,
-     name text, mobile text, attendance text,
-     adults int default 0, kids int default 0,
-     message text, created_at timestamptz default now()
-   );
-   create table wishes (
-     id uuid default gen_random_uuid() primary key,
-     name text, message text,
-     photo_url text, video_url text,
-     created_at timestamptz default now()
-   );
-   create table gallery (
-     id uuid default gen_random_uuid() primary key,
-     name text, type text, url text, size bigint,
-     approved boolean default false,
-     created_at timestamptz default now()
-   );
-   create table slides (
-     id uuid default gen_random_uuid() primary key,
-     name text, type text, url text,
-     sort_order int default 0,
-     created_at timestamptz default now()
-   );
-   -- Enable public read for approved gallery + slides:
-   alter table gallery enable row level security;
-   alter table slides enable row level security;
-   alter table rsvps enable row level security;
-   alter table wishes enable row level security;
-   create policy "public read approved gallery" on gallery for select using (approved = true);
-   create policy "public insert gallery" on gallery for insert with check (true);
-   create policy "public read slides" on slides for select using (true);
-   create policy "public read wishes" on wishes for select using (true);
-   create policy "public insert wishes" on wishes for insert with check (true);
-   create policy "public insert rsvps" on rsvps for insert with check (true);
-   -- For admin full access, use the service_role key (only server-side).
-   -- For this SPA we use anon key + a simple password gate in the UI.
-*/
-
 const CFG = {
-  cloudName:    'dd2l5psmo',           // ✅ Cloudinary Cloud Name
-  uploadPreset: 'kyrie_2026',          // ✅ Cloudinary Upload Preset
-  supabaseUrl:  'https://jzjvuhgsywnsxdkxajny.supabase.co', // ✅ Supabase Project URL
-  // ⚠️ Personal use only — do not share this file publicly with real keys
-  supabaseKey:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6anZ1aGdzeXduc3hka3hham55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyODk4NDksImV4cCI6MjA5NTg2NTg0OX0.4QRm3w5WbaSYPCAH8Zl65ArZDxtxZee0jQ3GvbmPSSs', // ✅ Supabase Anon Key
+  cloudName:    'dd2l5psmo',
+  uploadPreset: 'kyrie_2026',
+  supabaseUrl:  'https://jzjvuhgsywnsxdkxajny.supabase.co',
+  supabaseKey:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6anZ1aGdzeXduc3hka3hham55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyODk4NDksImV4cCI6MjA5NTg2NTg0OX0.4QRm3w5WbaSYPCAH8Zl65ArZDxtxZee0jQ3GvbmPSSs',
   maxPhotoMB: 20,
   maxVideoMB: 200,
 };
 
-// Detect if configured
 const IS_CFG = CFG.cloudName !== 'YOUR_CLOUD_NAME' && CFG.supabaseUrl !== 'YOUR_SUPABASE_URL';
 
-/* ════════════ SUPABASE HELPER ════════════ */
 const SB_H = () => ({
   'apikey': CFG.supabaseKey,
   'Authorization': 'Bearer '+CFG.supabaseKey,
@@ -1151,7 +908,7 @@ async function sbInsert(table, row){
     try{return JSON.parse(body);}catch{return body;}
   }catch(e){
     console.error('sbInsert exception',table,e);
-    throw e; // re-throw so caller can catch
+    throw e;
   }
 }
 async function sbUpdate(table, id, data){
@@ -1173,42 +930,24 @@ async function sbDelete(table, id){
   }catch(e){console.error('sbDelete exception',e);throw e;}
 }
 
-/* ════════════ CLOUDINARY DELETE ════════════
-   Cloudinary unsigned preset cannot delete via client-side API directly
-   (requires signed request with API secret — never expose in frontend).
-   Instead we use Cloudinary's "invalidate" approach:
-   We extract the public_id from the URL and store it, then call destroy
-   via a signed method. Since we can't do signed deletes client-side safely,
-   we'll use the admin API with a server-less approach:
-   For now we tag assets for deletion and remove from DB + local.
-   The free tier auto-cleans untagged/orphan assets.
-   Real-time delete: user must go to Cloudinary dashboard to free storage.
-   We notify admin with the public_id to delete manually if needed.
-   ═══════════════════════════════════════════════════════════════════ */
 function getCloudinaryPublicId(url){
-  // e.g. https://res.cloudinary.com/dd2l5psmo/image/upload/v1234/kyrie_birthday/filename.jpg
-  // public_id = kyrie_birthday/filename (without extension)
   try{
     const parts = url.split('/upload/');
     if(parts.length < 2) return null;
-    const afterUpload = parts[1]; // e.g. v1234/kyrie_birthday/filename.jpg
-    const withoutVersion = afterUpload.replace(/^v\d+\//,''); // kyrie_birthday/filename.jpg
-    const withoutExt = withoutVersion.replace(/\.[^/.]+$/,''); // kyrie_birthday/filename
+    const afterUpload = parts[1];
+    const withoutVersion = afterUpload.replace(/^v\d+\//,'');
+    const withoutExt = withoutVersion.replace(/\.[^/.]+$/,'');
     return withoutExt;
   }catch(e){return null;}
 }
 
 async function cloudDelete(url, resourceType='image'){
-  // Cloudinary client-side delete requires unsigned delete enabled on preset
-  // OR we can use the destroy endpoint with our cloud name
-  // Since we can't sign from client, we'll attempt it — if preset allows unsigned delete
   const publicId = getCloudinaryPublicId(url);
   if(!publicId){console.warn('Could not extract public_id from:',url);return false;}
   try{
     const fd = new FormData();
     fd.append('public_id', publicId);
     fd.append('upload_preset', CFG.uploadPreset);
-    // Try unsigned invalidate — works if preset has "return delete token" enabled
     const r = await fetch(
       `https://api.cloudinary.com/v1_1/${CFG.cloudName}/${resourceType}/destroy`,
       {method:'POST', body:fd}
@@ -1220,7 +959,6 @@ async function cloudDelete(url, resourceType='image'){
     return false;
   }
 }
-/* ════════════ CLOUDINARY UPLOAD ════════════ */
 async function cloudUpload(file, onProgress){
   if(!IS_CFG) return {url:URL.createObjectURL(file), local:true};
   const fd = new FormData();
@@ -1241,7 +979,6 @@ async function cloudUpload(file, onProgress){
   });
 }
 
-/* ════════════ LOCAL FALLBACK (IDB) when not configured ════════════ */
 let _idb = null;
 function openIDB(){
   return new Promise((res,rej) => {
@@ -1256,12 +993,10 @@ async function idbPut(id,blob){const db=await openIDB();return new Promise((res,
 async function idbGet(id){const db=await openIDB();return new Promise((res,rej)=>{const tx=db.transaction('f','readonly');const r=tx.objectStore('f').get(id);r.onsuccess=()=>res(r.result?.blob);r.onerror=()=>res(null);});}
 async function idbDel(id){const db=await openIDB();return new Promise((res,rej)=>{const tx=db.transaction('f','readwrite');tx.objectStore('f').delete(id);tx.oncomplete=res;tx.onerror=rej;});}
 
-/* Local DB fallback */
 const LDB='kyrie_local_v1';
 const lLoad=()=>{try{const r=localStorage.getItem(LDB);return r?JSON.parse(r):{rsvps:[],wishes:[],gallery:[],slides:[]};}catch{return{rsvps:[],wishes:[],gallery:[],slides:[]};}}
 const lSave=d=>localStorage.setItem(LDB,JSON.stringify(d));
 
-/* ════════════ UTILS ════════════ */
 const uid=()=>crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36);
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const fmtDt=iso=>new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
@@ -1269,10 +1004,8 @@ const fmtSz=b=>b>1e6?(b/1e6).toFixed(1)+'MB':b>1e3?(b/1e3).toFixed(0)+'KB':b+'B'
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),3000);}
 function confetti(n=55){const c=['#d62b2b','#f7c500','#e8608a','#fff','#c9963a'];for(let i=0;i<n;i++)setTimeout(()=>{const p=document.createElement('div');p.className='cp';const sh=['2px','50%','0'];p.style.cssText=`left:${Math.random()*100}vw;top:-8px;width:${Math.random()*9+4}px;height:${Math.random()*9+4}px;background:${c[Math.random()*c.length|0]};--sh:${sh[Math.random()*3|0]};--d:${2+Math.random()*3}s;--dx:${(Math.random()-.5)*140}px;`;document.body.appendChild(p);setTimeout(()=>p.remove(),5e3);},i*22);}
 
-/* ════════════ STARS ════════════ */
 (()=>{const c=document.getElementById('intro-stars');for(let i=0;i<130;i++){const s=document.createElement('div');s.className='istar';const z=Math.random()*2.5+.5;s.style.cssText=`width:${z}px;height:${z}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;--dl:${Math.random()*5}s;`;c.appendChild(s);}})();
 
-/* ════════════ ENVELOPE ════════════ */
 let envDone=false;
 function openEnv(){
   if(envDone)return; envDone=true;
@@ -1282,21 +1015,16 @@ function openEnv(){
   const btn    = document.getElementById('open-btn');
   btn.disabled = true; btn.textContent = 'Opening...';
 
-  // STEP 1 — flip the flap open (850ms)
   scene.classList.add('opening');
 
-  // STEP 2 — after flap is open, allow overflow so card can rise above envelope,
-  //           then slide the card up out of the envelope
   setTimeout(() => {
-    back.style.overflow = 'visible'; // now let card emerge above the top edge
+    back.style.overflow = 'visible';
     card.style.transition = 'transform .75s cubic-bezier(.175,.885,.32,1.275), box-shadow .75s';
-    card.style.transform  = 'translateX(-50%) translateY(-18%)'; // rise just above envelope top
+    card.style.transform  = 'translateX(-50%) translateY(-18%)';
     card.style.boxShadow  = '0 20px 60px rgba(0,0,0,.4)';
     card.style.zIndex     = '10';
   }, 850);
 
-  // STEP 3 — card is now fully visible & readable for 4 seconds
-  // STEP 4 — fade intro out and show main website
   setTimeout(() => {
     document.getElementById('intro').classList.add('out');
     const m = document.getElementById('main');
@@ -1306,12 +1034,11 @@ function openEnv(){
       confetti(65);
       initSite();
     }));
-  }, 850 + 750 + 4000); // flap(850) + card rise(750) + read(4000)
+  }, 850 + 750 + 4000);
 }
 document.getElementById('env-scene').addEventListener('click', openEnv);
 document.getElementById('env-scene').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')openEnv();});
 
-/* ════════════ COUNTDOWN ════════════ */
 const PARTY=new Date('2026-07-03T19:00:00+03:00');
 function tick(){
   const d=PARTY-Date.now();
@@ -1323,13 +1050,11 @@ function tick(){
 }
 setInterval(tick,1000); tick();
 
-/* ════════════ REEL ════════════ */
 let rIdx=0,rTimer=null,rSlides=[];
 async function buildReel(){
   let slides=[];
   if(IS_CFG){
     try{
-      // Fetch directly — bypasses sbSelect to have full control over query
       const res=await fetch(
         `${CFG.supabaseUrl}/rest/v1/slides?select=*&order=sort_order.asc,created_at.asc`,
         {headers:SB_H()}
@@ -1356,18 +1081,15 @@ async function buildReel(){
   empty.style.display='none';
   rIdx=0;
 
-  /* ── Device detection for adaptive fit ── */
   function getDeviceType(){
     const w=window.innerWidth;
     const ua=navigator.userAgent||'';
-    // TV: large screen or SmartTV UA
     if(w>=1800 || /SmartTV|Tizen|WebOS|SMART-TV|HbbTV|TV Safari/i.test(ua)) return 'tv';
     if(w>=1025) return 'desktop';
     if(w>=601) return 'tablet';
     return 'mobile';
   }
 
-  /* ── Apply orientation class + blurred backdrop ── */
   function applyOrientationClass(div, img){
     const device=getDeviceType();
     const w=img.naturalWidth, h=img.naturalHeight;
@@ -1381,12 +1103,11 @@ async function buildReel(){
     let useContain = false;
     if(device==='mobile'){
       div.classList.add(isPortrait ? 'is-portrait' : 'is-landscape');
-      useContain = false; // mobile always cover
+      useContain = false;
     } else if(device==='tablet'){
       div.classList.add(isPortrait ? 'is-portrait' : 'is-landscape');
       useContain = isPortrait;
     } else {
-      // desktop / tv
       if(isPortrait || imgRatio < wrapRatio * 0.75){
         div.classList.add('is-portrait');
         useContain = true;
@@ -1396,7 +1117,6 @@ async function buildReel(){
       }
     }
 
-    // Show blur backdrop only when image won't fill the frame
     const blurEl = div.querySelector('.reel-blur-bg');
     if(blurEl){
       if(useContain){
@@ -1419,7 +1139,6 @@ async function buildReel(){
       v.addEventListener('ended',nextReel);
       div.appendChild(v);
     } else {
-      // Blurred backdrop layer (hidden until orientation detected)
       const blurBg=document.createElement('div');
       blurBg.className='reel-blur-bg';
       div.appendChild(blurBg);
@@ -1438,7 +1157,6 @@ async function buildReel(){
     dotsEl.appendChild(dot);
   });
 
-  // Re-apply orientation on resize (e.g. phone rotation, window resize on desktop)
   if(window._reelResizeObs) window._reelResizeObs.disconnect();
   window._reelResizeObs = new ResizeObserver(()=>{
     wrap.querySelectorAll('.reel-slide').forEach(div=>{
@@ -1476,113 +1194,20 @@ function prevReel(){goReel(rIdx-1);}
 function startReelAuto(){clearTimeout(rTimer);rTimer=setTimeout(nextReel,5000);}
 function updReelCtr(){const c=document.getElementById('reel-ctr');c.textContent=rSlides.length?`${rIdx+1} / ${rSlides.length}`:''}
 
-/* ════════════ COPY ADDRESS ════════════ */
 function copyAddr(){navigator.clipboard.writeText('Jollibee Doha Souq Mall, Al Mirqab Al Jadeed St, Doha, Qatar').then(()=>toast('📋 Address copied!')).catch(()=>toast('Al Mirqab Al Jadeed St, Doha, Qatar'));}
-
-
-/* ════════════ RSVP ════════════ */
-let pickedA='';
-function pickA(b){document.querySelectorAll('.att').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');pickedA=b.dataset.v;}
-async function submitRSVP(){
-  const name=document.getElementById('r-name').value.trim();
-  const mob=document.getElementById('r-mob').value.trim();
-  document.getElementById('r-name').classList.remove('err');
-  document.getElementById('r-mob').classList.remove('err');
-  if(!name){document.getElementById('r-name').classList.add('err');toast('⚠️ Name is required');return;}
-  if(!mob){document.getElementById('r-mob').classList.add('err');toast('⚠️ Mobile is required');return;}
-  if(!pickedA){toast('⚠️ Please select attendance');return;}
-  const btn=document.getElementById('rsvp-submit-btn');
-  btn.disabled=true; btn.textContent='Submitting...';
-  try{
-    const row={name,mobile:mob,attendance:pickedA,adults:+document.getElementById('r-adults').value||0,kids:+document.getElementById('r-kids').value||0};
-    if(IS_CFG){
-      const res=await sbInsert('rsvps',row);
-      if(!res){toast('❌ Error saving RSVP. Try again.');btn.disabled=false;btn.textContent='💌 Submit RSVP';return;}
-    } else {
-      const ld=lLoad();ld.rsvps.unshift({id:uid(),...row,created_at:new Date().toISOString()});lSave(ld);
-    }
-    // Also save wish if the guest wrote one
-    const wishMsg=document.getElementById('r-wish').value.trim();
-    if(wishMsg){
-      btn.textContent='Sending wish...';
-      let photoUrl=null,videoUrl=null;
-      if(wPhoto){toast('📤 Uploading photo...');const r=await cloudUpload(wPhoto.file,p=>btn.textContent=`Uploading photo ${p}%...`);photoUrl=r.url;}
-      if(wVideo){toast('📤 Uploading video...');const r=await cloudUpload(wVideo.file,p=>btn.textContent=`Uploading video ${p}%...`);videoUrl=r.url;}
-      const wrow={name,message:wishMsg,photo_url:photoUrl,video_url:videoUrl};
-      if(IS_CFG){await sbInsert('wishes',wrow);}
-      else{const ld=lLoad();ld.wishes.unshift({id:uid(),...wrow,created_at:new Date().toISOString()});lSave(ld);}
-      renderWishes();
-    }
-    document.getElementById('rsvp-fw').style.display='none';
-    document.getElementById('rsvp-ok').classList.add('on');
-    btn.disabled=false; btn.textContent='💌 Submit RSVP';
-    confetti(60);
-  } catch(e){
-    toast('❌ Something went wrong. Check connection.');
-    btn.disabled=false; btn.textContent='💌 Submit RSVP';
-  }
-}
-function resetRSVP(){
-  pickedA='';
-  ['r-name','r-mob','r-wish'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});
-  document.getElementById('r-adults').value='1';
-  document.getElementById('r-kids').value='0';
-  document.querySelectorAll('.att').forEach(b=>b.classList.remove('sel'));
-  // clear wish uploads
-  ['w-pp','w-vp'].forEach(i=>{const el=document.getElementById(i);if(el)el.innerHTML='';});
-  ['w-photo','w-video'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});
-  ['wpc-photo','wpc-video'].forEach(i=>{const el=document.getElementById(i);if(el)el.classList.remove('on');});
-  wPhoto=null; wVideo=null;
-  document.getElementById('rsvp-fw').style.display='';
-  document.getElementById('rsvp-ok').classList.remove('on');
-}
-
-/* ════════════ WISH FILE HANDLING ════════════ */
-let wPhoto=null, wVideo=null;
-function prevWish(inp,prevId,type){
-  if(!inp.files[0])return;
-  const file=inp.files[0];
-  const maxMB=type==='img'?CFG.maxPhotoMB:CFG.maxVideoMB;
-  if(file.size>maxMB*1024*1024){toast(`⚠️ File too large. Max ${maxMB}MB`);inp.value='';return;}
-  const cancelBtn=document.getElementById(type==='img'?'wpc-photo':'wpc-video');
-  cancelBtn.classList.add('on');
-  const reader=new FileReader();
-  reader.onload=e=>{
-    if(type==='img'){wPhoto={data:e.target.result,file};document.getElementById(prevId).innerHTML=`<img src="${e.target.result}" alt="Preview">`;}
-    else{wVideo={data:e.target.result,file};document.getElementById(prevId).innerHTML=`<video src="${e.target.result}" controls style="width:100%;max-height:90px;border-radius:8px;"></video>`;}
-  };
-  reader.readAsDataURL(file);
-}
-function cancelWishFile(evt,inputId,prevId,cancelId,type){
-  evt.preventDefault();evt.stopPropagation();
-  document.getElementById(inputId).value='';
-  document.getElementById(prevId).innerHTML='';
-  document.getElementById(cancelId).classList.remove('on');
-  if(type==='img')wPhoto=null; else wVideo=null;
-}
-
-/* ════════════ RENDER WISHES (carousel) ════════════ */
-let wishShowAll=true;
-function showMoreWishes(){ wishShowAll=true; renderWishes(); }
 
 async function renderWishes(){
   let wishes=[];
   if(IS_CFG) wishes=await sbSelect('wishes');
   else wishes=lLoad().wishes||[];
   const g=document.getElementById('wg');
-  const moreBtn=document.getElementById('show-more-wishes');
   if(!wishes.length){
-    g.innerHTML='<div class="no-c" style="padding:32px 20px;color:var(--muted);font-style:italic;">💝 Be the first to leave a wish for Princess Kyrie!</div>';
-    if(moreBtn) moreBtn.style.display='none';
+    g.innerHTML='<div class="no-c" style="padding:32px 20px;color:var(--muted);font-style:italic;">💝 No wishes yet.</div>';
     return;
   }
-  const limit=wishShowAll?wishes.length:Math.min(8,wishes.length);
-  const visible=wishes.slice(0,limit);
-  if(moreBtn) moreBtn.style.display=(!wishShowAll&&wishes.length>8)?'inline-block':'none';
-  // Use data-wid to avoid JSON-in-HTML attribute issues
   window._wishMap={};
   wishes.forEach(w=>{ window._wishMap[w.id||w.created_at]=w; });
-  g.innerHTML=visible.map(w=>{
+  g.innerHTML=wishes.map(w=>{
     const key=esc(w.id||w.created_at||'');
     const hasPhoto=!!(w.photo_url||w.photo);
     return `<div class="wcard" data-wid="${key}" role="button" tabindex="0">
@@ -1595,7 +1220,6 @@ async function renderWishes(){
       <div class="wread">Tap to read full wish →</div>
     </div>`;
   }).join('');
-  // Attach click handlers
   g.querySelectorAll('.wcard[data-wid]').forEach(card=>{
     const fn=()=>{ const w=window._wishMap[card.dataset.wid]; if(w) openWPop(w); };
     card.addEventListener('click',fn);
@@ -1611,12 +1235,10 @@ let carouselDir=1;
 function scrollWishCarousel(dir){
   const wrap=document.getElementById('wish-carousel-wrap');
   if(!wrap) return;
-  // pause auto-scroll while user navigates
   clearTimeout(carouselPauseTimer);
   clearInterval(carouselScrollTimer);
   const cardW = wrap.querySelector('.wcard')?.offsetWidth||280;
   wrap.scrollBy({left: dir*(cardW+14), behavior:'smooth'});
-  // resume auto-scroll after 3s of inactivity
   carouselPauseTimer=setTimeout(()=>startCarouselScroll(),3000);
 }
 
@@ -1630,7 +1252,6 @@ function startCarouselScroll(){
     if(wrap.scrollLeft+wrap.clientWidth>=wrap.scrollWidth-2) carouselDir=-1;
     if(wrap.scrollLeft<=0) carouselDir=1;
   },20);
-  // pause on touch/drag
   wrap.ontouchstart=()=>{
     clearInterval(carouselScrollTimer);
     clearTimeout(carouselPauseTimer);
@@ -1665,7 +1286,6 @@ function closeWPop(){
   document.body.style.overflow='';
 }
 
-/* ════════════ FILE TYPE HELPERS (by extension + MIME, handles HEIC/HEIF/etc) ════════════ */
 function fileIsVideo(file){
   if(file.type && file.type.startsWith('video')) return true;
   const ext=(file.name.split('.').pop()||'').toLowerCase();
@@ -1678,87 +1298,28 @@ function fileIsImage(file){
 }
 function fileMediaType(file){ return fileIsVideo(file)?'video':'image'; }
 
-/* ════════════ GALLERY (guest uploads, needs approval) ════════════ */
-async function handleGalUp(inp){
-  if(!inp.files.length)return;
-  const files=Array.from(inp.files);
-  const pending=document.getElementById('gup-pending');
-  let uploadedCount=0;
-  for(const file of files){
-    const isVid=fileIsVideo(file);
-    const isImg=fileIsImage(file);
-    if(!isVid && !isImg){toast(`⚠️ Skipping unsupported: ${file.name}`);continue;}
-    const maxMB=isVid?CFG.maxVideoMB:CFG.maxPhotoMB;
-    if(file.size>maxMB*1024*1024){toast(`⚠️ "${file.name}" exceeds ${maxMB}MB. Skipped.`);continue;}
-    toast(`📤 Uploading ${file.name} to cloud...`);
-    let cloudUrl = null;
-    // Step 1: upload to Cloudinary
-    try{
-      const r=await cloudUpload(file, p=>toast(`📤 ${file.name}: ${p}%`));
-      cloudUrl = r.url;
-      toast(`☁️ Cloud upload done. Saving to database...`);
-    }catch(ce){
-      console.error('Cloudinary upload failed:',ce);
-      toast(`❌ Cloud upload failed for ${file.name}. Check internet.`);
-      continue;
-    }
-    // Step 2: save metadata to Supabase
-    const row={name:file.name,type:isVid?'video':'image',url:cloudUrl,size:file.size,approved:false};
-    if(IS_CFG){
-      try{
-        const res=await fetch(`${CFG.supabaseUrl}/rest/v1/gallery`,{
-          method:'POST',
-          headers:{
-            'apikey': CFG.supabaseKey,
-            'Authorization': 'Bearer '+CFG.supabaseKey,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=representation'
-          },
-          body:JSON.stringify(row)
-        });
-        const body=await res.text();
-        if(!res.ok){console.error('Gallery insert HTTP',res.status,body);throw new Error(body);}
-        uploadedCount++;
-        toast(`✅ ${file.name} uploaded! Awaiting host approval.`);
-        pending.style.display='block';
-      }catch(dbe){
-        console.error('Gallery DB save failed:',dbe);
-        toast(`❌ DB save failed for ${file.name}. File is in Cloudinary. Check Supabase policies.`);
-      }
-    } else {
-      const ld=lLoad();
-      ld.gallery.unshift({id:uid(),...row,created_at:new Date().toISOString()});
-      lSave(ld);
-      uploadedCount++;
-      toast(`✅ ${file.name} saved! Pending approval.`);
-      pending.style.display='block';
-    }
-  }
-  inp.value='';
-  if(uploadedCount>0){ renderGallery(); rAStats(); }
-}
-
+let lbItems=[];
+let lbIndex=0;
 async function renderGallery(){
   let items=[];
   if(IS_CFG) items=await sbSelect('gallery','&approved=eq.true');
   else items=(lLoad().gallery||[]).filter(g=>g.approved);
   const g=document.getElementById('gg');
-  if(!items.length){g.innerHTML='<div class="no-c" style="grid-column:1/-1;">No memories yet. Be the first to share!</div>';return;}
+  if(!items.length){g.innerHTML='<div class="no-c" style="grid-column:1/-1;">No memories yet.</div>';lbItems=[];return;}
+  lbItems=items;
   g.innerHTML='';
-  items.forEach(item=>{
+  items.forEach((item,idx)=>{
     const div=document.createElement('div');div.className='gi';
     if(item.type==='video'){
       div.innerHTML=`<video src="${esc(item.url)}" preload="metadata" playsinline muted></video><div class="gi-ov">▶</div>`;
-      div.onclick=()=>openLb(item.url,'video');
     } else {
       div.innerHTML=`<img src="${esc(item.url)}" alt="${esc(item.name)}" loading="lazy"><div class="gi-ov">🔍</div>`;
-      div.onclick=()=>openLb(item.url,'img');
     }
+    div.onclick=()=>openLbAt(idx);
     g.appendChild(div);
   });
 }
 
-/* Slides manager — with universal type detection & image framing */
 async function uploadSlides(inp){
   if(!inp.files.length)return;
   const files=Array.from(inp.files);
@@ -1768,7 +1329,6 @@ async function uploadSlides(inp){
     const isImg=fileIsImage(file);
     if(!isVid && !isImg){toast(`⚠️ Skipping: ${file.name}`);continue;}
     toast(`📤 Uploading ${file.name}...`);
-    // Step 1: upload file to Cloudinary
     let cloudUrl=null;
     try{
       const r=await cloudUpload(file, p=>toast(`📤 ${file.name}: ${p}%`));
@@ -1778,13 +1338,10 @@ async function uploadSlides(inp){
       toast(`❌ Cloud upload failed: ${file.name}`);
       continue;
     }
-    // Step 2: save to Supabase
-    // sort_order: seconds since 2024-01-01 — stays well within int range for decades
-    const sortBase = 1704067200; // 2024-01-01 Unix timestamp
+    const sortBase = 1704067200;
     const row={name:file.name,type:isVid?'video':'image',url:cloudUrl,sort_order:Math.floor(Date.now()/1000)-sortBase};
     if(IS_CFG){
       try{
-        // Use raw fetch with full explicit headers (same pattern as buildReel which works)
         const res=await fetch(`${CFG.supabaseUrl}/rest/v1/slides`,{
           method:'POST',
           headers:{
@@ -1805,8 +1362,6 @@ async function uploadSlides(inp){
       }catch(dbe){
         console.error('Slides DB insert failed:',dbe);
         toast(`❌ Could not save to DB: ${dbe.message||dbe}. Check Supabase policies.`);
-        // Do NOT save locally — Cloudinary URL already exists so it's not lost
-        // User can retry after fixing Supabase
       }
     } else {
       const ld=lLoad();
@@ -1909,13 +1464,11 @@ async function rSSGrid(){
   }
 }
 
-/* Admin gallery — show ALL (pending + approved), merge Supabase + local fallback */
 let galFilter='all';
 async function rAGal(filter){
   galFilter=filter||galFilter;
   let items=[];
   if(IS_CFG){
-    // fetch ALL gallery items for admin — no RLS approved filter
     const f=galFilter==='pending'?'&approved=eq.false':galFilter==='approved'?'&approved=eq.true':'';
     try{
       const res=await fetch(`${CFG.supabaseUrl}/rest/v1/gallery?order=created_at.desc${f}`,{headers:SB_H()});
@@ -1925,7 +1478,6 @@ async function rAGal(filter){
         console.error('rAGal fetch error:',res.status,err);
       }
     }catch(e){console.error('rAGal exception:',e);}
-    // ALSO merge any local fallback items (saved when DB failed)
     const ld=lLoad();
     const localItems=(ld.gallery||[]).filter(x=>x.url&&x.url.startsWith('http'));
     localItems.forEach(loc=>{
@@ -1946,10 +1498,9 @@ async function rAGal(filter){
     if(item.type==='video'){
       div.innerHTML=`<video src="${esc(url)}" preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>`;
     } else {
-      div.innerHTML=`<img src="${esc(url)}" alt="Memory photo" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect fill=\\'%23eee\\'/><text x=\\'50%\\' y=\\'50%\\' text-anchor=\\'middle\\' font-size=\\'12\\' fill=\\'%23999\\'>No preview</text></svg>'">`;
+      div.innerHTML=`<img src="${esc(url)}" alt="Memory photo" style="width:100%;height:100%;object-fit:cover;" loading="lazy">`;
     }
     div.innerHTML+=`<span class="ag-badge ${item.approved?'approved':'pending'}">${item.approved?'✓ Live':'⏳ Pending'}</span>`;
-    // Approve button for pending
     if(!item.approved){
       const ab=document.createElement('button');ab.className='ag-approve';ab.textContent='✓ Approve';
       ab.onclick=async(e)=>{
@@ -1966,14 +1517,11 @@ async function rAGal(filter){
       e.stopPropagation();
       if(!confirm(`Delete "${item.name||'this file'}" permanently?\n\nThis will remove it from cloud storage too.`))return;
       dl.textContent='...';dl.disabled=true;
-      // 1. Delete from Cloudinary
       const resType = item.type==='video'?'video':'image';
       const cloudOk = await cloudDelete(item.url, resType);
-      // 2. Delete from Supabase
       if(IS_CFG && item.id && !item._local){
         await sbDelete('gallery', item.id);
       }
-      // 3. Clean local fallback
       const ld=lLoad();
       ld.gallery=(ld.gallery||[]).filter(x=>x.url!==item.url && x.id!==item.id);
       lSave(ld);
@@ -1991,22 +1539,55 @@ async function rAGal(filter){
   });
 }
 function filterGal(f){rAGal(f);}
-function openLb(src,type){
-  const w=document.getElementById('lb-wrap');
+
+function openLbAt(idx){
+  if(!lbItems.length)return;
+  lbIndex=((idx%lbItems.length)+lbItems.length)%lbItems.length;
+  renderLb();
   document.getElementById('lb').classList.add('on');
-  w.innerHTML=type==='video'
-    ?`<video src="${src}" controls autoplay playsinline style="max-width:92vw;max-height:86vh;border-radius:16px;"></video>`
-    :`<img src="${src}" alt="" style="max-width:92vw;max-height:86vh;border-radius:16px;object-fit:contain;">`;
 }
-function closeLb(){document.getElementById('lb').classList.remove('on');document.getElementById('lb-wrap').innerHTML='';}
+function renderLb(){
+  const item=lbItems[lbIndex];
+  if(!item)return;
+  const w=document.getElementById('lb-wrap');
+  w.innerHTML=item.type==='video'
+    ?`<video src="${esc(item.url)}" controls autoplay playsinline style="max-width:92vw;max-height:86vh;border-radius:16px;"></video>`
+    :`<img src="${esc(item.url)}" alt="" style="max-width:92vw;max-height:86vh;border-radius:16px;object-fit:contain;">`;
+  const old=document.getElementById('lb-nav-wrap');
+  if(old)old.remove();
+  if(lbItems.length>1){
+    const nav=document.createElement('div');
+    nav.id='lb-nav-wrap';
+    nav.innerHTML=`
+      <button type="button" class="lb-nav lb-prev" onclick="lbNav(-1)" aria-label="Previous">&#8249;</button>
+      <button type="button" class="lb-nav lb-next" onclick="lbNav(1)" aria-label="Next">&#8250;</button>
+      <div class="lb-counter">${lbIndex+1} / ${lbItems.length}</div>`;
+    document.getElementById('lb').appendChild(nav);
+  }
+}
+function lbNav(dir){
+  if(!lbItems.length)return;
+  lbIndex=((lbIndex+dir)%lbItems.length+lbItems.length)%lbItems.length;
+  renderLb();
+}
+function closeLb(){
+  const cv=document.querySelector('#lb-wrap video');
+  if(cv)cv.pause();
+  document.getElementById('lb').classList.remove('on');
+  document.getElementById('lb-wrap').innerHTML='';
+  const nav=document.getElementById('lb-nav-wrap');
+  if(nav)nav.remove();
+}
 document.getElementById('lb').addEventListener('click',e=>{if(e.target===document.getElementById('lb'))closeLb();});
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lb').classList.contains('on'))return;
+  if(e.key==='ArrowLeft')lbNav(-1);
+  if(e.key==='ArrowRight')lbNav(1);
+});
 
-
-/* ════════════ SCROLL REVEAL ════════════ */
 const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}}),{threshold:.07,rootMargin:'0px 0px -24px 0px'});
 function initReveal(){document.querySelectorAll('.rev').forEach(el=>ro.observe(el));}
 
-/* ════════════ ADMIN ════════════ */
 function showALogin(){document.getElementById('al-ov').classList.add('on');setTimeout(()=>document.getElementById('a-u').focus(),80);}
 function closeALogin(){document.getElementById('al-ov').classList.remove('on');document.getElementById('a-u').value='';document.getElementById('a-p').value='';document.getElementById('a-err').style.display='none';}
 function doLogin(){if(document.getElementById('a-u').value==='admin'&&document.getElementById('a-p').value==='admin123'){closeALogin();openAP();}else{document.getElementById('a-err').style.display='block';document.getElementById('a-p').value='';}}
@@ -2161,8 +1742,6 @@ async function rAWishes(){
 }
 async function delWish(id){if(!confirm('Delete?'))return;if(IS_CFG)await sbDelete('wishes',id);else{const ld=lLoad();ld.wishes=ld.wishes.filter(w=>w.id!==id);lSave(ld);}rAStats();rAWishes();renderWishes();toast('Deleted');}
 
-
-/* Gallery popup (admin) */
 function openGPop(url,type,name){
   document.getElementById('gal-pop-body').innerHTML=type==='video'
     ?`<div class="gp-media"><video src="${url}" controls autoplay playsinline style="width:100%;max-height:65vh;border-radius:10px;"></video><p style="text-align:center;font-size:.76rem;color:var(--muted);margin-top:6px;">${esc(name||'')}</p></div>`
@@ -2172,7 +1751,6 @@ function openGPop(url,type,name){
 }
 function closeGPop(){document.getElementById('gal-pop').classList.remove('on');document.body.style.overflow='';}
 
-/* Export/Backup (metadata only) */
 async function expDB(){
   let data={};
   if(IS_CFG){
@@ -2187,7 +1765,6 @@ function bkDB(){if(!IS_CFG){localStorage.setItem('kyrie_local_bk',JSON.stringify
 function trigImp(){document.getElementById('imp-f').click();}
 function impDB(inp){if(!inp.files[0])return;const r=new FileReader();r.onload=e=>{try{const p=JSON.parse(e.target.result);if(!IS_CFG){lSave(p);}toast('📥 Imported!');rAStats();rARSVPs();rAWishes();rAGal();}catch{toast('❌ Invalid file');}};r.readAsText(inp.files[0]);inp.value='';}
 
-/* ESC + backdrop close */
 function closeAllPopups(){
   closeLb(); closeALogin(); closeAP(); closeWPop(); closeGPop(); closeRSVPPop();
   document.body.style.overflow='';
@@ -2200,23 +1777,18 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape') closeAllPopups();})
   });
 });
 
-/* ════════════ INIT ════════════ */
 async function initSite(){
   initReveal();
   await Promise.all([renderWishes(), renderGallery(), buildReel()]);
 }
 
-// ── PRE-LOAD the reel immediately when page opens ──
-// This runs before envelope animation so slides are ready on ALL devices/browsers
 document.addEventListener('DOMContentLoaded', ()=>{
-  tick(); // countdown
+  tick();
   if(IS_CFG){
-    // Silently pre-fetch slides so reel is ready by the time user opens envelope
     buildReel();
   }
 });
 
-// Show config warning if not set up
 if(!IS_CFG){
   console.warn('%c⚠️ KYRIE WEBSITE: Running in LOCAL mode.','color:orange;font-weight:bold;font-size:14px;');
 }
